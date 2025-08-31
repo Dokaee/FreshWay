@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Marqueur pour injecter le head commun -->
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - Débat & Pistes</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col">
+    <div id="header-container"></div>
+
+    <main class="pt-20 lg:pt-24 flex-grow">
+        
+        <section class="mb-16 text-center relative px-4 sm:px-6 md:px-8 lg:px-16">
+            <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true"></div>
+                <div class="relative z-10 max-w-5xl mx-auto">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                        Débats, pistes, questions ouvertes
+                    </h1>
+                    <p class="text-lg md:text-xl opacity-90">
+                        Retour sur l'événement du 10 juin 2025 à l'Académie du Climat de Paris
+                    </p>
+                    <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6 rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Podcast Section -->
+        <section class="py-16 bg-white">
+            <div class="mx-auto lg:container px-4 sm:px-6">
+                <div class="mx-auto bg-gradient-to-r from-slate-800 to-slate-600 text-white rounded-2xl p-8 lg:p-12 shadow-2xl">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-titre mb-4">Podcast bientôt disponible</h2>
+                        <p class="text-lg opacity-90 mb-4">Le 10 juin 2025, les résultats du projet FreshWay ont été présentés à l'académie du climat de Paris devant les collectivités et des acteurs et scientifiques. Un podcast a été enregistré et, sera bientôt disponible.</p>
+                        <p class="text-lg opacity-90 mb-4">Enregistrement et montage assurés par Crystal Aslanian. Merci pour son professionnalisme.</p>
+                        <p class="text-sm opacity-75 mb-8">Cette page synthétise les principaux échanges de cet événement.</p>
+                    </div>
+                    
+                    <!-- Lecteur Spotify intégré -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <iframe 
+                            style="border-radius:12px" 
+                            src="https://open.spotify.com/embed/episode/2o3Q0OGUlKDNdDWyR6Fh3Oe?utm_source=generator&theme=0" 
+                            width="100%" 
+                            height="232" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section class="py-16 bg-gray-50">
+  <div class="mx-auto lg:container px-4 sm:px-6">
+    <div class="mx-auto">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-site-primary to-teal-600 text-white p-8">
+          <h2 class="text-3xl lg:text-4xl font-titre mb-4 text-center">L'événement en images</h2>
+          <p class="text-lg text-center opacity-90">Retour sur la table ronde du 10 juin 2025 à l'Académie du Climat de Paris</p>
+          <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6 rounded"></div>
+        </div>
+
+        <div class="p-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <!-- Item 1 -->
+            <figure class="rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <a href="/data/img/debat/table_ronde_1.jpg" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl transform hover:scale-105">
+                <img src="/data/img/debat/table_ronde_1.jpg" alt="Table ronde - Discussion principale" class="w-full h-80 object-cover">
+              </a>
+              <figcaption class="mt-3 text-center">
+                <div class="inline-block bg-white/90 rounded-lg px-3 py-2">
+                  <p class="text-gray-600 text-xs">Vue d'ensemble de la table ronde</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <!-- Item 2 -->
+            <figure class="rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <a href="/data/img/debat/table_ronde_4.jpg" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl transform hover:scale-105">
+                <img src="/data/img/debat/table_ronde_4.jpg" alt="Vue d'ensemble de l'événement" class="w-full h-80 object-cover">
+              </a>
+              <figcaption class="mt-3 text-center">
+                <div class="inline-block bg-white/90 rounded-lg px-3 py-2">
+                  <p class="text-gray-600 text-xs">Présents de gauche à droite : Barroca B, Clemence V, Girres JF, Ruas A, Perrney M, Delorme M</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <!-- Item 3 -->
+            <figure class="rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <a href="/data/img/debat/table_ronde_2.jpg" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl transform hover:scale-105">
+                <img src="/data/img/debat/table_ronde_2.jpg" alt="Échanges entre participants" class="w-full h-80 object-cover">
+              </a>
+              <figcaption class="mt-3 text-center">
+                <div class="inline-block bg-white/90 rounded-lg px-3 py-2">
+                  <p class="text-gray-600 text-xs">Présents de gauche à droite : Meynard F, Rouaux M, Fourtané M, Dayre C, Oumari H</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <!-- Item 4 -->
+            <figure class="rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+              <a href="/data/img/debat/table_ronde_3.jpg" target="_blank" rel="noopener" class="block overflow-hidden rounded-xl transform hover:scale-105">
+                <img src="/data/img/debat/table_ronde_3.jpg" alt="Présentation des résultats" class="w-full h-80 object-cover">
+              </a>
+              <figcaption class="mt-3 text-center">
+                <div class="inline-block bg-white/90 rounded-lg px-3 py-2">
+                  <p class="text-gray-600 text-xs">Présents de gauche à droite : Rives C, Doniou M, Sampson E</p>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+        <!-- Discussion 1 -->
+        <section class="py-16 bg-gray-50">
+            <div class="mx-auto lg:container px-4 sm:px-6">
+                <div class="mx-auto">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-site-primary to-teal-600 text-white p-8">
+                            <h2 class="text-3xl lg:text-4xl font-titre mb-4">
+                                Discussion 1 : Réactions des collectivités après présentation des résultats
+                            </h2>
+                            <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                                <p class="text-lg">
+                                    <strong>Participants :</strong> Catherine Dayre (Ville de Castelnau-le-Lez), Marie Fourtané (Ville de Montreuil), Frédéric Meynard (Ville de Sarcelles), Hocine Oumari (Ville de Pontault-Combault), Marie Rouaux (Ville de Paris).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-8">
+                            <p class="text-xl text-gray-600 mb-12 italic text-center">Les réactions des collectivités illustrent les spécificités de chacune.</p>
+
+                            <div class="space-y-8">
+                                <!-- Sarcelles -->
+                                <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Sarcelles</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        A Sarcelles, il y a une énorme pression sur le logement, il faut donc réfléchir à une densification sur certains secteurs, ce qui amène à une stratégie qui doit prendre en compte la nécessité de construire
+                                    </p>
+                                </div>
+
+                                <!-- Montreuil -->
+                                <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Montreuil</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        Montreuil est sous une forte pression foncière étant aux portes de Paris, avec deux territoires : la partie Faubourg le bas Montreuil et la partie plateau ancien plateau maraîcher. Les tissus sont différents et il y a des projets d'amélioration de l'accessibilité (prolongement métro 11, tram 1 et 3). Montreuil est dans une dynamique de réactualisation annuelle de son PLUi. Le choix des EPP permet de protéger de nombreux arbres.
+                                    </p>
+                                </div>
+
+                                <!-- Castelnau -->
+                                <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Castelnau-le-Lez</span>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            Castelnau a souffert du retard de signature du PLUi et a mis en place des PAPAG. Un PAPAG c'est un périmètre d'attente d'un projet d'aménagement global qui permet en termes d'urbanisme de faire un sursis à statuer sur les autorisations et donc qui est un frein réglementaire de la mutation. Pour le prochain PLUi la collectivité a été très volontariste et les pourcentages de pleine terre ont été remontés à 35 et 45%. Dans le nouveau PLUi il y a aussi la préservation du végétal avec la création des EBC les espaces boisés et classés ce qu'on appelle des EVP, des espaces verts protégés, travaillés à la parcelle et qui sont en train de permettre de préserver des arbres significatifs.
+                                        </p>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            Pour la désimperméabilisation des cours d'école, il faut noter des résistances de la part des parents et des services techniques; Pour finir il faut vraiment travailler sur les matériaux mal adaptés.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Pontault Combault -->
+                                <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Pontault Combault</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        Pontault Combault de son côté a beaucoup travaillé sur la coulée verte et la désimperméabilisation le long du Morbas pour réduire les risques d'inondation. Comme Castelnau, Pontault veut limiter les divisions parcellaires. Enfin au niveau de la pleine terre dans les zones pavillonnaires un point de vigilance est la vérification du respect de la règle, par exemple sur le fait de ne pas mettre de dalle dans les jardins.
+                                    </p>
+                                </div>
+
+                                <!-- Paris -->
+                                <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Paris</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        À Paris la gestion de la densité est un des principaux défis puisqu'il y a énormément d'habitants au kilomètre carré, énormément d'urbanisme sur dalle ce  qui va rendre la mise en place de toutes les solutions très compliquées, la désimperméabilisation très compliquée. On a vraiment un enjeu de transformation des espaces pour pouvoir apporter cette fraîcheur en ville et ça prend du temps. On a des problématiques de propreté qui peuvent arriver avec de nouveaux aménagements, avec plus de végétalisation ou des revêtements clairs qui peuvent être plus compliqués à nettoyer. Il y a aussi les difficultés d'acceptation du grand public, des habitants, des usagers dans une ville extrêmement patrimoniale. Pour tous les programmes il y a toujours un enjeu de commencer de faire la preuve que ça apporte vraiment de la fraîcheur et du bien-être. Il y a toujours cet enjeu de d'abord faire une preuve que ça fonctionne et ensuite de développer les outils opérationnels qui marchent. La végétalisation en ville dans des espaces qui n'étaient pas végétalisés demande plus d'entretien, il faut planter les bonnes essences, il ne faut pas que ce soit dégradé par les usagers de l'espace public. On a un enjeu à monter en compétence de manière globale au sein de toutes les équipes techniques gestionnaires sur ces enjeux de changement climatique. Il y a un enjeu de traiter la minéralité pour les cas extrêmes ou malheureusement la végétation ne suffira plus voire souffrira trop. C'est l'étape d'après. On a aussi une approche gestion de crise parce qu'on sait aujourd'hui qu'il existe une probabilité qu'on puisse avoir des températures dépassant 50 degrés à Paris dans un futur proche.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rafraîchissement des logements -->
+        <section class="py-16 bg-white">
+            <div class="mx-auto lg:container px-4 sm:px-6">
+                <div class="mx-auto">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-amber-300 text-gray-800 p-8">
+                            <h2 class="text-3xl lg:text-4xl font-titre mb-4">
+                                Rafraîchissement des logements
+                            </h2>
+                        </div>
+
+                        <div class="p-8">
+                            <div class="mb-8">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Questions</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg">
+                                    Quelles sont les réflexions sur le rafraîchissement d'un logement quand la ventilation ne sera plus suffisante et sur la question de la climatisation. Soit on ne veut pas voir la climatisation comme une solution et on maintient qu'on y arrivera par les autres moyens soit on se dit que les autres moyens ne seront pas suffisants et qu'il y a peut-être quelque chose à déployer de manière mutualisée, plus économe comme par exemple les réseaux de froid que Paris est en train de mettre en place.
+                                </p>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-yellow-100 to-amber-100 border-l-4 border-yellow-500 p-6 rounded-r-xl">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Discussions</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg italic">
+                                    Face risque de maladaptation (réchauffer la ville avec des climatiseurs) les réseaux de fraîcheur sont une excellente solution. L'utilisation de brasseurs d'air est aussi intéressante et par exemple plusieurs sont utilisés dans des écoles et certains bâtiments publics à Castelnau-le-Lez. A Castelnau, Il y a aussi des référents énergies à la collectivité qui sont garants de bonnes pratiques.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discussion 2 -->
+        <section class="py-16 bg-gray-50">
+            <div class="mx-auto lg:container px-4 sm:px-6">
+                <div class="mx-auto">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-gradient-to-r from-site-primary to-teal-600 text-white p-8">
+                            <h2 class="text-3xl lg:text-4xl font-titre mb-4">
+                                Discussion 2 : Leviers, freins, perspectives
+                            </h2>
+                            <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4 space-y-2">
+                                <p class="text-lg">
+                                    <strong>Participants :</strong> Charles Rives (architecte urbaniste, docteur en architecture au sein d'Atelier Georges), Emilie Sampson (directrice du Pôle Aménagement au sein de Nhood), Malicia Doniou (avocate co-fondatrice du cabinet d'avocats Ginkgo avocats)
+                                </p>
+                                <p class="text-lg">
+                                    <strong>Sous le regard des collectivités :</strong> Catherine Dayre (Ville de Castelnau-le-Lez), Marie Fourtané (Ville de Montreuil), Frédéric Meynard (Ville de Sarcelles), Hocine Oumari (Ville de Pontault-Combault), Marie Rouaux (Ville de Paris)
+                                </p>
+                                <p class="text-lg">
+                                    <strong>Et avec Maylis Desrousseaux</strong> (Université Paris-Est Créteil) comme grand témoin.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-8 space-y-12">
+                            <!-- Point de vue architecte -->
+                            <div class="border-l-4 border-site-primary pl-8">
+                                <h3 class="text-2xl font-soustitre text-site-primary mb-6">
+                                    Point de vue d'un cabinet d'architecte : travailler avec l'existant
+                                </h3>
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Charles Rives - Acteur de conception de projets urbains</span>
+                                </div>
+                                
+                                <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                                    <p>
+                                        La priorité dans les projets urbains actuels est la végétalisation. D'une certaine manière, le rafraîchissement est plutôt au second plan. On essaie de monter en compétence en même temps qu'on fait, notamment par le manque d'outils à notre disposition pour pouvoir évaluer très précisément la portée de nos actions. On essaie de se former en même temps qu'on apprend et qu'on fait.
+                                    </p>
+                                    <p>
+                                        Dans les contextes dans lequel on travaille, notamment des places, des espaces publics ou des projets urbains -qui sont dans des contextes contraints avec des programmes spécifiques de marché d'accès à des services de sécurité etc - ou de pompiers, on se rend compte qu'on assemble un certain nombre de programmes ou d'usages qui sont parfois très contradictoires avec la première ambition de végétaliser, donc on est obligé de mobiliser d'autres leviers. Il faut commencer par regarder le capital arboré qu'on peut préserver et à partir duquel on va pouvoir travailler. On essaye aussi de travailler avec les ombrages (des autres bâtiments, des arbres plantés) et sur le vent et les corridors de ventilation.
+                                    </p>
+                                    <p>
+                                        On pourrait aussi réfléchir à des plantations asymétriques dans les alignements des rues, chose qu'on n'a pas l'habitude de voir, et  qui serait en fonction de l'orientation de la rue, des essences qu'on choisit, des tailles des essences qu'on choisit.
+                                    </p>
+                                    <p>
+                                        L'utilisation de brumisateurs a fait beaucoup débat : est-ce une solution efficace ou une maladaptation que d'utiliser de l'eau potable pour la distribuer sur l'espace public? Pour autant c'est une solution très efficace <em>(NoteProjet : faible consommation d'eau et bonne réduction de chaleur)</em>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Transformer les centres commerciaux -->
+                            <div class="border-l-4 border-site-primary pl-8">
+                                <h3 class="text-2xl font-soustitre text-site-primary mb-6">
+                                    Transformer les centres commerciaux : une approche partenariale et multi-échelle
+                                </h3>
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Emilie Sampson - Aménageur Nhood</span>
+                                </div>
+                                
+                                <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                                    <p>
+                                        Les zones commerciales concentrent un certain nombre d'externalités négatives. Le rafraîchissement des zones commerciales dans le cadre de leur transformation est un enjeu urbain majeur. Une des questions est la pluralité des échelles quand on veut véritablement s'attaquer à la question de l'îlot de chaleur urbain. Il faut une combinatoire de solutions grises, basées sur la nature et douces pour être véritablement impactant. La première approche c'est de travailler ensemble, de façon très partenariale, sur des grands territoires à transformer notamment sur la métropole de Strasbourg, sur la métropole de Bordeaux ou sur la métropole de Nantes : entrer dans le cadre de partenariat de droit privé avec les collectivités concernées à l'échelle intercommunale, à l'échelle de l'agglomération, mais aussi à l'échelle de la commune pour qu'on puisse finalement, dans un contrat très classique et très simple, se poser ensemble une méthodologie de travail des objectifs.
+                                    </p>
+                                    <p>
+                                        On a également l'opportunité de travailler en tant qu'aménageur privé, avec les aménageurs publics, sur la question de l'espace public et de ses qualités rafraîchissantes pour lutter à une échelle vaste contre l' ICU et puis nous avons l'opportunité dans ce travail partenarial de descendre aussi au stade des cahiers des charges des prescriptions environnementales urbaines et paysagères dans des cahiers des charges très précis qui s'imposent au promoteur pour arriver vraiment à combiner toutes ces échelles depuis les réglementations qui se positionnent à une échelle vaste jusqu'à l'échelle bâtimentaire.
+                                    </p>
+                                    <p>
+                                        Enfin pour les solutions douces (les usages) on va pouvoir travailler avec les exploitants avec les commerçants qui sont sur site et qui, par leurs actions du quotidien, vont pouvoir eux aussi avoir un impact pour améliorer le confort des clients et des usagers sur le site mais aussi durablement éviter la climatisation, éviter que des solutions qui sont mises en place à l'échelle bâtimentaire ne viennent contrecarrer l'effet d'autres stratégies que l'on aurait mises en place à une échelle plus large.
+                                    </p>
+                                    <p>
+                                        En tant qu'opérateur privé, notre échelle de valeur est basée sur le fait de construire alors se pose assez naturellement la question du financement de la renaturation : Quel est le modèle économique d'un opérateur qui privilégierait le fait de renaturer versus le fait de construire ?
+                                    </p>
+                                    <p>
+                                        Il faudrait revisiter le modèle économique d'un projet urbain : comment allons -nous capitaliser sur les externalités positives d'un projet urbain vertueux ?
+                                    </p>
+                                    <p>
+                                        Enfin, se pose la question de la méthodologie partenariale mais aussi des outils dont on se dote pour prendre les bonnes décisions, avec de nouvelles guidelines et puis des critères d'impact qui soient clairement définis. Cela permettrait d'emmener avec nous la chaîne de valeur financière et assurantielle qui doit nous permettre d'arriver à mobiliser les fonds et les partenaires investisseurs sur des projets qui seraient plus vertueux que d'autres sur la base de ce nouveau tableau de bord réinventé.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Le droit pour faciliter -->
+                            <div class="border-l-4 border-site-primary pl-8">
+                                <h3 class="text-2xl font-soustitre text-site-primary mb-6">
+                                    Le droit pour faciliter et accélérer le rafraîchissement
+                                </h3>
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Malicia Donniou, Avocate, Ginkgo Avocats</span>
+                                </div>
+                                
+                                <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                                    <p>
+                                        C'est un peu la question de l'efficacité de la norme de comprendre à partir de quel moment on peut considérer que les opérateurs privés (les constructeurs et des propriétaires privés) se sentent concernés par la problématique du rafraîchissement urbain.
+                                    </p>
+                                    <p>
+                                        Les dispositifs de planification d'aménagement du territoire et planification urbaine mettent finalement pas mal de temps à arriver dans les PLU. Par ailleurs il n'y a que les PLU et les documents assimilables qui sont directement opposables aux autorisations d'urbanisme. Il y a un important laps de temps entre les objectifs qui sont posés et la traduction concrète dans un projet immobilier.. Les effets prévus dans les règlements sont décalés ce qui pose des problèmes de connaissance de l'efficacité de la norme.
+                                    </p>
+                                    <p>
+                                        Le code de l'urbanisme, aujourd'hui même s'il ne fait pas référence à la notion de rafraîchissement urbain, dispose de tous les outils nécessaires pour les collectivités locales pour faire des PLU intelligents. Tous ces outils existent mais ils sont laissés à la libre appréciation des auteurs de PLU. Dans les éléments à réfléchir et d'évolution réglementaire ça serait éventuellement de rendre obligatoire certains dispositifs notamment d'espace, pourquoi pas d'espace libre, tenant compte des qualités bioclimatiques d'une construction.
+                                    </p>
+                                    <p>
+                                        Mais en réalité ce qu'on voit c'est que finalement les villes où la question des îlots de chaleur se posent le plus c'est des villes les plus bâties les plus denses et ces villes c'est des villes du déjà là, donc finalement le code de l'urbanisme on l'applique assez peu puisqu'on construit assez peu, à part des grosses réhabilitations.
+                                    </p>
+                                    <div class="bg-gradient-to-r from-blue-100 to-indigo-100 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                                        <p class="font-semibold">
+                                            <span class="border-b-2 border-blue-500 pb-1">La ville du déjà là</span> c'est la ville des propriétaires : <span class="border-b-2 border-blue-500 pb-1">comment à un moment on fait participer les propriétaires privés, que ce soit les propriétaires de maisons individuelles ou les propriétaires dans les copropriétés, au phénomène de rafraîchissement urbain.</span>
+                                        </p>
+                                    </div>
+                                    <p>
+                                        Il y a un dispositif par exemple qui a été mis en place par la ville de Paris qui s'appelle <em>coproasis,</em> en référence au cours oasis, où chaque copropriété Parisienne peut demander une subvention à la ville pour étudier la possibilité de désimperméabiliser les cours d'immeuble. C'est un premier dispositif qui peut être intéressant.
+                                    </p>
+                                    <p>
+                                        Ce qui pourrait être intéressant aussi c'est, dans les immeubles en copropriété, d'avoir un <span class="border-b-2 border-blue-500 pb-1">allègement des majorités</span> pour permettre de mettre en place des dispositifs de volets.
+                                    </p>
+                                    <p>
+                                        On se heurte à la question de la protection patrimoniale (portée par les ABF). On a aujourd'hui cette difficulté de conflits répétés entre la protection patrimoniale et la protection de santé publique : il faut trouver une manière de résoudre ces conflits.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Réactions et discussions des collectivités -->
+        <section class="py-16 bg-white">
+            <div class="mx-auto lg:container px-4 sm:px-6">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-site-secondary text-white p-8">
+                        <h2 class="text-3xl lg:text-4xl font-titre mb-4">
+                            Réactions et discussions des collectivités
+                        </h2>
+                    </div>
+
+                    <div class="p-8 space-y-8">
+
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Sarcelles</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                Il serait intéressant, au niveau des pratiques professionnelles, de pouvoir revenir sur des chantiers construits, pour observer, mettre en place des tableaux de bord, des indicateurs pour pouvoir modifier. En finir avec la démarche one shot.
+                            </p>
+                        </div>
+
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Pontault-Combault</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                Lorsque l'on parle des copropriétés la difficulté est d'avoir les majorités pour pouvoir mettre en œuvre les transformations nécessaires au rafraîchissement de ses immeubles.
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Malicia Doniou</span>
+                            </div>
+                            <div class="space-y-4 text-gray-700 leading-relaxed text-lg">
+                                <p>
+                                    Aujourd'hui on est effectivement sur une règle de double majorité qui rend les transformations difficiles, même si ces derniers temps il y a eu des abaissements de majorité pour les sujets de rénovation thermique des bâtiments.
+                                </p>
+                                <p>
+                                    Malgré cela il y a des problèmes de financement : il peut y avoir des aides de la mairie (comme l’initiative coproasis) ou l’ajout d’un nouvel étage qui finance l’isolation.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Charles Rives</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                A propos de la végétalisation des toits d’immeuble (qui isole et participe à l’évapotranspiration ), il faut de grosse épaisseur de sol, et assurer un arrosage. Compte tenu du changement climatique, ce n’est plus une solution privilégiée.
+                            </p>
+                        </div>
+
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Montreuil</span>
+                            </div>
+                            <div class="space-y-4 text-gray-700 leading-relaxed text-lg">
+                                <p>
+                                    Montreuil a co-élaboré une charte de la construction pour la ville résiliente en 2015. Elle privilégie l'implantation bioclimatique avec les logements traversants qui génèrent une ventilation naturelle. Cette charte a servi de support pour alimenter le PLU et les OAP d’aménagement ( NoteProjet : donc surement l’OAP de Boissière-Acacia). C'est un document très encadrant pour faire de l'architecture bio climatique. Cette charte n’est pas opposable : c'est de la négociation et c'est le promoteur qui est signataire. C'est un peu une forme de partenariat public privé.
+                                </p>
+                                <p>
+                                    A Montreuil il y a aussi le projet de démantèlement de la A186 qui inclut de nombreux acteurs. Le mot d’ordre c’est “planter d'abord construire parfois” qui est aujourd'hui un plan guide et qui va faire l'objet d'une opération d'aménagement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Castelnau-le-Lez</span>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                A propos de la valorisation du foncier, un des premiers leviers, lors d’une opération d'aménagement, c'est de voir comment on valorise l'espace l'espace libre par rapport à l'espace construit. Comme Montreuil, Castelnau veut également s’investir dans la charte de la construction.
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-site-primary pl-8 py-6 bg-gradient-to-r from-teal-50 to-transparent rounded-r-xl">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-site-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Paris</span>
+                            </div>
+                            <div class="space-y-4 text-gray-700 leading-relaxed text-lg">
+                                <p>
+                                    A Paris, sur la question patrimoniale et le dialogue avec les ABF, c’est quelque chose qui est très fort à Paris parce que effectivement on a cet enjeu de garder l'image de Paris, de ne pas trop toucher au patrimoine. En tout cas d'y aller de manière précautionneuse et dans la volonté de convaincre. Le dialogue avec les ABF est constant et il évolue. On a aussi un enjeu de désirabilité des transformations. Il y a des sujets sur lesquels on n'est pas d'accord, il faut continuer d'avancer. Le dialogue évolue aussi en fonction des solutions qui peuvent être proposées et de l'urgence climatique : plus il fait chaud plus on a des situations compliquées, plus on peut avancer sur certains de ces sujets.
+                                </p>
+                                <p>
+                                    On a parfois des opérations d'aménagement qui ont été pensées il y a 20 ans qui sortent maintenant (dix ans de planification et dix ans de construction) et on arrive parfois avec un projet d'aménagement complet où certaines problématiques de fraîcheur en ville n'étaient pas pensées au moment de la conception du projet.
+                                </p>
+                                <p>
+                                    Il y a près de 1000 établissements scolaires à Paris. La rénovation devrait prendre jusqu’à 2050, il faut trouver des solutions intermédiaires, développer des solutions boîte à outils un peu légères qui demandent pas trop de temps de travaux. Par exemple, on travaille sur l'ombrage artificiel, l'ombrage qu'on peut apporter là où il n'est pas possible de planter d'arbres. Il peut s’agir aussi d'occultation solaire et de brasseurs d’air.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-2 border-purple-400 mt-12">
+                            <div class="p-8 space-y-4">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Question - Nathalie Molines, UTC</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg">
+                                    Pour l'imperméabilisation, la division des projets par service (service espace vert, service gestion des autres pluies) rend compliqué certaines gestions de projets et l’autre question concerne les bureaux d'études où les agences architectes sur la prise en compte en amont du projet de qui va gérer ensuite les projets de végétalisation ?
+                                </p>
+                                <div class="pt-4 mt-4 border-t border-gray-200">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Charles Rives</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        On revient et on redessine une partie du projet qu'on a déjà dessiné donc ça nécessite de re-payer quelques études sur quelque chose qui a été dessiné mais c'est quand même moins onéreux que de repayer des aménagements à a posteriori. Donc on reprend les nouvelles problématiques et on évalue aussi notre première phase d'aménagement pour essayer de proposer de nouveaux ajustements dans la phase d'après.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-2 border-purple-400 mt-12">
+                            <div class="p-8 space-y-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Question - Anne Ruas, FreshWay, UGE</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg">
+                                    La ville du déjà là, c’est vraiment intéressant. Est-ce qu'on en fait assez ? Est-ce qu'on a assez de solutions ? Quand Paris a dit finalement “c'est vrai qu'on ne sait pas exactement quel sera l'intensité du changement climatique donc on fait ce qu'on peut sur de nombreux secteurs différents” c'est bien, mais on se pose la question : Est-ce qu'il y a assez de brainstorming sur la ville du déjà là ? Est-ce qu'on n'y va pas trop doucement ? Est ce qu’après un ou deux étés très chauds tout le monde ne va pas se ruer sur les climatiseurs ?
+                                </p>
+                                <div class="pt-6 mt-6 border-t border-gray-200 space-y-8">
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Sarcelles</span>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            Sur le renouvellement urbain, il y a beaucoup de travail, mais on se pose des questions sur les indicateurs dont on peut disposer qu'ils sont effectivement aujourd'hui pas complètement là.
+                                        </p>
+                                    </div>
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Emilie Sampson</span>
+                                        </div>
+                                        <div class="space-y-4 text-gray-700 leading-relaxed text-lg">
+                                            <p>Il y a un travail sur la verticale de la détention immobilière à opérer: Aujourd'hui mes principaux alliés dans la réflexion sur la transformation de la ville vers une ville plus résiliente qui chauffe moins, qui est plus adaptable, c'est plus les collectivités. Les gens que j'ai le plus de mal à embarquer ce sont les assets manager (NoteProjet : Gestionnaires de portefeuille) qui ne vont pas forcément voir dans les solutions que je leur propose un impact sur la valorisation que eux opèrent dans leur quotidien du bâti ou de l'actif qui détiennent. Or c'est là un gros enjeu parce que c'est là qu'on va chercher le financement donc finalement en parallèle je pense ça nous ouvre un nouveau champ de collaboration qui consiste à dire : Si on a cette approche de la verticale immobilière et de la valeur de l'actif au prisme de la résilience climatique et de l'adaptation au changement, un asset manager ne doit pas valoriser de la même façon :</p> 
+                                                <ol class="list-decimal list-inside">
+                                                    <li>un immeuble qui chauffe et dans lequel il faut mettre la climatisation fond et où finalement en coût total pour l'usager ça devient impossible à tenir, que</li>
+                                                    <li>un actif qui est beaucoup plus stable climatiquement qui se refroidit tout seul enfin ou qui bénéficie de solutions basées sur la nature pour être beaucoup plus habitable ou confortable.</li>
+                                                </ol>
+                                            <p>Il manque une inflexion du monde de la finance de l'immobilier qui soit vraiment à la hauteur de l'inflexion du monde de la conception des projets. Le couple investisseur financeur assureur devrait changer sa grille de lecture pour aller chercher les fonds et pour valoriser les actifs.</p>
+                                        </div>
+                                    </div>
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Paris</span>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                        La rénovation des copropriétés c'est plus large que juste l'adaptation parce qu'on a aussi la rénovation énergétique pour le confort d'hiver. C'est un sujet extrêmement complexe sur lequel aussi les compétences de la collectivité ont une limite.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-2 border-purple-400 mt-12">
+                            <div class="p-8 space-y-4">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Question - Maylis Desrousseaux, UGE</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg">
+                                    J'ai analysé quelques contentieux sur les opérations d'aménagement commercial quand il y a des opérations de désimperméabilisation j'ai l'impression que souvent elles sont mises en place en tant que mesure compensatoire et donc quasiment obligatoire plutôt que relevant d'une vraie démarche proactive de la part des aménageurs commerciaux.
+                                </p>
+                                <div class="pt-4 mt-4 border-t border-gray-200">
+                                    <div class="flex items-center mb-4">
+                                        <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Emilie Sampson</span>
+                                    </div>
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        Il y a un changement de paradigme quand même qui s'opère au sein de beaucoup de foncières qui ont une approche plus prospective que défensive du sujet de la renaturation. Néanmoins ça ne résout pas le problème du modèle économique intrinsèque c'est pour ça que je plaide aux côtés de ces foncières pour une approche en coût global qui doit permettre la prise en compte beaucoup plus proactive de la qualité de la renaturation de la résilience climatique.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-t-2 border-purple-400 mt-12">
+                            <div class="p-8 space-y-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Question - Solange Glover Bondeau, Notaire</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed text-lg">
+                                    J'ai l'impression qu'on hésite en termes de politique entre l'incitation - qui serait via des subventions des incitations fiscales - et des sanctions, par exemple je pense à l'interdiction de location des logements énergivores. Est-ce qu’aujourd’hui, on arrive à avoir une vision claire sur le fait de devoir privilégier l’un plutôt que l’autre ? Tous ces éléments ils sont aux mains de l'état aujourd'hui on est avec des représentants de collectivité locale : quels sont les outils des collectivités locales que ce soit en termes d'incitation de subventions des exonérations de taxes foncières ou de sanctions qui peuvent être mis en place parce que finalement c'est quand même vous qui êtes au plus près des territoires des administrés pour agir. On a l'impression que cette politique d'adaptation climatique des villes est menée par l'état et que les collectivités s'en saisissent au moyen des outils qu'elles ont à disposition, je pense notamment au plu : mais l'adaptation de la ville qui est déjà là elle n'est pas liée au plu.
+                                </p>
+                                <div class="pt-6 mt-6 border-t border-gray-200 space-y-8">
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Pontault</span>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            Avec la diminution des dotations de l'État, nous n'avons pas les moyens de mettre en place des subventions pour la rénovation. On essaie de mettre en place des outils qui permettent d'inciter de sensibiliser et d'aider à la recherche de subvention.
+                                        </p>
+                                    </div>
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Sarcelles</span>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            On va chercher les subventions dans les agences. A Sarcelles on a un énorme projet de rénovation urbaine avec l'Anru, et on a un plan une intervention sur les copropriétés dégradées avec l'Anah. On met en place des formations gratuites aussi pour les copropriétaires.
+                                        </p>
+                                    </div>
+                                    <div class="border-l-4 border-site-primary pl-6">
+                                        <div class="flex items-center mb-4">
+                                            <span class="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Réponse - Paris</span>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed text-lg">
+                                            A Paris on a un dispositif qui s'appelle éco-Renovons qui mixe un accompagnement technique des copropriétés gratuit donc avec quelqu'un qui va se déplacer dans la copropriété pour pouvoir réaliser une première étape de diagnostic conseillé sur les travaux à mettre en oeuvre et renseigner sur les financements possibles la ville de Paris participe aux financements possibles.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-slate-700 to-gray-800 text-white rounded-2xl shadow-2xl mt-16">
+                            <div class="p-8 lg:p-12">
+                                <h3 class="text-3xl font-titre mb-6 text-center text-teal-300">Le dernier mot</h3>
+                                <div class="flex items-center mb-6 justify-center">
+                                    <span class="bg-teal-500 text-white px-5 py-2 rounded-full text-md font-semibold">Maylis Desrousseaux, Chercheur Lab’urba</span>
+                                </div>
+                                <div class="space-y-6 leading-relaxed opacity-95 text-lg">
+                                    <p>
+                                        On voit bien que le plan local d'urbanisme est la star identifiée par les acteurs, les collectivités, les aménageurs, les chercheurs aussi, pour résoudre les problèmes liés à l'aménagement urbain. On est du coup dans un document qui doit être un incubateur de différentes politiques environnementales mais qui reste quand même un document qui relève du droit d'urbanisme qui est un droit qui initialement est limité à la répartition des activités des modes d'occupation du sol sur le territoire et donc ce n'est pas un document qui à la base a été pensé pour intégrer l'ensemble de nos problèmes. Ça pose vraiment la question de qui est le plus légitime pour répondre à ces enjeux d'îlots de chaleur ?
+                                    </p>
+                                    <p>
+                                        On voit apparaître le propriétaire privé, l'aménageur commercial, différents individus et partis prenante qui eux aussi peuvent avoir un effet levier très important mais toujours dans une démarche volontaire avec très peu de levier juridique pour obliger en fait ces personnes là à véritablement prendre en charge ce problème.
+                                    </p>
+                                    <p class="font-bold">
+                                        Ce qui nous manque ici, c'est d’aller plus vite, c'est un peu de colère parce que c'est une crise que l'on est en train de vivre et on essaye par des mesurettes par un paradigme de l'adaptation, à répondre à un problème qui nous dépasse très clairement la question de où est-ce qu'on va vivre et comment est-ce qu'on va vivre à l'horizon 2050 et même cet été déjà.
+                                    </p>
+                                    <p>
+                                        La question qui se pose et donc cette habitabilité qui fait penser à des outils juridiques plutôt du droit de l'urbanisme, avec des mécanismes de protection des milieux, qui font appel à des pouvoirs de police administratives, qui font appel aussi à des systèmes d'infraction du pénal parce qu'il y a peut-être aussi des situations délictuelles : parfois à faire vivre les gens dans des endroits invivables et qui finalement bien durcirait un petit peu sur le plan de l'action tout ce qu'on peut entamer comme démarche mais qui pose aussi la question de la solidarité.
+                                    </p>
+                                    <p>
+                                        Alors il y a la solidarité nationale qui s'applique très facilement dans les situations de crise. J'ai un exemple très frappant des communes qui ont été exposées dans le département du nord aux inondations de cet automne (2024) et bien là il y a déjà eu des actions foncières qui ont été prises, les maisons les plus exposées ont été rachetés et qui sont en ce moment en train d'être détruites, là on désimperméabilise sévèrement, on renature aussi et on a trouvé les moyens de le faire parce qu'on a répondu à une crise et ça s'est fait dans le temps d'une année. Donc les leviers on les a, dès lors que l'on a considéré l'importance de l'enjeu.
+                                    </p>
+                                    <p>
+                                        La solidarité nationale face au risque, c'est aussi la solidarité écologique. La solidarité écologique, c'est un principe du droit de l'environnement inscrit dans le code de l'environnement qui reconnaît l'interdépendance que l'on a tous, nous humains mais aussi l'ensemble des êtres vivants, avec les milieux naturels. Il s’agit de repenser de manière solidaire les interactions que l'on peut avoir lorsqu'on aménage une parcelle sur la parcelle d'à côté. Cette idée pourrait se transposer à plusieurs échelles.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    <div id="footer-container"></div>
+
+    <script src="/lib/leaflet.js" crossorigin=""></script>
+    <script src="/lib/chart.umd.js"></script>
+    <script src="/lib/chartjs-plugin-annotation.min.js"></script> 
+    <script src="/lib/chartjs-plugin-datalabels.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+</body>
+</html>

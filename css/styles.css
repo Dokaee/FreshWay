@@ -1,0 +1,43 @@
+body { background-color: theme('colors.site-background'); }
+        #map { height: 500px; width: 100%; border-radius: theme('borderRadius.md'); cursor: pointer; }
+        .dashboard-card { 
+            background-color: rgb(250, 250, 250); 
+            border-radius: theme('borderRadius.md'); 
+            box-shadow: theme('boxShadow.custom-light'); 
+            padding: 1rem; 
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
+        }
+        .dashboard-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: theme('boxShadow.custom-medium'); 
+        }
+        .chart-container { position: relative; height: 300px; width: 100%; }
+        #feature-info-panel {
+            background: white; padding: 1rem; margin-top:1rem; 
+            border-radius: theme('borderRadius.md');
+            box-shadow: theme('boxShadow.custom-light');
+            display: none; 
+            border-left: 4px solid theme('colors.site-primary');
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1000;
+            background-color: #1f2937;
+            color: white;
+            text-align: left;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            max-width: 300px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 5px;
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+        }
+        

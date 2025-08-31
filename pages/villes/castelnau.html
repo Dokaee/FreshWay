@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - Castelnau-le-Lez</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col overflow-x-hidden">
+    <div id="header-container"></div>
+
+    <main class="pt-20 lg:pt-24 flex-grow mx-auto lg:container px-1 lg:px-4 py-10 pb-20">
+
+        <!-- Hero Section -->
+        <section class="mb-16 text-center relative">
+            <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                        Analyse des trajectoires de transformation de Castelnau-le-Lez
+                    </h1>
+                    <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6"></div>
+                </div>
+            </div>
+        </section>
+
+<!-- Section 1: Contexte -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+            <span class="w-10 h-10 sm:w-8 sm:h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">1</span>
+            Contexte
+        </h2>
+        <span class="text-4xl sm:text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-6 sm:p-8 space-y-12">
+            <!-- Statistiques clés sur fond coloré -->
+            <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 sm:p-8 rounded-xl -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">2011 hab/km²</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Densité en 2022 (INSEE)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">11,18 km²</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Superficie en 2022 (INSEE)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">222,4 h / mois</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Ensoleillement moyen calculé sur la période 1991-2021 (Climate Data)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description contextuelle -->
+            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 sm:p-8 rounded-xl border-l-4 border-site-primary">
+                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                    Castelnau le Lez est marquée par un climat méditéranéen et des fortes températures l'été. Ces événements particulièrement chauds sont communs dans la région et les mesures de rafraîchissement envisagées ne sont pas les mêmes que dans les villes de l'étude plus au nord.
+                </p>
+                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                    <br/>La ville de Castelnau-le-lez longe Montpellier à l'Est. Les communes sont séparées par le Lez qui traverse ensuite Montpellier avant de se jeter dans la mer. Elle fait partie de la Métropole 3M de Montpellier. Castelnau est une ville historiquement agricole (vigne), il reste quelques vignobles, en particulier au domaine du Verchant (AOP Verchant). Sa proximité avec Montpellier, sa réserve foncière et son tram qui la traverse d'Est en Ouest depuis 2008 fait que la ville attire de nouveaux habitants (voir ci-dessous). La ville est majoritairement composée de pavillons verdoyants à l'exception du centre historique, de la zone qui longe le tram et du nouvel écoquartier Eureka qui s'est fortement urbanisé depuis 10 ans.
+                </p>
+            </div>
+            
+            <!-- Croissance démographique -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl border-l-4 border-emerald-500">
+                        <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 sm:w-6 sm:h-6 bg-emerald-500 rounded-full mr-3"></div>
+                            Une croissance démographique soutenue
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                            Depuis 1931, la commune connaît une croissance démographique continue, qui s'est accélérée au cours des dernières décennies. Entre <b>2008 et 2019</b>, la densité quant à elle est passée de 1338 à plus de 2000 habitants au km².  Le taux annuel moyen augmente de 1,50, traduisant une dynamique soutenue. Cette croissance est plus rapide que celle de Montpellier (1,17) ou que la moyenne nationale (1,05). En 2019 elle avait 22534 habitants.
+                        </p>
+                    </div>
+                </div>
+                <figure class="group">
+                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <img src="/data/img/castelnau/1/1_taux_croissance.png" alt="Graphique du taux de croissance de la population de Castelnau-le-Lez comparé à Montpellier et la France depuis 1931." class="w-full h-auto transform  transition-transform duration-300">
+                    </div>
+                    <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                        Taux de croissance historique à Castelnau-le-Lez © FreshWay 2025
+                    </figcaption>
+                </figure>
+            </div>
+
+            <!-- Capital fraîcheur -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-6 sm:p-8 rounded-xl shadow-inner -mx-6 sm:-mx-8 border border-gray-100">
+                <figure class="group order-2 lg:order-1">
+                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <img src="/data/img/castelnau/1/2_carte_schématique.png" alt="Carte schématique de Castelnau-le-Lez en 2022 montrant les zones de végétation, les quartiers et les infrastructures." class="w-full h-auto transform  transition-transform duration-300">
+                    </div>
+                    <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                        Carte schématique des points importants de la ville © FreshWay 2025
+                    </figcaption>
+                </figure>
+                <div class="space-y-6 order-1 lg:order-2">
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+                        <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 sm:w-6 sm:h-6 bg-green-500 rounded-full mr-3"></div>
+                            Un capital fraîcheur à préserver
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                            La carte ci contre localise les éléments importants du territoire, comme les quartiers de l'étude, le cours d'eau principal, les routes et tracé de tramway. L'équilibre entre végétal et minéral permet d'estimer ce que l'on peut appeler un « capital fraîcheur ». À Castelnau-le-Lez, ce capital est relativement important en raison d'une proportion significative de végétation, particulièrement visible dans les extrémités Est et Nord du territoire, trace du passé agricole de la commune. 
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                            La ligne 2 du tramway, qui relie Castelnau-le-Lez à Montpellier, traverse la commune en desservant principalement les secteurs Est et Nord-Est. Le long de cette ligne, plusieurs projets urbains ont vu le jour, comme l'écoquartier du Domaine de Caylus, témoignant d'une volonté de concilier urbanisation et végétation et le quartier Eureka au sud. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+
+
+<!-- Section 2: Trajectoire de mise en œuvre opérationnelle -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">2</span>
+                    Trajectoire de mise en œuvre opérationnelle
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-16">
+                    <!-- Un parc par an -->
+                    <div class="space-y-8">
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8 -mt-8 mb-12">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Un parc par an</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-6">
+                                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 sm:text-lg">
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                        La commune de Castelnau-le-Lez a initié l'opération <b>« un parc par an »</b>, avec l’objectif de créer chaque année un nouvel espace vert accessible au public. Cette démarche vise à renforcer le confort urbain et favorise la présence d’îlots de fraîcheur dans la ville. Dans la grande majorité des cas, les parcs existent déjà et assez peu de plantations sont réalisées à l’exception de parcs ouverts fin 2025 où 200 arbres doivent être plantés. Six ouvertures de parcs ont été réalisées dans le cadre de la mandature du maire Frédéric Lafforgue, et une supplémentaire est prévue pour la fin 2025.
+                                    </p>
+                                    <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                        Dans la grande majorité des cas, les parcs existent déjà et <b>assez peu de plantations sont réalisées</b> à l'exception de parcs ouverts fin 2025 où 200 arbres doivent être plantés. Six ouvertures de parcs ont été réalisées, et une supplémentaire est prévue pour fin 2025:
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-lg">
+                                    <h4 class="font-semibold text-lg text-gray-800 mb-4 flex items-center ">
+                                        <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sm:text-2xl"> identifiées </span>
+                                    </h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Le parc des Berges du Lez (2021)</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Le parc Lydie Wilson, déjà planté et situé dans une copropriété mais désormais géré par la mairie.</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Le parc du Mas de Rochet, ancien jardin de clinique rendu public après quelques aménagements.</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Le square Jeanne-Barret (730 m²), seul espace entièrement planté dans le cadre de l’opération,avec une gestion similaire à celle du parc Lydie Wilson.</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Parc Pujol (Avril 2025) suite au legs du professeur Pujol (4ha).</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">le parc Frédéric Brazile inauguré le 21 juin 2025 de 5ha où 100 arbres seront plantés.</span>
+                                        </div>
+                                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                            <span class="text-sm text-gray-700 sm:text-lg">Le bois de Devois de 800m² ouvert mi 2025 où à terme 100 arbres doivent être plantés</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/castelnau/2/3_bois_parcs_jardins.png" alt="Carte des bois, parcs, squares et jardins publics à Castelnau-le-Lez en 2023." class="w-full h-auto transform  transition-transform duration-300 rounded-lg">
+                                </div>
+                                <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                                    Bois, parcs, squares et jardins publics à Castelnau-le-Lez.<br/>
+                                    <em>© FreshWay 2023 d'après les informations du site de la mairie.</em>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- Micro-forêt Miyawaki -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                        <div class="text-center">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Micro-forêt Miyawaki</h3>
+                            <div class="w-20 h-1 bg-green-500 mx-auto"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                    <img src="/data/img/castelnau/2/4_micro_foret.png" alt="Photo de la micro-forêt Miyawaki sur la place Aristote." class="w-full h-auto transform  transition-transform duration-300">
+                                </div>
+                                <figcaption class="text-center text-sm text-gray-500 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                    Micro-forêt Miyawaki, place Aristote, cité Eurekâ<br/>
+                                    <em class="text-xs">© Ruas 2024</em>
+                                </figcaption>
+                            </figure>
+                            
+                            <div class="space-y-6">
+                                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+                                    <p class="text-gray-700 leading-relaxed mb-4 sm:text-lg">
+                                        Parmi les aménagements notables, on trouve l'installation d'une micro-forêt Miyawaki sur la place Aristote au cœur de la cité Eurêka. Ce type de plantation, fondé sur un principe de forte densité végétale et d'espèces indigènes, permet de créer un effet de fraîcheur par évapotranspiration. Modeste en surface, cette forêt urbaine est implantée dans une zone très minéralisée.
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <svg class="w-5 h-5 text-red-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-semibold text-red-800 mb-2 sm:text-2xl">Limites identifiées</h4>
+                                            <p class="text-sm text-red-700 sm:text-lg">
+                                                Cependant, certaines limites opérationnelles ont été identifiées. Les plantes choisies ne sont pas toujours adaptées au climat local, ce qui rend leur entretien estival contraignant. De plus, les agents ne sont pas spécifiquement formés sur les problématiques de chaleur urbaine liés à l'aménagement, ce qui freine la généralisation de solutions comme l'optimisation de l'albédo des surfaces.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tableau solutions de rafraîchissement -->
+                    <div>
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Solutions de rafraîchissement mises en place</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 -mx-8">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Solution</th>
+                                            <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Niveau d'action</th>
+                                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détails</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Plantation d’arbres</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Moyen</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Alors que peu d’arbres ont été plantés ces dernières années et ne compensent pas les arbres coupés, en 2025 une dynamique de plantation s’amorce même si elle reste modeste (200 arbres).</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Accès à des lieux frais</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Politique volontariste</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Politique volontariste d’aménagement permettant l’ouverture de parcs.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Désimperméabilisation (cours oasis)</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Le nouveau groupe scolaire Jacques-Chirac est performant, mais les autres écoles n’ont pas encore été réaménagées. Pas de politique systématique.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Installation d’ombrages</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Pas de politique</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Pas d’ombrage mis en place dans la ville.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée à l'eau</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Absent mais aménagement le long du Lez </td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">L’eau étant très calcaire, il n’y a pas de solution de type fontaine. Une balade est proposée en bord du Lez.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée au réseau froid</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Politique volontariste Métropole</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Le quartier Eureka est connecté à un réseau de froid de la Métropole.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action sur l'Albedo</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Absent</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Pas d’action sur l’albedo.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+
+        <!-- Section 3: Trajectoire de l'espace physique -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-violet-100">3</span>
+                    Trajectoire de l'espace physique
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-12">
+
+                    <!-- Introduction contextuelle -->
+                <div class="bg-white  p-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-violet-500 ">
+                    <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                        Par rapport aux autres villes étudiées dans ce projet, Castelnau est une ville peu minerale (23,9% de minéralité sol (routes et bati) (pontault 20,2%, Sarcelles 28,3%, Montreuil 42,4%). <b>On peut considérer que Castelnau a un bon capital fraîcheur,</b> mais elle touche Montpellier qui exerce une forte pression foncière. Sur les quatre villes que nous avons étudiées, Castelnau est la ville qui s’est le plus minéralisée sur la période étudiée. 
+                    </p><br/>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full ">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200"></th>
+                                    <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Capital fraîcheur</strong></td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Bon </td>
+                                    <td class="py-4 px-6 text-gray-700 align-top">Fort capital fraîcheur, notamment grâce à des terres agricoles, au Lez et à une surface importante de zones pavillonnaires .</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Évolution de la minéralité </strong></td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Très forte perte</td>
+                                    <td class="py-4 px-6 text-gray-700 align-top">Entre 2005 et 2023 la minéralisation a été très intense, elle équivaut à 37 ha soit l’équivalent de 53 terrains de foot. </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><br/>
+
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                    Explorez les transformations physiques de Castelnau-le-Lez. Le tableau ci-dessous met en lumière les changements d'occupation du sol et l'évolution des espaces végétalisés entre 2005 et 2023. Sélectionnez une zone d'étude pour afficher les données correspondantes.
+                </p>
+            </div>
+
+                    <div class="mb-6 p-4 bg-white/50 rounded-lg border border-gray-200 shadow-sm">
+                        <label for="zone-select" class="block text-md font-soustitre text-gray-800 mb-1 sm:text-2xl">
+                            Choisissez une zone d'étude :
+                        </label>
+                        <div class="relative">
+                            <select id="zone-select" class="w-full p-2.5 border border-gray-300 rounded-md appearance-none text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-site-primary focus:border-site-primary shadow-sm cursor-pointer pr-10 sm:text-lg">
+                                <option value="select-commune">Commune de Castelnau-le-Lez</option>
+                                <option value="select-zones">Ensemble des zones étudiées</option>
+                                <option value="Caylus">Zone : Caylus</option>
+                                <option value="Palais des sports">Zone : Palais des sports</option>
+                                <option value="Chemin du thym">Zone : Chemin du thym</option>
+                                <option value="Avenue de l'Europe">Zone : Avenue de l'europe</option>
+                                <option value="Eureka">Zone : Eureka</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                                <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="flex flex-col gap-6">
+                            <div class="dashboard-card">
+                                <h3 class="text-xl font-soustitre text-gray-800 mb-4 ">Évolution nette de végétation <span id="canopee-zone-name" class="text-site-secondary font-bold"></span></h3>
+                                <div class="flex items-center justify-between">
+                                    <div id="indicator-content">
+                                        <p class="text-5xl font-bold text-site-secondary" id="vegetation-loss">-- %</p>
+                                        <p class="text-sm text-gray-500 mt-1 sm:text-lg">Entre 2005 et 2023</p>
+                                        <p class="text-sm text-gray-500 mt-0" id="football-transcription"></p>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-xs text-gray-500 mb-1 sm:text-lg" id="unity-change">Changer d'unité</span>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-medium text-gray-600 sm:text-lg">%</span>
+                                            <label for="unit-switch-v1" class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" value="" id="unit-switch-v1" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-site-primary rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-site-primary"></div>
+                                            </label>
+                                            <span class="text-sm font-medium text-gray-600 sm:text-lg">ha</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3 class="text-xl font-soustitre text-gray-800 mb-4 flex items-center gap-x-2">
+                                    <span>Occupation du Sol <span id="occupation-zone-name" class="text-site-secondary font-bold"></span></span>
+                                    
+                                    <span id="occupation-info-tooltip" class="has-tooltip relative" style="display: none;">
+                                        <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-400 rounded-full cursor-pointer">i</span>
+                                        <span class="tooltip"><strong class="font-semibold">Note de calcul :</strong> Dans l'ensemble de la commune, la catégorie d'occupation du sol 'Imperméable' est calculée à partir de données sur la voirie.</span>
+                                    </span>
+                                    </h3>
+                                <div class="chart-container" style="height: 168px;"><canvas id="compositionChart"></canvas></div>
+                            </div> 
+                        </div>
+                        <div class="dashboard-card">
+                            <div id="map" class="z-0 mb-4" style="height: 360px;"></div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">Cliquez sur une zone pour afficher ses détails. Utilisez les boutons pour comparer avant/après.
+                                <br/>Données calculées à partir de : BD TOPO®, BD ORTHO® IGN</p>
+                        </div>
+                    </div>
+                
+                    <div class="mt-8 bg-white/50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl font-titre text-gray-800 mb-3 text-center">
+                            Approfondir l'Analyse <span id="analysis-zone-name" class="text-site-primary"></span>
+                        </h3>
+                        <div id="dynamic-analysis-text" class="text-gray-700 text-justify">
+                            <p>Sélectionnez une zone sur la carte ou dans le menu déroulant pour afficher une analyse détaillée.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+
+<!-- Section 4: Trajectoire du système d'action locale -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">4</span>
+            Trajectoire du système d'action locale
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+            <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-8 rounded-xl -mx-8 -mt-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-teal-500">
+                    <h3 class="font-soustitre text-xl text-gray-800 mb-4 flex items-center">
+                        <div class="w-6 h-6 bg-teal-500 rounded-full mr-3"></div>
+                        <div class="sm:text-2xl">Contexte politique et organisationnel</div>
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                        Au niveau politique la commune a été administrée par Jean-Pierre Grand de 1983 à 2017 (Les républicains) puis Frédéric Lafforgue depuis 2017 (sans parti).
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                        Les enjeux liés au climat, et en particulier au rafraîchissement urbain, sont relativement récents dans l'agenda local. La prise de conscience s'est accélérée au cours des dernières années, notamment à travers des projets urbains intégrant progressivement des dimensions environnementales. Si la commune ne dispose pas d'un service dédié exclusivement aux questions climatiques, plusieurs services sont indirectement concernés par le rafraîchissement urbain comme l'urbanisme et les espaces verts de la mairie.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Limites identifiées -->
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6 shadow-lg">
+                <h3 class="font-soustitre text-xl text-red-800 mb-4 flex items-center">
+                    <svg class="w-6 h-6 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div class="sm:text-2xl">Défis opérationnels identifiés</div>
+                </h3>
+                <p class="text-red-700 leading-relaxed sm:text-lg">
+                    Les stratégies opérationnelles restent limitées, et les services municipaux ne bénéficient pas à ce jour de formations spécifiques sur les enjeux de rafraîchissement urbain. Certaines actions sont mises en place en période de canicule, comme le contact des personnes vulnérables ou l'ouverture de lieux frais qui affiche d'ailleurs une fréquentation faible. Le recours à des solutions techniques comme les brumisateurs ou les ombrières est écarté, jugé trop coûteux, peu adapté localement, et peu demandé par les habitants. Aussi, l'arrosage des arbres plantés, est géré par la métropole qui a fait le choix de ne pas les entretenir en été, malgré un sous-sol riche en eau. Ces éléments traduisent une mobilisation partielle des services communaux, freinée par des décisions politiques et une absence de montée en compétence sur ces sujets.
+                </p>
+            </div>
+
+            <!-- Tableau d'évaluation -->
+            <div class="bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-100 to-gray-100 px-8 py-6">
+                    <h3 class="font-soustitre text-2xl text-gray-800 text-center">Évaluation du système d'action locale</h3>
+                    <div class="w-20 h-1 bg-site-secondary mx-auto mt-3"></div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Critère</th>
+                                <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Évaluation</th>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Volonté politique spécifique de rafraîchissement et stratégie</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Pas de volonté politique spécifique formulée du rafraîchissement, plutôt une conséquence d'autres volontés politiques</strong> : inscription dans les préoccupations sociétales sur le confortement de la biodiversité par des actions d'aménagement précises (un parc par an affichée depuis 2024)
+                                </td>
+                            </tr>
+
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Identification des compétences mobilisées et pilotage</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Externe
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Compétences externes qui conçoivent les projets</strong>. Instruction des actions de rafraîchissement dans le cadre de la moe des projets urbains (commune et interco)<br><br>
+                                    <strong>Pilotage par le projet</strong> 'un parc par an' les OPA, les projets sont l'occasion de végétaliser (ex OAP Caylus)
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Élaboration / mobilisation des documents de planification</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Attente des documents de planification dans la mise en œuvre du rafraîchissement. :</strong> PLU qui date de 2007 ... PLUi qui prend du temps<br><br>
+                                    <strong>2024 : un budget vert</strong><br><br>
+                                    <strong>Pilotage par le projet :</strong> 'un parc par an' les OAP, les projets sont l'occasion de végétaliser (ex OAP Caylus)
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Solutions sectorielle ou hybride</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Sectorielle
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Focus sur des espaces biens définis associé à une seule solution</strong> : la végétalisation
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Préservation et transformation</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Un peu de préservation; quelques actions de transformation
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Quelques actions de protection/transformation</strong> : nouveau PLUi qui augmente le % de pleine terre, programme un parc par an, démarrage de la désimperméabilisation de cours école
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Accès aux espaces frais</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-gray-800">Très bon
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Augmentation significative de l'accès aux zones fraîches :</strong> ouverture d'un parc par an (espaces déjà végétalisé, aménagement pour l'accueil)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Note complémentaire -->
+            <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    Si la stratégie engagée repose clairement sur la végétalisation comme levier de rafraîchissement urbain, la montée en compétence du personnel reste limitée. À ce jour, les agents ne sont pas spécifiquement formés sur les problématiques de chaleur urbaine liés à l'aménagement, ce qui freine la généralisation de solutions comme l'action l'optimisation de l'albédo des surfaces ou l'intégration d'une sorte d'écomorphologie urbaine.
+                </p>
+            </div>
+        </div>
+    </div>
+</details>
+
+<!-- Section 5: Trajectoire de planification -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-indigo-100">5</span>
+            Trajectoire de planification
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="px-8">
+            <!-- 5.1 Les documents d'urbanisme -->
+            <section class="space-y-8">
+                <div class="text-center bg-gradient-to-r from-indigo-50 to-purple-50 py-8 px-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-indigo-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.1 Les documents d'urbanisme</h3>
+                    <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 rounded-xl border-l-4 border-indigo-500">
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            Les principaux documents d'urbanismes locaux (SRADDET, PCAET, SCoT, PLU/PLUi) ont été étudiés pour voir si ils font directements références au rafraîchissement urbain (figure suivante) ou si ils font références à des mesures qui contribuent au rafraîchissement urbain de façon indirecte.
+                        </p>
+                    </div>
+
+                    <!-- Liste des documents analysés -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-lg border border-blue-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-blue-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-blue-600 rounded-full mr-3"></div>
+                                SRADDET Occitanie (2022)
+                            </h4>
+                            <p class="text-blue-700 text-sm leading-relaxed sm:text-lg">
+                                Le SRADDET Occitanie, datant de 2022, présente particulièrement les enjeux liés aux îlots de chaleur et la nécessité d'effectuer des diagnostics, cette notion d'étude et de diagnostic se perd aux niveaux inférieurs de la planification. Il préconise en particulier les solutions fondées sur la nature au détriment des autres solutions de rafraîchissement.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border border-green-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-green-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-green-600 rounded-full mr-3"></div>
+                                PCAET 3M (2023)
+                            </h4>
+                            <p class="text-green-700 text-sm leading-relaxed sm:text-lg">
+                                Le PCAET 3M de 2023 préconise principalement les solutions fondées sur la nature, celles qui concernent les systèmes et les matériaux de construction. Les solutions techniques fondées sur l'eau ne sont pas abordées, ni celles concernant les usages. Des références à la typo morphologie urbaine et à la gestion (formation du personnel au changement climatique et aux questions d'adaptation) sont remarquées
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl shadow-lg border border-purple-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-purple-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-purple-600 rounded-full mr-3"></div>
+                                SCoT 3M (2019)
+                            </h4>
+                            <p class="text-purple-700 text-sm leading-relaxed sm:text-lg">
+                                Le Scot 3M de 2019 prescrit toutes les solutions à l'exception des études et diagnostics. Les solutions fondées sur la nature représentent plus de 50% de la totalité des prescriptions. Les solutions liées aux systèmes, à l'usage et à la gestion sont peu présentes.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl shadow-lg border border-orange-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-orange-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-orange-600 rounded-full mr-3"></div>
+                                PLU Castelnau-le-Lez (2007-2014)
+                            </h4>
+                            <p class="text-orange-700 text-sm leading-relaxed sm:text-lg">
+                                Le PLU de Castelnau-Le-Lez, datant de 2007 et ayant été modifié pour la dernière fois en 2014, prescrit essentiellement des solutions fondées sur la nature (à 85%). Les autres prescriptions abordent des notions liées à la gestion, aux systèmes et matériaux, mais ces prescriptions ne concernent pas directement le rafraîchissement urbain.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Figures illustratives -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/castelnau/5/12_mesures_decrites.png" alt="Mesures décrites avec objectifs clairs de rafraîchissement urbain" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Mesures décrites avec objectifs clairs de rafraîchissement urbain dans les documents d'urbanisme pour Castelnau le Lez 2007-2025 © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/castelnau/5/13_mesures_decrites_co-benefices.png" alt="Toutes mesures pouvant contribuer au rafraîchissement urbain" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Toutes mesures pouvant contribuer au rafraîchissement urbain (co-bénéfices) présentes dans les documents d'urbanisme pour Castelnau le Lez 2007-2025 © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/castelnau/5/14_nombre_prescriptions.png" alt="Nombre de prescriptions par catégorie et par document de planification" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Nombre de prescriptions par catégorie et par document de planification en vigueur<br/>Ville de Castelnau-le-Lez © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 shadow-lg">
+                        <p class="text-amber-800 leading-relaxed font-medium sm:text-lg">
+                            Hors-mis la prévalence des SfN, il y a peu de continuité entre les différents niveaux de plan.
+                        </p>
+                    </div>
+
+                    <!-- Analyses détaillées des documents -->
+                    <div class="space-y-8">
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                <img src="/data/img/castelnau/5/15_prise_en_compte_rafraich_pcaet.png" alt="Prise en compte du rafraîchissement urbain dans le PCAET" class="w-full h-auto transform  transition-transform duration-300 rounded-lg">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Prise en compte du rafraîchissement urbain dans le PCAET de Montpellier Méditerranée Métropole © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-lg">
+                            <p class="text-blue-800 leading-relaxed sm:text-lg">
+                                Concernant exclusivement le rafraîchissement urbain, les financements indiqués dans le PCAET 3M sont presque exclusivement des solutions fondées sur la nature (végétation, biomasse, etc.). Le financement “rafraîchir la ville en végétalisant” représente 9,2M€, et est intégré à une stratégie globale “Préserver la biodiversité, rafraîchir la ville et séquestrer le carbone” de 172 266 780,00 € qui représente 10,5% du budget total. Les risques pris en compte sont les risques inondation, feux de forêt, mouvements de terrain, tempêtes et risque sismique. Les canicules et îlots de chaleur ne semblent pas être considérés comme des risques. Le plus haut financement est attribué au développement du transport (57% du budget). Aussi, notons que les stratégies dédiées au financement du logement (2%), comme pour le transport, tendent à diminuer la consommation énergétique et réduire les émissions en CO2. Ceci a comme co-bénéfice de participer à la réduction des îlots de chaleur.
+                            </p>
+                        </div>
+
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                <img src="/data/img/castelnau/5/15_prise_en_compte_rafraich_scot.png" alt="Prise en compte du rafraîchissement urbain dans le SCoT" class="w-full h-auto transform  transition-transform duration-300 rounded-lg">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Prise en compte du rafraîchissement urbain dans le SCoT de Montpellier Méditerranée Métropole © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                <img src="/data/img/castelnau/5/15_prise_en_compte_rafraich_plui.png" alt="Prise en compte du rafraîchissement urbain dans le PLUi" class="w-full h-auto transform  transition-transform duration-300 rounded-lg">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Prise en compte du rafraîchissement urbain dans le PLUi de Montpellier Méditerranée Métropole; version minute 2023 © FreshWay - Perney 2025</em>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5.2 Les éléments du PLU(i) -->
+            <section class="space-y-8 border-t pt-8">
+                <div class="text-center bg-gradient-to-r from-emerald-50 to-teal-50 py-8 px-8 rounded-xl shadow-lg -mx-8 border-l-4 border-emerald-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.2 Les éléments du PLU(i)</h3>
+                    <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                    <!-- Versions du PLU -->
+                    <div class="space-y-6">
+                        <h4 class="font-soustitre text-xl text-gray-800 flex items-center">
+                            <div class="w-6 h-6 bg-emerald-500 rounded-full mr-3"></div>
+                            <div class="sm:text-2xl">Versions du PLU de Castelnau le Lez</div>
+                        </h4>
+                        
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/castelnau/5/16_frise_chrono_plu.png" alt="Frise chronologique des différentes versions du PLU" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Frise chronologique des différentes versions/modifications du PLU © FreshWay 2024</em>
+                            </figcaption>
+                        </figure>
+                    </div>
+                
+                <!-- Pourcentages minimums de pleine terre -->
+            <section class="space-y-8 border-t pt-8">
+                        <h4 class="font-soustitre text-xl text-gray-800 flex items-center">
+                            <div class="w-6 h-6 bg-emerald-500 rounded-full mr-3"></div>
+                            <div class="sm:text-2xl">Pourcentage de pleine terre minimum</div>
+                        </h4>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg class="w-5 h-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-800 font-medium mb-2 sm:text-lg">Rappel :</p>
+                            <p class="text-sm text-blue-700 sm:text-lg">
+                                Le pourcentage de pleine terre est le pourcentage minimum de surface qui doit être en pleine terre lors d'une opération immobilière ou un permis de construire déposé.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed sm:text-lg">
+                        À Castelnau-le-Lez, la majorité du territoire est soumise à un seuil de 20 % de pleine terre ce qui est très faible. Certaines zones, notamment la zone pavillonnaire et industrielle située au nord-est, est fixée à 10 %, tout comme l’écoquartier Eurêka (15%), au sud de la commune, ce qui ne permet pas d’assurer une végétalisation minimale via le PLU: bien que ces valeurs représentent des minimas réglementaires, et que rien n’empêche d’aller au-delà, elles traduisent une exigence  extrêmement faible.
+                    </p>
+                    
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl border-l-4 border-emerald-500 shadow-lg">
+                        <p class="text-emerald-800 leading-relaxed sm:text-lg">
+                            Selon Catherine Dayre, responsable de la DAP, le futur PLUi (en cours d’écriture pendant le projet Freshway et en finalisation mi-2025) pourrait intégrer des objectifs beaucoup plus ambitieux, avec des seuils pouvant atteindre 50 % de pleine terre dans certains secteurs à urbaniser. Cechangement de valeur marquerait une évolution significative dans la prise en compte des enjeux de rafraîchissement.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 items-start">
+                    <figure class="group">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2 flex items-center justify-center">
+                            <img src="/data/img/castelnau/5/17_CPT.png" alt="Superficie et répartition du pourcentage minimal de pleine terre" class="w-3/4 h-auto transform transition-transform duration-300 rounded-lg">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            <em>Répartition du pourcentage minimal de pleine terre (PLU de 2007 en cours en 2025) © FreshWay 2025</em>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <figure class="group lg:col-span-1">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                            <img src="/data/img/castelnau/5/18_superficie_CPT.png" alt="Pourcentage minimal de pleine terre de 2007 à 2025" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            <em>Superficie du pourcentage minimal de pleine terre de 2007 à 2025 (PLU de 2007) © FreshWay 2024</em>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="group lg:col-span-2">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                            <img src="/data/img/castelnau/5/19_repartition_CPT.png" alt="Superficie et répartition du pourcentage minimal de pleine terre" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            <em>Répartition du pourcentage minimal de pleine terre de 2007 à 2025 (PLU de 2007) © FreshWay 2024</em>
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+
+
+                <!-- 5.3 Hauteur maximale du bâti -->
+                <section class="space-y-8 border-t pt-8">
+                    <div class="text-center bg-gradient-to-r from-slate-50 to-gray-50 py-6 px-8 rounded-xl shadow-lg -mx-8 border-l-4 border-slate-500">
+                        <h3 class="font-soustitre text-2xl text-gray-800 mb-2">5.3 Hauteur maximale du bâti (PLU 2007, encore en vigueur en 2025)</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                        <div class="space-y-4">
+                            <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                La carte de hauteur maximale du bâti à Castelnau-le-Lez, représentée ci-dessous, met en évidence une forte variation entre les secteurs, qui reflète des effets de densification ciblés. Dans le centre géographique de la commune, zone plus pavillonnaire, où le coefficient de pleine terre est fixé à 20 %, la hauteur maximale autorisée reste modeste : la majorité des constructions y sont limitées à un étage (R+1). Les zones principalement agricoles, situées au nord et au sud-est de la commune, avec un minimum de 50 % de pleine terre, sont encadrées par une hauteur maximale de 10 mètres, ce qui limite les effets de densification verticale.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                Une transition nette s’opère le long de l’avenue de l’Europe, entre les deux voies ferrées et dans les alentours, où les constructions peuvent atteindre deux à trois étages (R+2/R+3), en cohérence avec la proximité du tramway. Cette densification autour des axes de transport est le résultat du PLU adopté en 2007, qui a pris en compte l'arrivée du tramway à cet endroit et a augmenté le seuil maximal des hauteurs de construction. La zone de Charles de Gaulle (droite) permet un R+8. Deux autres zones en R+8 étaient prévues le long du tram avenue de l’Europe à la station Centurion et au niveau de Aube Rouge, mais elles semblent faire débats. 
+                            </p>
+                        </div>
+                        
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                <img src="/data/img/castelnau/5/20_hauteur_maximale.png" alt="Hauteur maximale des nouvelles constructions" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Hauteur maximale des nouvelles constructions référencé dans le PLU en 2024 (PLU 2007 modifiés)</em>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                        <p class="text-amber-800 leading-relaxed sm:text-lg">
+                            Un cas particulier est l'écoquartier Eurêka, au sud de la commune, où les hauteurs autorisées peuvent monter jusqu'à R+7 (soit 21 mètres) ce qui traduit une politique de densification accompagnée d'un pourcentage de pleine terre extrêmement faible 15%. A noter que c'est à cet endroit qu'a été installée une expérimentation d'une Micro-forêt Miyawaki (voir plus bas) qui sera intéressante à suivre dans le temps mais qui est de très petite taille.
+                        </p>
+                    </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50">
+                                    <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Trajectoire de la protection de la pleine terre dans le PLU </th>
+                                        <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">PLU 2007</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800"></td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Très peu de protection pleine terre en 2007</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Évolution en 2007 et 2025 (trajectoire)</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-gray-100 text-white"></td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Le nouveau PLUi, en cours d’écriture depuis 2015, n’est toujours pas validé mi 2025. </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            
+            </div>
+        </div>
+    </details>
+
+    <!-- Section 6: Bilan -->
+    <details class="group mb-8" open>
+        <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-secondary to-red-400 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+            <h2 class="text-3xl font-titre flex items-center">
+                <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-gray-100">6</span>
+                Bilan
+            </h2>
+            <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+        </summary>
+        
+        <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+            <div class="p-8 space-y-8">
+                <!-- Capital fraîcheur -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div class="flex items-start mb-6">
+                        <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">1</span>
+                        </div>
+                        <div>
+                            <h3 class="font-soustitre text-xl text-gray-800 mb-3">Un capital fraîcheur important mais menacé</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Castelnau‑le‑Lez apparaît comme une commune en pleine mutation, entre son attractivité croissante et ses défis climatiques à venir. Son tissu dispose d’un atout précieux : un « capital fraîcheur » important, avec des espaces végétalisés, le Lez et des quartiers moyennement artificialisés. Cette présence de nature en ville permet de garder ce capital fraîcheur et de créer des espaces à valoriser pour les habitants. Ses dernières années la ville a facilité l’accès au Lez et aux parcs par des aménagements ad hoc. 
+                    </p>
+                </div>
+
+                <!-- Défis actuels -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div class="flex items-start mb-6">
+                        <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">2</span>
+                        </div>
+                        <div>
+                            <h3 class="font-soustitre text-xl text-gray-800 mb-3">Une transition face aux enjeux climatiques difficile</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-justify mb-4">
+                        Pour autant, la transition vers un modèle plus résilient face aux fortes chaleurs reste faible. Les documents de planification actuels, hérités d’un PLU de 2007, peinent à intégrer les enjeux de confort thermique et de désimperméabilisation. Les services municipaux, sans formation spécifique aux problématiques de chaleur urbaine, répondent à la crise de la chaleur conformément aux obligations légales : ouverture de lieux frais, identification des personnes vulnérables.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Actuellement la ville ne déploie pas de solutions techniques ou végétales à échelle suffisamment importantes pour assurer que la commune soit suffisamment préparée aux enjeux futurs de réchauffement climatique et d'intensification de phénomènes d'îlots de chaleur urbains.
+                    </p>
+                </div>
+
+                <!-- Actions en cours -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div class="flex items-start mb-6">
+                        <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">3</span>
+                        </div>
+                        <div>
+                            <h3 class="font-soustitre text-xl text-gray-800 mb-3">Des avancées notables mais insuffisantes</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        L’opération remarquable « un parc par an » a ouvert sept nouveaux espaces verts, ce qui est une avancée majeure, mais n'a que très peu végétalisé : seuls les deux derniers parcs ouverts en 2025 prévoient une plantation un peu plus importante (200 arbres) ce qui ne compense pas les arbres coupés sur les 18 dernières années. 
+                    </p>
+                </div>
+
+                <!-- Perspectives d'avenir -->
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                    <div class="flex items-start mb-6">
+                        <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-lg">4</span>
+                        </div>
+                        <div>
+                            <h3 class="font-soustitre text-xl text-gray-800 mb-3">Un enjeu crucial : le futur PLUi</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-justify mb-4">
+                        Le PLUi en cours d’élaboration représente un enjeu important pour faire évoluer la manière dont Castelnau-le-Lez aborde les enjeux de rafraîchissement urbain. Ce document pourrait prescrire une augmentation des seuils de couverture de pleine terre minimale, porter une attention aux matériaux de construction et à l’organisation des formes urbaines.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-justify">
+                        Sur le terrain, certaines actions comme l’ouverture de parcs ou la mise en place d’une micro forêt Miyawaki vont déjà dans ce sens et sont le premier pas vers une gestion prenant en compte le rafraîchissement urbain.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </details>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/lib/leaflet.js" crossorigin=""></script>
+    <script src="/lib/chart.umd.js"></script>
+    <script src="/lib/chartjs-plugin-annotation.min.js"></script> 
+    <script src="/lib/chartjs-plugin-datalabels.js"></script>
+    <script src="../../data/castelnau/avenue_europe2022.js"></script>
+    <script src="../../data/castelnau/avenue_europe2005.js"></script>
+    <script src="../../data/castelnau/caylus2005.js"></script>
+    <script src="../../data/castelnau/caylus2022.js"></script>
+    <script src="../../data/castelnau/chemin_du_thymn2005.js"></script>
+    <script src="../../data/castelnau/chemin_du_thymn2022.js"></script>
+    <script src="../../data/castelnau/eureka2005.js"></script>
+    <script src="../../data/castelnau/eureka2022.js"></script>
+    <script src="../../data/castelnau/palais_des_sports2005.js"></script>
+    <script src="../../data/castelnau/palais_des_sports2022.js"></script>
+    <script src="../../data/castelnau/secteurs_castelnau.js"></script>
+    <script src="../../data/castelnau/castelnau_commune.js"></script>
+    <script src="../../js/config-castelnau.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

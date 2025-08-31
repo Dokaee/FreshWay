@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Marqueur pour injecter le head commun -->
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - synthèse</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col">
+    <div id="header-container"></div>
+
+        <main class="pt-20 lg:pt-24 flex-grow mx-auto lg:container px-1 lg:px-4 py-10 pb-20">
+
+            <section class="mb-16 text-center relative">
+                <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true"></div>
+                    <div class="relative z-10 max-w-5xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                            Synthèse &amp; conclusion
+                        </h1>
+                        <p class="text-lg md:text-xl opacity-90">
+                            Trajectoires, planification, espace physique et système d’action local
+                        </p>
+                        <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6 rounded"></div>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="mb-12">
+                <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <li><a href="#sec1" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>1.</strong> Les trajectoires des réalisations</a></li>
+                    <li><a href="#sec2" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>2.</strong> Trajectoire de l’espace physique</a></li>
+                    <li><a href="#sec3" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>3.</strong> Trajectoire de la planification</a></li>
+                    <li><a href="#sec4" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>4.</strong> Trajectoire du système d’action local</a></li>
+                    <li><a href="#sec5" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>5.</strong> Ouverture &amp; recommandations</a></li>
+                    <li><a href="#sec6" class="block p-4 rounded-xl border bg-white hover:bg-slate-50 transition shadow-sm hover:shadow-md hover:-translate-y-1 duration-300"><strong>6.</strong> Conclusion / Perspectives</a></li>
+                </ul>
+            </nav>
+
+            <details id="sec1" class="group mb-8" open>
+                <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary-500 to-site-primary-300 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                        <span class="w-9 h-9 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">1</span>
+                        Les trajectoires des réalisations (mises en œuvre)
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6 leading-relaxed">
+                        <p>Dans le cadre du projet, 26 réalisations ont été étudiées. Pour enrichir notre analyse, nous avons également intégré des réalisations dans les villes de Paris et de Montpellier.</p>
+                        <p>On observe des <u>solutions ponctuelles</u>, récurrentes comme des brumisateurs, plus expérimentales comme des ombrières qui ont notamment été testées par Paris qui sont des solutions très efficaces pour rafraîchir mais qui posent des questions d’intégration et de gestion dans l'espace public.</p>
+                        <p>Après il y a des solutions qui demandent des <u>aménagements d'espaces</u> qui regroupent différentes solutions comme on peut le voir à Montpellier (place de la comédie) avec des bancs, des brumisateurs, des arbres et buissons où le cas d’aménagement d'espaces semi privés comme les cours d'école oasis où finalement on constitue avec les solutions de rafraîchissement des situations de vivre ensemble.</p>
+                        <p>Nous avons également observé des <u>solutions plus singulières</u> : comme on peut le voir à Paris où une concession automobile a été détruite pour la création d'un parc (le parc Truillot) mais aussi la réalisation de <u>réseaux de froid </u>qui est une solution très efficace de refroidissement collectif à émission moindre que le climatiseurs mais qui demande des financements plus importants.</p>
+                        
+                        <figure class="mt-6">
+                            <img src="/data/img/synthese/1_exemple_real.png" alt="Exemple des réalisations étudiées" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Exemple des réalisations étudiées © Freshway, 2025</figcaption>
+                        </figure>
+
+                            <div class="space-y-6">
+                                <p>La majeure partie des solutions installées sont des <strong>solutions vertes</strong> qui tirent parti de l’ombrage et de l'évapotranspiration. La première solution citée est la plantation d’arbres. <strong>Les cours oasis</strong> sont également plébiscitées par les collectivités, car d’autres communes les mettent en œuvre, des bureaux d’étude les pratiquent, et ce sont les collectivités qui gèrent les écoles maternelles et primaires, ce qui facilite leur mise en œuvre.</p>
+                                <p>L’ombrage non végétal est peu pratiqué, sauf à Paris, pour des raisons de complexité de gestion au cours de l’année. Les travaux menés par les services de la mairie de Paris sont donc très importants pour ouvrir la voie. La plupart des acteurs rencontrés ne connaissaient pas, ou très mal, les solutions basées sur les réseaux de froid.</p>
+                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-6">
+                            <figure>
+                                <img src="/data/img/synthese/2_type_solution.png" alt="Type de solution et type de rafraîchissement physique © Freshway, Marchesini, 2024" class="w-full h-auto rounded-xl shadow-lg">
+                            </figure>
+                            <figure>
+                                <img src="/data/img/synthese/2_type_solution-2.png" alt="Type de solution et type de rafraîchissement physique © Freshway, Marchesini, 2024" class="w-full h-auto rounded-xl shadow-lg">
+                            </figure>
+                        </div>
+                        <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Type de solution et type de rafraîchissement physique © Freshway, Marchesini, 2024</figcaption>
+
+                        <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-6 rounded-xl border-l-4 border-teal-500 mt-4">
+                            <p>Sur les villes étudiées, on observe une <u>augmentation des réalisations</u> ayant soit pour objectif direct de rafraîchir localement l’espace, soit comme objectif secondaire ou comme co-bénéfice, souvent associé aux objectifs de biodiversité (notamment dans le cas de la plantation d’arbres).</p>
+                        </div>
+                        
+                        <figure class="mt-6">
+                            <img src="/data/img/synthese/3_chronologie_solutions.png" alt="Chronologie des solutions mises en œuvre" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Chronologie des solutions mises en œuvre © Freshway, 2024</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </details>
+
+
+            <details id="sec2" class="group mb-8" open>
+                <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary-500 to-site-primary-300 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                        <span class="w-9 h-9 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">2</span>
+                        Trajectoire de l’espace physique
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6 leading-relaxed">
+                        <p>L’objectif de cette partie est d'étudier la progression du minéral et du végétal sur 4 collectivités étudiées. Nous avons cherché à quantifier la progression des surfaces minérales et végétales sur nos territoires d'études. Sur chaque commune on a identifié les secteurs qui avaient le plus changé sur une période de 15 ans environ de 2008 à 2023 et sur chacun de ces secteurs on a récupéré des données IGN on a mesuré les surfaces occupées par les bâtiments, les surfaces imperméabilisées, les surfaces végétalisées et étudier leur évolution sur la période de référence.</p>
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-500">
+                            <p><u>Sur tous les territoires d'études on constate une progression de la minéralité</u>, qui se traduit de manière très différente selon les communes et selon les secteurs à l'intérieur de ces communes et les projets urbains associés. <br/>En regardant la minéralité et son évolution il y a des situations très contrastées pour des territoires comme Pontault-Combault ou Castelnau qui ont un fort capital fraîcheur et d'autres qui sont beaucoup plus denses comme Montreuil puis Sarcelles qui est un peu en situation intermédiaire.</p>
+                        </div>
+
+                        <figure class="mt-6">
+                            <img src="/data/img/synthese/4_comparatif_mineral.png" alt="Comparatif de l’évolution de la minéralité © Freshway, 2025" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Comparatif de l’évolution de la minéralité © Freshway, 2025</figcaption>
+                        </figure>
+                        
+                        <p>Montreuil d'un côté, ville très dense, s'est minéralisé relativement peu ces 15 dernières années par rapport aux autres (5 hectares ce qui fait à peu près 7 terrains de foot) et à l'extrême une ville comme Castelnau (commune limitrophe de Montpellier et accessible par le tram et qui a encore d’importante des réserves disponibles): de toutes les communes étudiées c'est celle qui s'est le plus minéralisée (+ 37ha ~ 53 terrains de foot).</p>
+                        <p>Les motifs d’augmentation du minéral sont des processus de densification par changement du PLU (le long du tram à Castelnau ou à Pontault suite à un changement de PLU avec l’ autorisation de constructions R+2+C), de densification par remembrement parcellaire ou encore de développement de nouveaux quartiers sur des zones naturelles ou agricoles avec ou sans contrainte de surface de pleine terre, le plus souvent sous la forme d’OAP (Castelnau, Pontault, Sarcelles, Montreuil). Ainsi certains nouveaux quartiers maintiennent un certain niveau de végétal (l'éco quartier de Caylus à Castelnau) alors que d’autres deviennent très minéral (le quartier d'Eureka à Castelnau).</p>
+                        <p>On voit donc des situations différentes en fonction de la densité initiale, du capital fraîcheur, de la pression foncière et de la politique de la ville.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details id="sec3" class="group mb-8" open>
+                <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary-500 to-site-primary-300 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                        <span class="w-9 h-9 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">3</span>
+                        Trajectoire de la planification
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-8 leading-relaxed">
+                        <div>
+                            <h3 class="text-xl font-semibold font-soustitre text-gray-800 mb-2">Évolution de la réglementation, prise en compte du rafraîchissement urbain</h3>
+                            <p>Pour étudier la prise en compte du rafraîchissement urbain dans les documents d'urbanisme on s'est d'abord intéressé à différents plans nationaux: aux lois, décrets et les plans nationaux qui prennent en compte ces notions. Pour représenter cette trajectoire on les a représentés et organisés par date et ordre d'apparition et on a cherché à comprendre qu'elle était leur répercussion aux échelles régionales avec le SRADDET ou le SDRIF puis à l'échelle intercommunale et communale avec le SCOT PLU et PLUI (figure suivante).</p>
+                        </div>
+                        <figure>
+                            <img src="/data/img/synthese/5_chronologie.png" alt="Chronologie de la prise en compte du changement climatique dans les règlements" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Chronologie de la prise en compte du changement climatique dans les règlements © Freshway Perney, 2024</figcaption>
+                        </figure>
+
+                        <p>Dans cette figure on voit que la <u>stratégie nationale d'adaptation</u> mettait en place des notions de <strong>matérialité urbaine</strong> alors que plus tard la <u>loi climat et résilience</u> intégrait plutôt le <strong>ZAN</strong> ou des notions liées au <strong>couvert végétal</strong>.</p>
+                        <p>L’analyse des plans (figure suivante) permet de voir <u>l’introduction progressive de la notion de rafraîchissement urbain</u>, avant 2010 de façon indirecte, puis à partir du PNACC l’introduction de la notion d'îlot de chaleur urbain, jusqu’au <u>plan de gestion des vagues de chaleur (2023)</u> <b class="text-red-600">qui recommande de recenser les îlots de fraîcheur,</b> d’en aménager et de financer des actions de renaturation et de lutte contre les îlots de chaleur. Par contre le code de l’urbanisme ne mentionne le rafraîchissement urbain que de façon indirecte. Les articles L151-22 et L141-3 sont centrés sur l’artificialisation.</p>
+
+                        <figure class="space-y-4">
+                            <img src="/data/img/synthese/6_prise_compte_directe.jpg" alt="Prise en compte directe ou indirecte du rafraîchissement dans les plans, lois, décrets" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 -mt-2 bg-gray-50 py-2 px-4 rounded-lg">Prise en compte du rafraîchissement dans les plans, lois, décrets © Freshway Perney, 2024</figcaption>
+                        </figure>
+                        
+                        <div class="bg-gradient-to-br from-slate-50 to-blue-50 p-6 rounded-xl border-l-4 border-teal-500">
+                            <p>Suite à cela on a fait une étude quantitative où on a quantifié le nombre de mesures pouvant contribuer au rafraîchissement urbain et dans ces mesures le nombre de mesures décrites avec des objectifs clairs de rafraîchissement urbain. On se rend compte qu'il y a une <u>prévalence des solutions fondées sur la nature</u> et qu'il y a bien sûr <u>moins de mesures décrites avec des objectifs clairs de rafraîchissement urbain.</u></p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <figure class="flex items-start justify-center">
+                                <img src="/data/img/synthese/7_nb_mesures_gauche.png" alt="Nombre de mesures dans les DU pouvant contribuer au rafraîchissement urbain (gauche)" class="w-full h-auto rounded-xl shadow-md">
+                            </figure>
+
+                            <figure class="flex items-end justify-start">
+                                <img src="/data/img/synthese/7_nb_mesures_droite.png" alt="Mesures explicites de rafraîchissement (droite)" class="w-3/4 h-auto rounded-xl shadow-md">
+                            </figure>
+
+                            <figure class="flex items-end justify-start">
+                                <img src="/data/img/synthese/7_legende.png" alt="Légende associée" class="w-4/6 h-auto rounded-xl shadow-md max-w-lg">
+                            </figure>
+                        </div>
+                        <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Nombre de mesures dans les DU pouvant contribuer au rafraîchissement urbain (gauche) et mesures explicites (droite) © Freshway Perney, 2024</figcaption>
+
+                        <p>On remarque que les solutions de rafraîchissement les plus mentionnées, tout plan d'urbanisme confondu, sont les solutions fondées sur la Nature. Le SRADDET Occitanie mentionne seulement les solutions fondées sur la nature alors que le SDRIF-EN Ile de France prend en compte la plupart des types de solutions de rafraichissement à l'exception de celles liées à l’usage et à la gestion. De manière générale, ce sont les SCoT qui préconisent le plus de solutions de rafraîchissement urbain, suivis des PLU.</p>
+                        <p>Au regard des documents réglementaires à l’échelle nationale, nous constatons que le rafraîchissement urbain est une notion récente dans les politiques urbaines. Les articles du Code de l’Urbanisme dédiés au SCoT et au PLUi n’intègrent pas explicitement l’adaptation au changement climatique, ni les enjeux de climats urbains, ni la notion de rafraîchissement ou d’îlot de fraîcheur. <u>L'analyse des documents législatifs reflète une volonté de protéger la biodiversité et favorise l’usage des solutions fondées sur la nature en délaissant les autres solutions de rafraîchissement.</u></p>
+                        <p>Le diagnostic de territoire, ayant comme objectif de présenter la vulnérabilité d’un territoire aux risques (géologiques, technologiques et climatiques) et d’en déterminer les enjeux associés, sert à orienter un document d'urbanisme ou de planification stratégique (PLUi, SCoT, PCAET). <u>Actuellement, le <strong>diagnostic de surchauffe urbaine</strong>, permettant de déterminer, caractériser et cartographier les zones concernées par les îlots de chaleur urbain et / ou l’inconfort thermique, n’est pas spécifiquement recommandé ou préconisé.</u> Les communes étudiées dans ce projet de recherche n’ont aujourd’hui pas recours à un tel diagnostic.</p>
+                        <p>Le <strong>rafraîchissement urbain n'est pas l'objectif principal des documents d'urbanisme</strong>. Actuellement, leur structure offre une certaine flexibilité et l’utilisation de ces outils dans la lutte contre les îlots de chaleur urbains et l'inconfort thermique semble dépendre de la volonté de la collectivité qui les élabore.</p>
+
+                        <div class="pt-6 border-t border-gray-200">
+                            <h3 class="text-xl font-semibold font-soustitre text-gray-800 mb-3">La trajectoire de la prise en compte du végétal pleine terre dans les PLU</h3>
+                            <p>On a complété cette analyse par l'analyse précise des PLU parce que c'est le document qui est proche de l'action. Le premier constat est que <u>le rythme de transformation des PLU en faveur du rafraîchissement est variable d’une collectivité à une autre.</u> Certaines ont mis à niveau leur PLU (en matière de protection de la nature) avant de passer en PLUi (Montreuil) alors que d’autres attendent le PLUi comme c’est le cas de Castelnau dont le PLUi, commencé à être étudié en 2015 n’a toujours pas été validé mi 2025. Ce temps laisse l’opportunité de réaliser des chantiers peu protecteurs de l’environnement, par exemple avec des niveaux de pleine de terre très bas, comme il était d’usage dans les années 2005-2010.</p>
+                        </div>
+                        <figure>
+                            <img src="/data/img/synthese/8_frise_transformation_PLU.png" alt="Frise de transformation des PLU dans les quatre communes étudiées" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Frise de transformation des PLU dans les quatre communes étudiées Freshway, 2025</figcaption>
+                        </figure>
+                        
+                        <p>Un des critères très important à l'analyse des PLU est le <strong>pourcentage de pleine terre</strong> qui représente la surface minimale qu’il faut conserver en pleine terre quand il y a un permis de construire. Cette contrainte existe au moins depuis 2006 et a beaucoup évolué. Dans les PLU plus récents on voit que les pourcentages sont en faveur de la préservation du végétal. Cette évolution est récente comme en témoigne la ville de montreuil qui a significativement amélioré la protection pleine terre entre 2022 et 2023.</p>
+                        <figure>
+                            <img src="/data/img/synthese/9_evol_pourc_PT.jpg" alt="Évolution des pourcentages de pleine terre dans les différents PLU" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Évolution des pourcentages de pleine terre dans les différents PLU © Freshway, Clémence 2025</figcaption>
+                        </figure>
+
+                        <p>De façon générale, en 2006-2008, les collectivités protègent peu leur pleine terre, à l’exception de Sarcelles était un peu l'exception à protéger assez bien son territoire avec des pourcentages de 40% de pleine terre. A l'extrême on avait Castelnau qui est avec un PLU très peu protecteur avec donc des pourcentages de 20% qui est un pourcentage très bas. Les nouveaux PLU signés sont bien plus protecteurs, même si celui de Sarcelles a un peu régressé au global pour favoriser une politique de densification à certains endroits pour favoriser la rénovation du centre ancien.</p>
+                     <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                            <h4 class="font-semibold text-md text-amber-900 mb-3 flex items-center">
+                                Questionnement - pourcentage de pleine terre
+                            </h4>
+                            <p class="text-amber-800 leading-relaxed">
+                                A noter tout de même que <u>certaines collectivités appliquent des pourcentages de pleine terre élevés (40 à 50%) sur les territoires déjà construits mais très bas sur les territoires à urbaniser (10, 15%), souvent en OAP, ce qui questionne sur la véritable protection de la nature dans les zones à urbaniser.</u> Pourtant on voit que des pourcentages de 30 à 35% permettent de développer des logements en conservant une canopée qui apporte de la fraîcheur et de la biodiversité comme c’est le cas pour l’OAP de Caylus à Castelnau-le-Lez.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details id="sec4" class="group mb-8" open>
+                <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary-500 to-site-primary-300 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                        <span class="w-9 h-9 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">4</span>
+                        Trajectoire du système d’action local
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6 leading-relaxed">
+                        <p>Nous avons analysé la trajectoire du système d’action local par la qualification de quatre composantes:</p>
+                        <ul class="list-disc pl-8 space-y-2">
+                            <li>la <strong>volonté locale</strong></li>
+                            <li>les <strong>compétences locales</strong> et niveau de pilotage</li>
+                            <li>la <strong>mobilisation des outils</strong></li>
+                            <li>la <strong>mise en œuvre et l’évaluation</strong></li>
+                        </ul>
+                        <p>Nous avons enquêté sur de la capacité de la volonté locale (discours des élus, délégation des adjoints, etc.) à se matérialiser en une stratégie, déclinée en objectifs, plan d’action, feuilles de routes dans un calendrier formalisé. On a regardé aussi quelle compétence les collectivités ont mobilisé : compétences internes ou appels à des prestataires extérieurs sur ces questions de rafraîchissement. Puis on a regardé les degrés de mobilisation d'élaboration et d'appui des documents d'urbanisme avec pilotage de projet. En dernier lieu on a fait quelques analyses sur la dimension sectorielle ou multidimensionnelle, et l’équilibre entre la protection des espaces frais et les mesures pour rafraîchir davantage la ville.</p>
+                        <p>Pour le système d’action local nous avons également intégré Paris et Montpellier que nous avons étudiées et pour lesquelles nous avons fait des entretiens.</p>
+                        
+                        <div class="space-y-6 pt-4">
+                            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl border-l-4 border-blue-500">
+                                <p class="font-semibold text-gray-800">Au niveau stratégique, il y a deux grandes tendances qui émergent :</p>
+                                <ul class="list-disc pl-6 space-y-1 mt-2">
+                                    <li>Pour Pontault Sarcelles Montreuil et Castelnau le rafraîchissement n'est pas l'objectif principal, mais un objectif secondaire dans le discours politique c'est d'abord la biodiversité et en découle le rafraîchissement.</li>
+                                    <li>Pour Paris et Montpellier le discours est différent, on parle beaucoup plus d'adaptation. Le rafraîchissement est inclus dans l'adaptation des règlements climatiques et donc est perçu comme quelque chose de transversal.</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl border-l-4 border-blue-500">
+                                <p class="font-semibold text-gray-800">Pour les Compétences mobilisées et le niveau de pilotage, on trouve trois tendances :</p>
+                                <ul class="list-disc pl-6 space-y-1 mt-2">
+                                    <li>des collectivités qui font essentiellement appel à des <u>compétences externes</u> et donc très peu outillées en interne. Les villes de Sarcelles et de Castelnau font appel à des équipes de maîtres d'œuvre et ils leur font confiance sur certains sujets.</li>
+                                    <li>une montée progressive des compétences internes avec par exemple le recrutement d'un écologue à Pontault-Combault ou certaines collectivités qui commencent à donner des portefeuilles à des adjoints où il y a le rafraîchissement qui est mentionné.</li>
+                                    <li>les compétences sont déjà présentes (Paris, Montreuil), l'enjeu principal est la diffusion de la connaissance produite sur le rafraîchissement, de la volonté à tous les services techniques à tous les opérateurs internes mais aussi externes sur le sujet.</li>
+                                </ul>
+                            </div>
+
+                            
+                            <p>Sur la <u>mobilisation et l'élaboration des documents d'urbanisme</u> on voit une tendance générale, une progressivité de leur mobilisation sur le rafraîchissement avec plus ou moins de préconisation. Sur la pleine terre, il y a une augmentation des certains ratios mais les documents d'urbanisme sont souvent limités en termes de support et d'appui pour aller plus loin dans la mise en œuvre des solutions. Toutefois certaines collectivités mobilisent des pourcentages de pleine terre pour rafraîchir avec le couvert végétal mais, en même temps, sur une autre zone de leur territoire, le pourcentage de pleine terre est vécu comme une contrainte à l'aménagement (Sarcelles). On a une ambivalence entre l'utilité de la pleine terre et ses inconvénients sur le frein à la densité ou sur l'équilibre financier d’opérations. </p>
+                            
+
+                            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl border-l-4 border-blue-500">
+                                <p class="font-semibold text-gray-800">Concernant les solutions sectorielles ou hybrides, on a trois tendances :</p>
+                                <ul class="list-disc pl-6 space-y-1 mt-2">
+                                    <li>des actions bien définies avec une seule solution</li>
+                                    <li>2 solutions se combinent (Pontault, Montpellier) : eau et ombrage ou albedo et arbre.</li>
+                                    <li>hybridation (Paris et Montreuil) : toutes les solutions sont convoquées puisqu'effectivement l'espace est extrêmement contraint.</li>
+                                </ul>
+                            </div>
+                            
+                            <p>Concernant les priorités entre <u>préservation et transformation</u> : tout le monde combine un peu les deux à des rythmes différents et avec plus ou moins d'outils pour le faire. La préservation permet d'accéder à des zones fraîches (Castelnau) c'est un sujet important (et qui demande des budgets conséquents), pour d’autres il faut  mélanger préservation et transformation dans des zones beaucoup plus denses  (Paris ou à Montreuil).</p>
+                            
+                        </div>
+
+                        <figure class="pt-4">
+                            <img src="/data/img/synthese/10_synthese_systeme_action.png" alt="Synthèse système d’action local" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Synthèse système d’action local © Freshway, 2025</figcaption>
+                        </figure>
+                        
+                        <p>Toutes ces tendances partent à la fois du capital fraîcheur et de l'exposition à la canicule. <b>A priori plus on est exposé, plus on a un capital fraîcheur faible plus on devrait agir</b>. Pourtant une commune comme Pontault-Combault avec une exposition plutôt faible à la canicule et un capital fraîcheur élevé a quand même mis  beaucoup d'actions en place en s'appuyant sur syndicats mixtes alors que la ville de Castelnau, qui a un capital fraîcheur assez intéressant mais qui est très exposé attend sans doute le nouveau PLUi. </p>
+                    </div>
+                </div>
+            </details>
+
+            <details id="sec5" class="group mb-8" open>
+                <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary-500 to-site-primary-300 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                        <span class="w-9 h-9 sm:w-10 sm:h-10 bg-teal-600 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">5</span>
+                        Ouverture et recommandations
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6 leading-relaxed">
+                        <p>Avant de mettre en perspective ce travail de recherche, nous souhaitons rappeler un fait scientifique certain : <strong>'exposition à la chaleur est un phénomène en croissance partout</strong> (6ième rapport du GIEC, 2023). Dans le PNACC 3, il est écrit que la Trajectoire de réchauffement de référence pour l’adaptation au changement climatique (TRACC)  repose sur le scénario tendanciel selon les données du Groupe d’experts intergouvernemental sur l’évolution du climat (Giec). En France hexagonale, ce scénario prévoit une hausse des températures moyennes de 2 °C en 2030, de 2,7°C en 2050 et de 4 °C en 2100 par rapport à l’ère préindustrielle (PNACC, 2025). Une étude du Lancet sur les surmortalités attribuées à la chaleur sur 854 villes européennes conclut que Paris est la ville avec le risque relatif à la chaleur le plus élevé pour toutes les tranches d’âges<i class="text-sm"> (Masselot, P. Achilleos S. et al., 2023,Excess mortality attributed to heat and cold: a health impact assessment study in 854 cities in Europe, The Lancet Planetary Health, Volume 7, Issue 4, e271 - e281).</i></p>
+                        <p><b>Premièrement,</b> ce que montre le projet de recherche, face à cette augmentation progressive de l’exposition à la chaleur est la variabilité des trajectoires de rafraîchissement des collectivités. Cette variabilité s’explique par les nombreux facteurs détaillés dans les analyses précédentes mais également par la grande variabilité dans la nature des phénomènes de chaleur urbaine en termes de fréquence, d’intensité et de durée des événements (voir figure ci-dessous, et PNACC3, 2025).  </p>
+                        <figure>
+                            <img src="/data/img/synthese/11_vagues_chaleur.png" alt="Fréquence et variabilité des vagues de chaleur" class="w-full h-auto rounded-xl shadow-md">
+                            <figcaption class="text-sm text-center text-gray-600 mt-3 bg-gray-50 py-2 px-4 rounded-lg">Fréquence et variabilité des vagues de chaleur © Meteo France, 2024</figcaption>
+                        </figure>
+
+                        <p>Cette variabilité est encore mal connue. Elle fait l'objet de nombreuses recherche, en témoigne les nombreux réseaux de recherche sur la climatologie urbaine (le réseau international sur le climat des villes UCCRN, le groupe de recherche français sur la climatologie urbaine, l’équipe TURBAU du CNRM UMR 3589) avec toutes les difficultés de la prise de mesure, de la disponibilité et de l'uniformité des données ou encore dans le développement de logiciels de simulation pour analyser finement  l’échelon local (Micro-topographie, forme urbaine, réseau hydraulique, etc) <i class="text-sm">(Leduc T,  Rodler A, Bernard J, 2025, Modélisation géoclimatique : outils, limites et perspectives, Risques Urbains DOI : 10.21494/ISTE.OP.2025.1272).</i></p>
+                        
+                        
+                        <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
+                            <p class="font-soustitre text-lg text-green-800 mb-2 font-bold">Première recommandation :</p>
+                            <p>Enjoindre les collectivités à se saisir des outils disponibles de simulation de leurs climats urbains, à l’échelle pertinente, de les mettre au travail, de les affiner, pour mieux connaître leur vulnérabilité. Ces simulations climatiques doivent devenir des outils de diagnostic, de dialogue interne et externe (avec ses partenaires, ses citoyens, etc.) mais aussi de contractualisation avec ses opérateurs dans le cadre de projets d’aménagement.</p>
+                        </div>
+                        <br/>
+                        <p><b>Deuxièmement,</b> ce qui ressort de nos analyses est qu’une des réponses les plus mobilisées dans les trajectoires de rafraîchissement des collectivités passe par la végétalisation urbaine, ce qui est cohérent dans nos climats tempérés où les pics de chaleur tournent autour des 35 degrés. Mais l’augmentation de la fréquence, de l’intensité et de la durée des épisodes de chaleurs urbaine doivent nous préparer à des pics de températures de l’ordre de 40 à 45 degrés et surtout à des vagues de chaleur de longues durées (PNACC3, 2025). À ces températures, le capital de rafraîchissement du végétal (ombrage et évapo-transpiration) n’est plus opérant du fait de leur dépérissement lié au stress hydrique associé (chute des feuilles, mort prématurée, etc.).</p>
+                        <p>La minéralité n’est abordée que dans sa contribution à l’amplification des îlots de chaleurs urbains. En effet, conçue de manière horizontale, dans une logique de croissance urbaine (imperméabilisation des sols), elle favorise l’augmentation des températures en ville. Mais conçue verticalement, dans une logique d’ombrage incluse dans une réflexion climatique des formes urbaines, elle est une réponse adaptée au rafraîchissement des villes.</p>
+
+                        <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500 ">
+                            <p class="font-soustitre text-lg text-green-800 mb-2 font-bold">Deuxième recommandation :</p>
+                            <p>Poursuivre au maximum la végétalisation des espaces urbains avec une palette végétale adaptée, le déploiement de la pleine terre et de combiner cela à une conception climatique des formes urbaines en place et à venir. Ce qui va nous permettre d'avoir des villes fraîches, c’est bien cette combinaison entre une stratégie végétale forte et la conception d’une minéralité verticale rafraîchissante.</p>
+                        </div>
+                        
+                        <p>Ces savoir-faire et compétences sont présents de part le monde (voir par exemple les thèmes et expositions à la biennale d’architecture Bap! de 2025) et depuis longtemps, en témoignent les recommandations de l’architecte romain Vitruve (livre 1 et 6) sur l’organisation des rues en fonction du climat mais également les travaux récents de Muriel Delabarre (<b>Trame de fraîcheur. Le projet d'urbanisme écologique face au changement climatique</b><i class="text-sm">Delabarre Muriel (eds.), 2023/05/19. Collection Vues d'ensemble 225, MetisPresses)</i></p>
+                        <p>C'est un enjeu majeur de les mobiliser et les maîtriser par toute la chaîne de production urbaine (collectivités, services de l’Etat, propriétaires fonciers, équipes de conception, bureaux d’études, aménageurs, bailleurs, promoteurs). <u>Un triptyque vertueux de la transformation spatiale rafraîchissante :</u> collectivités, équipe de concepteurs, opérateurs urbains qui se saisissent d’un outil de simulation climatique commun. </p>
+                    </div>
+                </div>
+            </details>
+
+            <details id="sec6" class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-secondary to-red-400 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-9 h-9 sm:w-10 sm:h-10 bg-white bg-opacity-20 text-white rounded-full flex items-center justify-center mr-4 text-lg font-bold">6</span>
+                        Conclusion / Perspectives
+                    </h2>
+                    <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div class="bg-white rounded-b-2xl border-t-0 border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8 space-y-6 leading-relaxed">
+                        <p>En étudiant les planifications et les mises en œuvre de solutions rafraîchissantes sur des collectivités de tailles et de climats différents, le projet FreshWay s’intéresse à l’adaptation des territoires urbains aux vagues de chaleur.</p>
+                        
+                        <div class="space-y-4">
+                            <p><strong>Au niveau des mises en œuvre</strong>, on identifie des solutions ponctuelles (comme des brumisateurs) des aménagements publics (la restructuration d’une place), des aménagements d’espaces collectifs fermés (comme les cours d’écoles) ou des solutions singulières comme les réseaux de froid. La majeure partie des solutions installées sont des solutions vertes qui tirent parti de l’ombrage et de l'évapotranspiration, et en particulier la plantation d’arbres.</p>
+                            <p><strong>Au niveau de l’espace physique</strong>, on note une progression de la minéralité au sol (étalement) dans toutes les communes étudiées sur la période 2008-2023, mais qui se traduit de façon très différente selon les communes. Les villes très denses se sont peu minéralisées (Montreuil), alors que d’autres se sont considérablement minéralisées (Castelnau). Les types de processus sont des densifications le long de tram, des renouvellements urbains au cœur de ville, des remembrements dans les quartiers résidentiels et surtout de grandes opérations de construction de logements ou de zones commerciales. Sur ce dernier point il est important de souligner que la forme produite peut maintenir de l’ombrage si les contraintes sont exprimées (par exemple l’OAP Caylus à Castelnau-le-Lez).</p>
+                            <p><strong>Au niveau planification</strong>, l’analyse des plans permet de voir l’introduction progressive entre 2008 et 2024 de la notion de rafraichissement urbain, avant 2010 de façon indirecte, puis à partir du PNACC l’introduction de la notion d’îlot de chaleur urbain jusqu’au plan de gestion des vagues de chaleur (2023) qui recommande de recenser les îlots de chaleur. Pourtant le diagnostic de surchauffe urbaine n’est pas encore recommandé ou préconisé dans les PCAET, SCoT ou PLUi. Le rafraichissement n’est pas un objectif principal des documents d’urbanisme. Au niveau des PLU, le rythme de transformation des PLU en faveur du rafraîchissement est variable d’une collectivité à une autre. Le pourcentage de pleine terre, qui permet de maintenir de la végétation lors d’opération, évolue de façon positive, les nouveaux PLU sont bien plus protecteurs. Malheureusement on constate que les OAP ont souvent un pourcentage de pleine terre très bas (10 à 15%).</p>
+                            <p><strong>Enfin au niveau du système d’action local</strong>, pour certaines collectivités le rafraichissement est un objectif secondaire, alors que d’autres, surtout les métropoles, sont mobilisées et l’abordent de façon transversale.  La montée en compétence est variable selon les collectivités.</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 rounded-xl mt-6">
+                            <h3 class="font-soustitre text-xl text-gray-800 mb-4 font-bold">En matière de recommandations, 10 recommandations sont proposées :</h3>
+                            <ol class="list-decimal pl-6 space-y-3">
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Utiliser des solutions hybrides,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Planter d'abord construire parfois, partir de la végétation existante,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Utiliser des outils de diagnostic et de dialogue interne et externe,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Combiner stratégie végétale et conception d’une verticalité rafraichissante,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Adopter une logique partenariale et multi-échelle,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Repenser le modèle économique de la qualité environnementale,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Être plus précis et plus prescriptif dans le code de l’urbanisme,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Faire davantage participer les propriétaires de la ville du déjà là au rafraichissement,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Trouver un nouvel équilibre entre patrimoine et santé publique,</li>
+                                <li class="p-2 rounded-lg hover:bg-white/60 transition-colors">Développer de nouveaux leviers juridiques et mécanismes de solidarité pour la ville du déjà là.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </main>
+
+
+    <div id="footer-container"></div>
+
+    <script src="/lib/leaflet.js" crossorigin=""></script>
+    <script src="/lib/chart.umd.js"></script>
+    <script src="/lib/chartjs-plugin-annotation.min.js"></script> 
+    <script src="/lib/chartjs-plugin-datalabels.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+</body>
+</html>

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - Sarcelles</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col overflow-x-hidden">
+    <div id="header-container"></div>
+
+    <main class="pt-20 lg:pt-24 flex-grow mx-auto lg:container px-1 lg:px-4 py-10 pb-20">
+
+        <section class="mb-16 text-center relative">
+            <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                        Analyse des trajectoires de transformation de Sarcelles
+                    </h1>
+                    <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Contexte -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                    <span class="w-10 h-10 sm:w-8 sm:h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">1</span>
+                    Contexte
+                </h2>
+                <span class="text-4xl sm:text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            
+            <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-6 sm:p-8 space-y-12">
+                    
+                    <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 sm:p-8 rounded-xl -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">6 932,1 hab/km²</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Densité en 2022 (INSEE)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">8,42 km²</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Superficie en 2022 (INSEE)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">195,1 h / mois</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Ensoleillement moyen calculé sur la période 1999-2019 (Climate Data)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 sm:p-8 rounded-xl border-l-4 border-site-primary">
+                        <p class="text-gray-700 leading-relaxed text-xl sm:text-lg mb-4">
+                            La ville de Sarcelles est située au nord de Paris. Elle fait partie de l'agglomération <strong>Roissy Pays de France</strong>. Au recensement de 2022 elle avait 58 576 habitants. Son taux de croissance entre 2009 et 2020 est de 0,98, avec une forte baisse entre 2009 et 2014 et une hausse depuis. Sa superficie est de 842 ha. Sa densité en 2022 est de 6 932 hab/km². <span class="text-sm text-gray-500">(Montreuil 2019 : 12.456 hab./Km², Castelnau-Le-Lez 2019: 2.011 hab./Km², Pontault-Combault 2020: 2.755 hab./Km²).</span>
+                        </p>
+                    </div>
+
+                    <!-- Graphique taux de croissance -->
+                    <figure class="group text-center">
+                        <img src="/data/img/sarcelles/1/1_taux_croissance.png" alt="Graphique du taux de croissance de la population de Sarcelles" class="w-2/3 h-auto mx-auto rounded-xl shadow-lg">
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                            <em>Taux de croissance historique à Sarcelles © Freshway 2025</em>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Description avec carte -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-xl border-l-4 border-site-primary">
+                                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg mb-4">
+                                    La commune peut-être séparée en 3 parties: au <strong>nord</strong> des pavillons et un bout de la forêt d'Ecouen ; au <strong>centre</strong> le village historique de Sarcelles (qui correspond aux anciens bourgs agricoles autour de Paris), au <strong>sud</strong> grand ensemble.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                                    Les grands ensembles ont été construits entre 1954 et 1974 : Sarcelles-Lochères, <em>ville d'un seul promoteur et d'un seul architecte</em> reste comme le <u>premier Grand ensemble français construit</u> : 12 368 logements en 20 ans, témoins des expressions architecturales et techniques de constructions successives entre 1954 et 1974 (source : site de la Mairie de Sarcelles). <u>La partie des grands ensembles représente plus de ⅔ de la population de la ville.</u> (40 000 habitants). Sarcelles est desservie par deux gares SNCF : <strong>la gare Garges-Sarcelles</strong> au sud Est (ligne D et H) et <strong>la gare de Sarcelles Saint Brice</strong> (Ligne H) au nord ouest de la Ville. Depuis 2013 elle est connectée au tramway T5 qui relie la gare Garges-Sarcelles à saint Denis et au quartier des grands ensembles. <u>Sarcelles est donc très bien reliée à la capitale.</u>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/sarcelles/1/2_carte_schématique-1.png" alt="Vue d'ensemble sur Sarcelles" class="w-full h-auto transform transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                                Vue d'ensemble sur Sarcelles © Geoportail, IGN
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <figure class="group text-center">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <img src="/data/img/sarcelles/1/2_carte_schématique-2.png" alt="Carte schématique de Sarcelles en 2022" class="w-3/4 h-auto mx-auto transform transition-transform duration-300">
+                        </div>
+                        <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                            Sarcelles BDtopo, 2022 © Freshway 2025
+                        </figcaption>
+                    </figure>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 sm:p-8 rounded-xl border-l-4 border-site-primary">
+                        <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                            La ville est traversée par la rivière du <strong> petit Rosne</strong> dont une grande partie est souterraine. La ville est coupée du nord au sud par la D316 qui sépare la zone d'habitation (à l'Ouest) d'une zone commerciale puis d'une zone agricole à l'Est en direction de Gonesse. Cette zone agricole est traversée par de grands réseaux électriques. <i>(voir la première carte ci-dessus)</i>.  
+                        </p>
+                    </div>
+
+                    <!-- Foncier avec carte et texte -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start bg-white p-6 sm:p-8 rounded-xl shadow-inner -mx-6 sm:-mx-8 border border-gray-100">
+
+                        <!-- Texte prend toute la largeur (2 colonnes) -->
+                        <div class="space-y-6 lg:col-span-2">
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+                                <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                                    <div class="w-8 h-8 sm:w-6 sm:h-6 bg-green-500 rounded-full mr-3"></div>
+                                    Une forte proportion de foncier communal
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                                    Une des particularités de Sarcelles, par rapport aux autres collectivités que nous avons étudiées, est la forte proportion de logements sociaux (10,6% en surface), mais aussi la forte proportion de foncier appartenant à la commune <i>(23,4%, Pontault 6,1% Castelnau 12,7% et Montreuil 19,3%)</i> ce qui donne à la collectivité une bonne maîtrise du foncier pour des projets d’aménagement.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Image 1 -->
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/sarcelles/1/3_foncier.png" alt="Foncier de Sarcelles et proportion des logements sociaux" class="w-full h-auto transform transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                                Foncier de Sarcelles et proportion des logements sociaux, © Freshway 2025
+                            </figcaption>
+                        </figure>
+
+                        <!-- Image 2 -->
+                        <figure class="group text-center">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/sarcelles/1/3_foncier-2.png" alt="Répartition foncière détaillée de Sarcelles" class="w-2/3 h-auto mx-auto transform transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                                Répartition foncière détaillée de Sarcelles © Freshway 2025
+                            </figcaption>
+                        </figure>
+
+                    </div>
+
+                </div>
+            </div>
+        </details>
+
+
+
+
+ <!-- Section 2: Trajectoire de mise en œuvre opérationnelle -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">2</span>
+                    Trajectoire de mise en œuvre opérationnelle
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-16">
+                    
+                    <!-- Introduction -->
+                    <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                        À Sarcelles, la mise en œuvre de solutions de rafraîchissement est peu avancée mais plusieurs projets sont lancés. La priorité de la ville ces dernières années est en effet la rénovation des bâtiments par isolation pour réduire les factures énergétiques. L’accent est donc sur l’atténuation et non sur l’adaptation.
+                    </p>
+
+                    <!-- Projet Petit Rosne -->
+                    <div class="space-y-8">
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8 -mt-8 mb-12">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Réouverture du Petit Rosne</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                            <div class="space-y-6 lg:col-span-3">
+                                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                                    <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                                        Le projet phare en matière de rafraîchissement est la <u>remise à l'air libre du Petit Rosne</u>. Cette rivière, actuellement en grande partie recouverte et avec un lit bétonné, traverse la ville du nord au sud et son ouverture représente un potentiel majeur pour la création d'un corridor de fraîcheur, la restauration de la biodiversité et l'amélioration du cadre de vie.
+                                    </p>
+                                    <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                                        Le petit Rosne a été canalisé et enfoui pendant le XXe siècle. Une inondation marquante a eu lieu en 1992 et conduit à une première réouverture en amont datant de 2003 a été effectuée. Les travaux de réouverture d’une petite partie du petit Rosne datent de 2014 et ont coûté environ 900k€.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <figure class="group lg:col-span-1">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/2/4_petit_rosne.png" alt="Le petit Rosne avant réouverture" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                                <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                                    Le petit Rosne © Freshway 2024
+                                </figcaption>
+                            </figure>
+
+                            <figure class="group text-center lg:col-span-2">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/2/4_petit_rosne-2.png" alt="Réouverture d'une section du petit Rosne en 2014" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                                <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                                    Réouverture d'une section du petit Rosne en 2014 © Marchesini 2024
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- Autres projets -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                        <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl border-l-4 border-emerald-500">
+                            <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                                La plantation d'arbres est une préoccupation plus récente. Si aucun objectif quantifié n'est encore fixé par la municipalité, l'aménageur en charge de la rénovation urbaine a pour consigne de "planter le plus possible" sur la période 2024-2030. Parallèlement, la première "cour oasis" de la commune est budgétée pour 2025, marquant le début d'une politique de végétalisation des 29 établissements scolaires de la ville.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                                D'autres projets pourraient contribuer au rafraîchissement, comme la requalification de la Place de France avec l'installation de fontaines sèches ou le projet “Quartier fertile" de l'ANRU, qui vise à développer 4 à 5 hectares d'agriculture urbaine au nord de la ville avec une entreprise d’insertion professionnelle.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tableau des solutions -->
+                    <div>
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Solutions de rafraîchissement mises en place</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 -mx-8">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Solution</th>
+                                            <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Niveau d'action</th>
+                                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détails</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Plantation d'arbres</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Intentions mais pas de chiffrage</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">La plantation d'arbres est une préoccupation récente (2023-2024). Aucun objectif quantitatif n'est fixé. Les projets de rénovation urbaine des grands ensembles incluent en principe des plantations.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Réhabilitation du bâti (atténuation)</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-forte text-white">Élément prioritaire</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Socialement la ville a une population pauvre (65% du territoire est en quartier prioritaire de la politique de la ville, 58% des logements sont des logements sociaux). Les questions sociales priment sur les autres. La priorité est la Diminution des "passoires énergétiques" et à aménagement des nombreuses copropriétés dégradées.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Désimperméabilisation (cours oasis)</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">1 cours oasis est prévue</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Une cours oasis est budgétisé sur 2025.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Installation d'ombrages</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absente</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Pas d'ombrage prévu.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée à l'eau</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Quelques actions</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Projet de réouverture du petit Rosne et projet de fontaine sèches sur le place de France.</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action réseau froid</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absente</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action sur l'Albedo</td>
+                                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absente</td>
+                                            <td class="py-3 px-4 text-gray-700 align-top">Pas d'action sur l'albedo.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+
+        <details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-violet-100">3</span>
+            Trajectoire de l'espace physique
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+
+            <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-violet-500">
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Par rapport aux autres villes étudiées dans ce projet, avec une minéralité sol (routes et bati) de 28,3%, Sarcelles est dans une situation intermédiaire entre Pontault (20,2%) et Castelnau (23,9%) d’un côté et Montreuil (42,4%) de l’autre. 
+                </p>
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    <b>On peut considérer que Sarcelles a un capital fraîcheur intermédiaire.</b> Son centre-ville est dense, mais les grands ensembles sont assez espacés, et Sarcelles dispose encore un peu d’espace agricole à l’Est, un peu de forêt au nord (forêt d’Ecouen) et un peu de réserve foncière entre le vieux centre et les grands ensembles, dûs à des lignes électriques hautes tensions et à un projet routier qui n’a pour l’instant pas été réalisé (le BIP). En termes d’évolution, entre 2008 et 2022, Sarcelles a perdu +27 ha soit l’équivalent de 38 terrains de foot ce qui est une perte importante (comme Pontault) alors que la population n’a pas augmenté pendant cette période. 
+                </p>
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Les zones de 1 à 4 décrites ci-dessous traduisent les processus d’urbanisation de Sarcelles : l'étalement urbain pour l’installation de zones commerciales (zones 1 et 3) et la densification du cœur de ville pour sa revitalisation (zones 2 et 4).  
+                </p><br/>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full ">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200"></th>
+                                <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Capital fraîcheur</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Intermédiaire</td>
+                                <td class="py-4 px-6 text-gray-700 align-top">Il reste quelques zones végétales à l’est (zones agricoles) au nord (forêt d’Ecouen et zone du Petit Rosne) et sous les lignes à hautes tension entre les grands ensembles et la vieille ville. </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Évolution de la minéralité</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Perte</td>
+                                <td class="py-4 px-6 text-gray-700 align-top">Entre 2008 et 2022 la minéralisation a été intense, elle équivaut à 27 ha soit l’équivalent de 38 terrains de foot.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><br/>
+
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                    Explorez les transformations physiques de Sarcelles. Le tableau de bord ci-dessous met en lumière les changements d'occupation du sol et l'évolution des espaces végétalisés entre 2008 et 2022. Sélectionnez une zone d'étude pour afficher les données correspondantes.
+                </p>
+            </div>
+
+            <div class="mb-6 p-4 bg-white/50 rounded-lg border border-gray-200 shadow-sm">
+                <label for="zone-select" class="block text-md font-soustitre text-gray-800 mb-1 sm:text-2xl">
+                    Choisissez une zone d'étude :
+                </label>
+                <div class="relative">
+                    <select id="zone-select" class="w-full p-2.5 border border-gray-300 rounded-md appearance-none text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-site-primary focus:border-site-primary shadow-sm cursor-pointer pr-10 sm:text-lg">
+                        <option value="select-commune">Commune de Sarcelles</option>
+                        <option value="select-zones">Ensemble des zones étudiées</option>
+                        <option value="Zone 1">Zone 1</option>
+                        <option value="Zone 2">Zone 2</option>
+                        <option value="Zone 3">Zone 3</option>
+                        <option value="Zone 4">Zone 4</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                        <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                <div class="flex flex-col gap-6">
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-soustitre text-gray-800 mb-4 ">Évolution nette de végétation <span id="canopee-zone-name" class="text-site-secondary font-bold"></span></h3>
+                        <div class="flex items-center justify-between">
+                            <div id="indicator-content">
+                                <p class="text-5xl font-bold text-site-secondary" id="vegetation-loss">-- %</p>
+                                <p class="text-sm text-gray-500 mt-1 sm:text-lg">Entre 2008 et 2022</p>
+                                <p class="text-sm text-gray-500 mt-0" id="football-transcription"></p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-xs text-gray-500 mb-1 sm:text-lg" id="unity-change">Changer d'unité</span>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm font-medium text-gray-600 sm:text-lg">%</span>
+                                    <label for="unit-switch-v1" class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" id="unit-switch-v1" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-site-primary rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-site-primary"></div>
+                                    </label>
+                                    <span class="text-sm font-medium text-gray-600 sm:text-lg">ha</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-soustitre text-gray-800 mb-4 flex items-center gap-x-2">
+                            <span>Occupation du Sol <span id="occupation-zone-name" class="text-site-secondary font-bold"></span></span>
+                            
+                            <span id="occupation-info-tooltip" class="has-tooltip relative" style="display: none;">
+                                <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-400 rounded-full cursor-pointer">i</span>
+                                <span class="tooltip"><strong class="font-semibold">Note de calcul :</strong> Dans l'ensemble de la commune, la catégorie d'occupation du sol 'Imperméable' est calculée à partir de données sur la voirie.</span>
+                            </span>
+                            </h3>
+                        <div class="chart-container" style="height: 168px;"><canvas id="compositionChart"></canvas></div>
+                    </div> 
+                </div>
+                <div class="dashboard-card">
+                    <div id="map" class="z-0 mb-4" style="height: 360px;"></div>
+                    <p class="text-xs text-gray-500 mt-3 text-center">Cliquez sur une zone pour afficher ses détails. Utilisez les boutons pour comparer avant/après.
+                        <br/>Données calculées à partir de : BD TOPO®, BD ORTHO® IGN</p>
+                </div>
+            </div>
+        
+            <div class="mt-8 bg-white/50 p-6 rounded-lg border border-gray-200">
+                <h3 class="text-2xl font-titre text-gray-800 mb-3 text-center">
+                    Approfondir l'Analyse <span id="analysis-zone-name" class="text-site-primary"></span>
+                </h3>
+                <div id="dynamic-analysis-text" class="text-gray-700 text-justify">
+                    <p>Sélectionnez une zone sur la carte ou dans le menu déroulant pour afficher une analyse détaillée.</p>
+                </div>
+            </div>
+        </div>
+</details>
+
+
+
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">4</span>
+            Trajectoire du système d'action locale
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+            <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-8 rounded-xl -mx-8 -mt-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-teal-500">
+                    <h3 class="font-soustitre text-xl text-gray-800 mb-4 flex items-center">
+                        <div class="w-6 h-6 bg-teal-500 rounded-full mr-3"></div>
+                        <div class="sm:text-2xl">Contexte politique et organisationnel</div>
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                       À Sarcelles, la principale trajectoire d'action est celle de la rénovation urbaine, notamment via le programme de l'ANRU et la revitalisation du vieux Sarcelles. Le rafraîchissement urbain, bien que porté politiquement, est plus souvent intégré comme un co-bénéfice annexe de ces opérations de réhabilitation du bâti plutôt que comme un objectif premier. La priorité est donnée à la diminution des "passoires énergétiques" et à l’aménagement des nombreuses copropriétés dégradées.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                        Pour la mise en œuvre de ses projets d’aménagement, la commune s'appuie fortement sur des compétences externes. Elle a recours à des aménageurs comme La Séquano Aménagement, qui a pour consigne de "verdir au maximum l'espace" dans le cadre des opérations ANRU , à des concepteurs pour la requalification de places minérales (AM Environnement pour la Place de France), ou encore à des agences spécialisées (CivicCity) pour des projets d'urbanisme temporaire (ombrière).
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6 shadow-lg">
+                <h3 class="font-soustitre text-xl text-red-800 mb-4 flex items-center">
+                    <svg class="w-6 h-6 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div class="sm:text-2xl">Défis opérationnels identifiés</div>
+                </h3>
+                <p class="text-red-700 leading-relaxed sm:text-lg">
+                    Cette dépendance s'explique en partie par un manque de formation des agents municipaux sur ces nouvelles thématiques, comme le soulignait un entretien mené en 2023 à Serge Planchenault, responsable du service étude et développement urbain. Une stratégie locale intéressante consiste en la délégation de l’entretien de cœurs d'îlots privés à la mairie. Les copropriétés se délaissent de la charge de gestion des espaces verts, et les cèdent à la collectivité qui en assure l'entretien, permettant ainsi de préserver et de valoriser la végétation au cœur des grands ensembles.
+                </p>
+            </div>
+
+            <div class="bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-100 to-gray-100 px-8 py-6">
+                    <h3 class="font-soustitre text-2xl text-gray-800 text-center">Évaluation du système d'action locale</h3>
+                    <div class="w-20 h-1 bg-site-secondary mx-auto mt-3"></div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Critère</th>
+                                <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Évaluation</th>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Volonté politique spécifique de rafraîchissement et stratégie</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Pas de volonté politique spécifique formulée du rafraîchissement, plutôt une conséquence d’autres volontés politiques</strong> : justice sociale dans un équilibre entre le béton et la nature tel que promu initialement (concept de Ville-Parc de Philippe Panerai dans les années 1990)
+                                </td>
+                            </tr>
+
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Identification des compétences mobilisées et pilotage</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Externe
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Compétences externes qui conçoivent les projets</strong> (mobilisation d’importants financements d’Etat - ANRU, PIA4, etc - pour réparer, adapter la ville existante avec équipe de prestataire moe et amo, un aménageur (Séquano) et une équipe lauréate « inventons la métropole du Grand Paris (Espace 2 et Lamotte) et à différentes échelles spatiales et temporelles (urba éphémère, espace public, nouveau quartier)
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Élaboration / mobilisation des documents de planification</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Faible mobilisation des documents de planification.</strong> PCAET faiblement prescriptif sur l’environnement, SIAH (Syndicat Interco Aménagement Hydraulique Croult et Petit Rosne) notion d’écologie dans ses aménagements ,PLU % de pleine terre vécu comme une complication au développement ,Faiblesse des compétences internes pour le pilotage des prestataires. Un conseiller municipal délégué au cadre et qualité de vie et ville durable qui traite indirectement du rafraichissement mais les forces se concentrent dans la mise en oeuvre du projet de rénovation/réhabilitation où le rafraîchissement est une thématique
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Solutions sectorielle ou hybride</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Sectorielle
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Focus des espaces biens définis associé à une solution</strong> : par l'ombrage pour les Mailles Prost, la Place de France, par le végétal (pleine terre) pour l'Ecoquartier
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Préservation et transformation</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible transformation, faible préservation. Priorité à la revitalisation  
+
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    <strong>Priorité à la revitalisation</strong> : Réflexions sur les OAP (Cédre Bleu et Haut du Roy) sur le cœur de ville, choix de revalorisation ( Éradiquer l’habitat indigne : copropriétés dégradées, logements insalubres, etc.) revitalisation et de densification.
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top">
+                                    <strong>Accès aux espaces frais</strong>
+                                </td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Peu
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">
+                                    Quelques réflexions autour du petit Rosne et sur les cours oasis mais peu de projets concrets.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-indigo-100">5</span>
+            Trajectoire de planification
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="px-8">
+            <section class="space-y-8">
+                <div class="text-center bg-gradient-to-r from-indigo-50 to-purple-50 py-8 px-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-indigo-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.1 Les documents d'urbanisme</h3>
+                    <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 rounded-xl border-l-4 border-indigo-500">
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            Nous avons comptabilisé, dans les documents d’urbanismes, les termes relatifs au rafraîchissement urbain de façon explicite ou de façon indirecte.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-lg border border-blue-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-blue-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-blue-600 rounded-full mr-3"></div>
+                                SDRIF-E-île de France (2024)
+                            </h4>
+                            <p class="text-blue-700 text-sm leading-relaxed sm:text-lg">
+                               Le SDRIF-E-île de France, datant de 2024, comptabilise 15 prescriptions qui ont une influence sur le rafraîchissement urbain. Un tiers de celles-ci concerne les solutions fondées sur la nature, 26% les matériaux, et 20% concerne la typo morphologie urbaine. Les solutions relatives aux usages et à la gestion sont absentes.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border border-green-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-green-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-green-600 rounded-full mr-3"></div>
+                                PCAET Roissy Pays de France (2021)
+                            </h4>
+                            <p class="text-green-700 text-sm leading-relaxed sm:text-lg">
+                                Le PCAET de Roissy Pays de France (2021), aborde toutes les solutions contribuant au rafraîchissement urbain à l'exception de la typo morphologie. Ici contrairement aux autres plans, l'accent est mis sur la place des études, des diagnostics, de la gestion et des systèmes.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl shadow-lg border border-purple-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-purple-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-purple-600 rounded-full mr-3"></div>
+                                SCoT Roissy Pays de France (2019)
+                            </h4>
+                            <p class="text-purple-700 text-sm leading-relaxed sm:text-lg">
+                                Le SCoT Roissy Pays de France, de 2019, préconise majoritairement les solutions fondées sur la nature, puis les solutions liées à la typo morphologie urbaine et l'eau. Les systèmes, l'usage et la matérialité sont peu pris en compte.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl shadow-lg border border-orange-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-orange-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-orange-600 rounded-full mr-3"></div>
+                                PLU Sarcelles (2022)
+                            </h4>
+                            <p class="text-orange-700 text-sm leading-relaxed sm:text-lg">
+                               A l'échelle du PLU de Sarcelles, datant de 2022, les différentes solutions de rafraîchissement sont prescrites, principalement celles faisant références aux solutions fondées sur la nature et sur l'eau. Il n'y a pas de notion d'étude ou de diagnostic.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/sarcelles/5/15_nombre_prescriptions.png" alt="Types et occurrences des termes présents dans les documents d’urbanisme pour Sarcelles" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Types et occurrences des termes présents dans les documents d’urbanisme pour Sarcelles (2007-2025) © Freshway Perney, 2025</em>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="/data/img/sarcelles/5/16_mesures_decrites.png" alt="Mesures décrites avec objectifs clairs de rafraîchissement urbain" class="w-full h-auto transform  transition-transform duration-300">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Mesures décrites avec objectifs clairs de rafraîchissement urbain dans les documents d’urbanisme pour Sarcelles (2007-2025) © Freshway Perney, 2025</em>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="space-y-8 mt-12">
+                    <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8">
+                        <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Analyse détaillée du SCoT et du PCAET</h3>
+                        <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl shadow-lg border border-purple-200">
+                        <h4 class="font-semibold text-xl text-purple-800 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            SCoT Roissy Pays de France (DOO 2019)
+                        </h4>
+                        <div class="space-y-4 text-purple-900 text-sm sm:text-lg leading-relaxed">
+                            <p><strong>Partie 4.3.2 (Améliorer la qualité du cadre de vie) :</strong></p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong class="font-semibold">[P82]</strong> "]” De nouveaux espaces verts accessibles au public sont à créer dans les secteurs denses. Ils assurent un maillage de ces secteurs en offres de proximité pour la population et le rafraîchissement de la ville. Dans les secteurs moins denses, les espaces verts sont à préserver, et le cas échéant à créer, pour répondre aux besoins de la population. Les communes et notamment celles du front métropolitain, doivent veiller à accroître l’offre en espaces verts publics de proximité pour tendre vers l’objectif de 10 m²/hab. d’espaces verts publics de proximité. Les nouvelles opérations d’aménagement concourent à l’atteinte de l’objectif de 10 m²/hab d’espaces verts publics de proximité, et pour les opérations d’envergure, à la création d’un espace vert public structurant pour le territoire.Selon les recommandations de l’OMS, un espace vert public est considéré comme « de proximité » lorsqu’il est situé à moins de 15 minutes de marche."</li>
+                                <li><strong class="font-semibold">[P83]</strong> "Dans les projets d’aménagement, en renouvellement comme en extension, et lors de la reconversion des friches pour l’accueil de constructions, maintenir des espaces de pleine terre par une construction économe de l’espace."</li>
+                                <li><strong class="font-semibold">[P84]</strong> "Renforcer la place du végétal dans tout projet d’aménagement ou de construction, notamment réalisé en renouvellement urbain."</li>
+                            </ul>
+                            <p><strong>Partie 5.2 (Zones d’activités) :</strong></p>
+                            <ul class="list-disc pl-6">
+                                <li><strong class="font-semibold">[P95]</strong> "Dans les zones d’activités, dans le cadre de leur création, comme de leur renouvellement :  limiter l’imperméabilisation des sols, et le cas échéant, favoriser la désimperméabilisation en maintenant une proportion de pleine terre et en développant la végétalisation ;  préserver les espaces verts et de respiration existants, en créer de nouveaux."</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border border-green-200">
+                        <h4 class="font-semibold text-xl text-green-800 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke-width="2"></circle><path d="M9 12l2 2 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            PCAET Roissy Pays de France (Octobre 2021)
+                        </h4>
+                        <div class="space-y-3 text-green-900 text-sm sm:text-lg leading-relaxed">
+                            <p><strong>Action 1.6 (Atténuer et s'adapter au réchauffement climatique) :</strong></p>
+                            <ul class="list-none pl-4 space-y-3">
+                                <li class="flex items-start"><span class="w-3 h-3 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></span><span><strong>S’appuyer sur la cartographie les îlots de chaleur (ICU) du territoire</strong> pour élaborer un plan canicule qui pourra mettre en évidence les zones prioritaires en matières de création d'îlots de fraîcheur (végétalisation), qui intégrera un guide des matériaux à utiliser pour réduire l‘effet d'îlots de chaleur urbain. Poursuivre l’accompagnement des collectivités et des aménageurs/constructeurs dans la mise en application des prescriptions définies dans la CIAD et la CPEAD, notamment en favorisant la végétalisation des zones identifiées comme présentant un risque d’ICU.</span></li>
+                                <li class="flex items-start"><span class="w-3 h-3 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></span><span>Améliorer la communication et sensibiliser sur les bons gestes à adopter lors des épisodes de canicule.</span></li>
+                                <li class="flex items-start"><span class="w-3 h-3 bg-green-500 rounded-full mr-3 mt-2 flex-shrink-0"></span><span>Dans les PLU, <strong>inciter au maintien de zone de pleine terre dans les projets de construction neuves ou de requalification</strong> (coefficient d’emprise au sol).</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-6 shadow-md">
+                        <h4 class="font-semibold text-xl text-amber-800 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                            Conclusions de l'analyse
+                        </h4>
+                        <ul class="space-y-3 text-amber-900 text-sm sm:text-lg">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-amber-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>Le <strong>SRADDET (2024)</strong> intègre les obligations de diagnostic relatif au changement climatique et à la vulnérabilité ainsi que la plupart des solutions de rafraîchissement.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-amber-600 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>Le <strong>PCAET</strong> (climat-air-énergie) semble répondre aux obligations, mais le budget dédié au rafraîchissement n’est pas défini dans sa totalité.  Les seules informations pouvant être extraites en lien avec le rafraîchissement urbain concernent le budget « Trame Verte et Bleue pour développer de nouveaux supports de nature » indiquent que le financement n’est pas encore attribué.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                <span>Le <strong>SCoT (2019)</strong> n’intègre pas de diagnostic.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                                <span>Le <strong>PLU (2022)</strong> semble ne pas répondre aux obligations au PCAET de 2021 : Lors de nos diverses rencontres avec Sarcelles, il ne nous a pas fait mention de <u>cartographie des îlots de chaleur</u> et nous avons constaté que pour les OAP le coefficient de pleine terre n'était pas rempli ce qui ne correspond pas à la demande du PCAET.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-8 border-t pt-8">
+                <div class="text-center bg-gradient-to-r from-emerald-50 to-teal-50 py-8 px-8 rounded-xl shadow-lg -mx-8 border-l-4 border-emerald-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.2 Les éléments du PLU(i)</h3>
+                    <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                    <figure class="group">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <img src="/data/img/sarcelles/5/17_frise_chrono_plu.png" alt="Frise chronologique des différentes versions du PLU de Sarcelles" class="w-full h-auto transform transition-transform duration-300">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            <em>Frise des PLU de Sarcelles © Freshway, 2025</em>
+                        </figcaption>
+                    </figure>
+
+                    <p class="text-gray-700 leading-relaxed sm:text-lg">
+                        Les documents de planification de Sarcelles témoignent d'une intégration croissante des enjeux climatiques. Le PLU en vigueur, dont la dernière modification date de 2024, a fait évoluer les règlements par rapport à la version de 2008. Si les zones agricoles et naturelles ont vu leur surface diminuer, le rythme de l'urbanisation future prévue par le PLU de 2020 a été ralenti par rapport aux ambitions du plan de 2008.
+                    </p>
+                
+                    <div class="space-y-8 border-t pt-8">
+                        <h4 class="font-soustitre text-xl text-gray-800 flex items-center">
+                            <div class="w-6 h-6 bg-emerald-500 rounded-full mr-3"></div>
+                            <div class="sm:text-2xl">Pourcentages minimums de pleine terre</div>
+                        </h4>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow-lg">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-5 h-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-800 font-medium mb-2 sm:text-lg">Rappel :</p>
+                                    <p class="text-sm text-blue-700 sm:text-lg">
+                                        Le pourcentage de pleine terre est le pourcentage minimum de surface qui doit être en pleine terre lors d’une opération immobilière ou un permis de construire déposé.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-700 leading-relaxed sm:text-lg">
+                            Un levier réglementaire clé, le pourcentage de pleine terre, montre des évolutions contrastées. Alors que de nombreuses zones n'avaient aucune exigence en 2008, le PLU de 2022 en a instauré ce qui permet de protéger certaines zones. Cependant, le centre urbain dense (zone UA), destiné à être densifié, est soumis à un coefficient de seulement 10% de pleine terre, ce qui limite fortement les possibilités de végétalisation de cette zone mais peut éviter un étalement urbain. On peut noter aussi que la zone 15% sur le PLU de 2008 est passée à 40%. les deux zones OAP du sud de Sarcelles, une à l’Est et une à l’ouest, sont deux zones très différentes. L’OAP pointe Trois-Quart (à l’ouest) est une zone défavorisée, dont une partie contient des habitations illégales de type bidonville et est située sous des lignes haute tension. Certains immeubles ont déjà été construits (tout au sud). De nombreux remembrements sont prévus. La zone OAP le haut du Roy est une zone qui était naturelle et qui va être en partie construite, avec un pourcentage de terre pleine à 10%.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/5/18_PPT_2008.png" alt="Coefficient de pleine terre dans le PLU de Sarcelles en 2008" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                            </figure>
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/5/18_PPT_2022.png" alt="Coefficient de pleine terre dans le PLU de Sarcelles en 2022" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                            </figure>
+                             <figcaption class="text-center text-sm text-gray-600 -mt-4 lg:col-span-2 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Coefficient de pleine terre dans le PLU de Sarcelles en 2008 (gauche) & en 2022 (droite) © Freshway, 2025</em>
+                            </figcaption>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/5/19_superficie_CPT.png" alt="Graphique de la superficie du pourcentage minimal de pleine terre en 2008 et 2022" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                            </figure>
+                             <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                    <img src="/data/img/sarcelles/5/20_repartition_CPT.png" alt="Graphique de la répartition du pourcentage minimal de pleine terre en 2008 et 2022" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                </div>
+                            </figure>
+                            <figcaption class="text-center text-sm text-gray-600 -mt-4 lg:col-span-2 bg-gray-50 py-3 px-4 rounded-lg">
+                                <em>Superficie (gauche) et répartition (droite) du pourcentage minimal de pleine terre - 2008 et 2022 © Freshway 2025</em>
+                            </figcaption>
+                        </div>
+
+                        <div class="overflow-x-auto pt-8 border-t">
+                             <h4 class="font-soustitre text-xl text-center text-gray-800 mb-4 sm:text-2xl">Synthèse</h4>
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50">
+                                    <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Trajectoire de la protection de la pleine terre dans le PLU</th>
+                                        <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">PLU 2008</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Bien pour l’époque</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Le PLU de 2008 est le plus protecteur des 4 PLU étudiés avec 60% des zones protégées à 40 ou 50% de pleine terre.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Évolution en 2008 et 2022 (trajectoire)</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Augmentation importante des zones à 10% dont des OAP</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Si au global une grande partie du territoire reste bien protégé (65% est protégée entre 40 et 50%) la zone de protection à 10% a été agrandie. Une partie est destinée à la densification (et la rénovation du centre urbain), mais une autre partie concerne des OAP ce qui ne correspond pas aux directives du PCAET de 2021. Dans les PLU, <strong>inciter au maintien de zone de pleine terre dans les projets de construction neuves ou de requalification</strong>   (coefficient d’emprise au sol, coefficient)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+        </div>
+    </details>
+
+    <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-secondary to-red-400 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-gray-100">6</span>
+                    Bilan
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                        <span class="text-white font-bold text-lg">1</span>
+                    </div>
+                    <div>
+                        <h3 class="font-soustitre text-xl text-gray-800 mb-3">Un héritage agricole et industriel en mutation</h3>
+                    </div>
+                    <div>
+                        <h3 class="font-soustitre text-xl text-gray-800 mb-3"></h3>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">
+                    Sarcelles présente la trajectoire d'une ville en périphérie de Paris qui s’est fortement densifiée depuis 1960 et la construction des grands ensembles. De son passé agricole elle conserve une zone importante à l’Est de la commune et le long d’une ligne qui correspond au projet de construction d’un boulevard routier (le BIP) et de passage d’importantes lignes haute tension. Elle conserve au nord aussi quelques zones végétales à l’ancien lit de petit Rosne et avec une petite partie de la forêt d’Ecouen. La priorité actuelle de la municipalité est la <strong>rénovation urbaine (isolation thermique) et d'amélioration du cadre de vie</strong> notamment dans l’ancien cœur de ville. Le rafraîchissement n’est pas une priorité. Il trouve sa place comme un objectif secondaire, porté par une volonté politique émergente. Pourtant la commune dispose d'un levier d'action important avec une maîtrise foncière publique de 23,4%, facilitant la mise en œuvre de projets d'intérêt général.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                        <span class="text-white font-bold text-lg">2</span>
+                    </div>
+                    <div>
+                        <h3 class="font-soustitre text-xl text-gray-800 mb-3">Une stratégie de rafraîchissement à construire</h3>
+                    </div>
+                    <div>
+                        <h3 class="font-soustitre text-xl text-gray-800 mb-3"></h3>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">
+                    La planification reste confrontée à la double injonction de densifier le tissu existant tout en le verdissant, comme en témoignent les faibles exigences de pourcentages minimaux de pleine terre dans le centre. Sur le plan opérationnel, la ville est au début de sa trajectoire de rafraîchissement : les 2 projets phares (Petit Rosne &amp; cours d'écoles) sont soit en phase de lancement, soit à l'état de première expérimentation.
+                </p>
+            </div>
+        </details>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/lib/leaflet.js" crossorigin=""></script>
+    <script src="/lib/chart.umd.js"></script>
+    <script src="/lib/chartjs-plugin-annotation.min.js"></script> 
+    <script src="/lib/chartjs-plugin-datalabels.js"></script>
+    <script src="../../data/sarcelles/sarcelles_commune.js"></script>
+    <script src="../../data/sarcelles/secteurs_sarcelles.js"></script>
+    <script src="../../data/sarcelles/zone1_2008.js"></script>
+    <script src="../../data/sarcelles/zone1_2022.js"></script>
+    <script src="../../data/sarcelles/zone2_2008.js"></script>
+    <script src="../../data/sarcelles/zone2_2022.js"></script>
+    <script src="../../data/sarcelles/zone3_2008.js"></script>
+    <script src="../../data/sarcelles/zone3_2022.js"></script>
+    <script src="../../data/sarcelles/zone4_2008.js"></script>
+    <script src="../../data/sarcelles/zone4_2022.js"></script>
+    <script src="../../js/config-sarcelles.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

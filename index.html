@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Marqueur pour injecter le head commun -->
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - rafraichissement urbain</title>
+
+    <link href="lib/tailwind.css" rel="stylesheet">
+
+    
+    <!-- Styles spécifiques à cette page -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col">
+    <div id="header-container"></div>
+
+<main id="main-content" class="flex-grow">
+    
+    <section class="bg-white">
+        <div class="container mx-auto px-6 text-center pt-32 pb-24">
+            <p class="font-soustitre text-site-primary text-lg mb-4">Un projet de recherche sur l'adaptation des territoires urbains face aux impacts en terme de chaleur</p>
+            <h1 class="font-titre text-4xl md:text-6xl text-gray-800 max-w-4xl mx-auto leading-tight">
+                FRESHWAY : Trajectoires de rafraîchissement urbain
+            </h1>
+            <img src="/data/img/index/freshway_logo.png" alt="Illustration du projet FreshWay" class="block mx-auto rounded-lg mt-12 w-full max-w-md shadow-2xl shadow-site-primary/20">
+        </div>
+    </section>
+
+    <section class="py-20 lg:py-28">
+        <div class="mx-auto lg:container px-4 sm:px-6">
+            
+            <div class="max-w-4xl mx-auto text-lg text-justify leading-relaxed text-gray-700 mb-20">
+                <p>Face à des étés qui s'annoncent toujours plus chauds et à des villes qui suffoquent sous l'effet des îlots de chaleur, une question se pose : comment les espaces urbains peuvent-ils s’adapter et conserver de la fraîcheur ? Le projet FreshWay s'attaque à ce défi majeur, en explorant les chemins que les villes empruntent – ou pourraient emprunter – pour devenir plus vivables et résilientes face aux canicules induites par le changement climatique.</p>
+            </div>
+
+            <div class="text-center mb-16">
+                 <h2 class="font-titre text-4xl text-gray-800">Nos objectifs : mieux connaître, décrire, trouver des leviers d’action</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-site-primary transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <h3 class="font-logo font-bold text-site-primary text-2xl mb-3">CONNAÎTRE</h3>
+                    <p class="text-gray-600">Mieux connaître le rythme, les freins, les stratégies, les opportunités pour la mise en place de solutions rafraîchissantes au niveau de la planification et des réalisations.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-site-primary transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <h3 class="font-logo font-bold text-site-primary text-2xl mb-3">DÉCRIRE</h3>
+                    <p class="text-gray-600">Décrire les trajectoires d’adaptation au niveau des collectivités.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-site-primary transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <h3 class="font-logo font-bold text-site-primary text-2xl mb-3">PROPOSER</h3>
+                    <p class="text-gray-600">Proposer des leviers d’action.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-20 lg:py-28">
+        <div class="mx-auto lg:container px-4 sm:px-6">
+            <div class="text-center mb-12 max-w-4xl mx-auto">
+                <h2 class="font-titre text-4xl text-gray-800">Les trajectoires</h2>
+                <p class="text-lg text-gray-600 mt-4">
+                    Caractérisation de trajectoires sur des collectivités identifiées sur un horizon temporel de 2005-2008 à 2020-2022.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-slate-50 p-8 rounded-lg shadow-inner">
+                 <p class="text-gray-700 leading-relaxed mb-4">Pour caractériser les trajectoires des collectivités étudiées nous avons analysé différents point : l'aménagement de l’espace dans le but directe ou indirecte de rafraîchir que nous appelons <strong class="text-site-primary">la trajectoire de mise en oeuvre</strong>; l’état et l’évolution de la minéralité des territoires étudiés que nous appelons <strong class="text-site-primary">la trajectoire de l’espace physique</strong>; l’état et l’évolution des règlements d’urbanismes en matière de prise en compte et de mesure favorisant le rafraîchissement des villes et que nous appelons <strong class="text-site-primary">les trajectoires de planification</strong> et enfin les engagements de la collectivité en faveur du rafraîchissement que nous appelons <strong class="text-site-primary">la trajectoire du système d’action local</strong>.</p>
+                 <p class="text-gray-700 leading-relaxed">Chaque trajectoire répond à des questions spécifiques et a nécessité l’utilisation de méthodologies adhoc résumées dans le tableau suivant.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto mt-8">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                    <table class="w-full text-left font-corps">
+                        <thead class="bg-gray-50 border-b-2 border-gray-200">
+                             <tr>
+                                <th class="p-4 font-soustitre text-sm text-gray-500 uppercase tracking-wider">Trajectoire</th>
+                                <th class="p-4 font-soustitre text-sm text-gray-500 uppercase tracking-wider">Questions</th>
+                                <th class="p-4 font-soustitre text-sm text-gray-500 uppercase tracking-wider">Méthodes FreshWay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 align-top font-semibold text-gray-800">Mises en œuvre</td>
+                                <td class="p-4 align-top text-gray-600">Quelles solutions de rafraîchissement mises en œuvre ?</td>
+                                <td class="p-4 align-top text-gray-600">Entretiens, enquêtes terrains, comptage et recherche de réalisation phare.</td>
+                            </tr>
+                            <tr class="bg-gray-50 border-b border-gray-200">
+                                <td class="p-4 align-top font-semibold text-gray-800">Espace physique</td>
+                                <td class="p-4 align-top text-gray-600">Quelle progression du minéral et du végétal ?</td>
+                                <td class="p-4 align-top text-gray-600">Analyse de données IGN, détection des zones qui ont le plus changé, calcul de la minéralité et son évolution.</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 align-top font-semibold text-gray-800">Planification</td>
+                                <td class="p-4 align-top text-gray-600">Quelles sont les règles qui favorisent ou non la fraîcheur urbaine ?</td>
+                                <td class="p-4 align-top text-gray-600">Études des références au rafraichissement dans les documents d’urbanismes (SRADDET, PCAET, SCOT, PLU), analyse des pourcentages de pleine terre.</td>
+                            </tr>
+                             <tr class="bg-gray-50">
+                                <td class="p-4 align-top font-semibold text-gray-800">Système d’action local</td>
+                                <td class="p-4 align-top text-gray-600">Quel engagement de la collectivité (volonté, compétences, outils, suivi) ?</td>
+                                <td class="p-4 align-top text-gray-600">Entretiens semi directifs.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 lg:py-14">
+        <div class="mx-auto lg:container px-4 sm:px-6">
+            <div class="text-center mb-12 max-w-4xl mx-auto">
+                <h2 class="font-titre text-4xl text-gray-800">Le Choix des Terrains</h2>
+                <p class="text-lg text-gray-600 mt-4 text-justify">
+                    Nous avons choisi d’étudier de façon différenciée deux types de territoires : les métropoles que nous consultons pour connaître leur système d’action locale et des collectivités en connection avec ces métropoles où nous faisons une analyse plus poussée des quatre trajectoires : mise en oeuvre, espace physique, planification et système d’action locale. 
+                </p>
+                <p class="text-lg text-gray-600 mt-4 text-justify">
+                    Nous avons également voulu avoir un territoire au sud de la France, historiquement habitué aux vagues de chaleurs (Montpellier et Castelnau-le-lez), et des collectivités en région parisienne ayant des densités et une exposition au risque canicule différencié en fonction de leur positionnement, de leur couverture végétale et de leur proximité à Paris : Paris, Montreuil, Sarcelles et Pontault Combault.
+                </p>
+
+            <div class="overflow-x-auto mt-12">
+                <table class="min-w-full bg-white text-sm shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+                    <thead class="bg-blue-100">
+                        <tr>
+                            <th class="py-3 px-3 text-left font-bold text-gray-800 border-r"></th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800 border-l-2 border-gray-700">PONTAULT COMBAULT</th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800 border-r">SARCELLES</th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800 border-r">MONTREUIL</th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800 border-r-2 border-gray-700">PARIS</th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800 border-r">MONTPELLIER</th>
+                            <th class="py-3 px-3 text-center font-bold text-gray-800">CASTELNAU</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-3 font-medium text-gray-800 border-r-2 border-gray-700 align-top">Position Géographique</td>
+                            <td class="py-3 px-3 text-center align-top" colspan="4">NORD</td>
+                            <td class="py-3 px-3 text-center align-top border-l-2 border-gray-700" colspan="2">SUD</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-3 font-medium text-gray-800 border-r-2 border-gray-700 align-top">Densité pop. (impact)</td>
+                            <td class="py-3 px-3 text-center align-top">Moyenne<br>2 804 <br/>hab./km²</td>
+                            <td class="py-3 px-3 text-center align-top">Forte<br>6 932 hab./km²</td>
+                            <td class="py-3 px-3 text-center align-top">Très forte<br>12 495 hab./km²</td>
+                            <td class="py-3 px-3 text-center align-top ">Extrême<br>20 238 hab./km²</td>
+                            <td class="py-3 px-3 text-center align-top border-l-2 border-gray-700">Forte<br>5 317 <br/>hab./km²</td>
+                            <td class="py-3 px-3 text-center align-top">Moyenne<br>2 226 hab./km²</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-3 font-medium text-gray-800 border-r-2 border-gray-700 align-top">Exposition canicule</td>
+                            <td class="p-0 align-top bg-bilan-forte">
+                                <div class="py-3 px-3 text-center font-semibold text-white h-full flex items-center justify-center">
+                                    Faible
+                                </div>
+                            </td>
+                            <td class="p-0 align-top bg-bilan-moyenne">
+                                <div class="py-3 px-3 text-center font-semibold text-gray-800 h-full flex items-center justify-center">
+                                    Moyen
+                                </div>
+                            </td>
+                            <td class="p-0 align-top bg-bilan-absente">
+                                <div class="py-3 px-3 text-center font-semibold text-gray-800 h-full flex items-center justify-center">
+                                    Très forte
+                                </div>
+                            </td>
+                            <td class="p-0 align-top bg-red-700">
+                                <div class="py-3 px-3 text-center font-semibold text-white h-full flex items-center justify-center">
+                                    EXTRÊME<br>Paris à 50°C
+                                </div>
+                            </td>
+                            <td class="p-0 align-top bg-bilan-faible border-l-2 border-gray-700">
+                                <div class="py-3 px-3 text-center font-semibold text-gray-800 h-full flex items-center justify-center">
+                                    Fort
+                                </div>
+                            </td>
+                            <td class="p-0 align-top bg-bilan-faible">
+                                <div class="py-3 px-3 text-center font-semibold text-gray-800 h-full flex items-center justify-center">
+                                    Fort
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                
+            </div>
+            <section class="py-20 lg:py-8">
+                <div class="mx-auto lg:container px-4 sm:px-6">
+                    <div class="bg-white p-6 rounded-lg shadow-xl text-center">
+
+                        <h2 class="font-titre text-4xl text-gray-800 mb-12 max-w-4xl mx-auto">
+                            Localisation des zones d'étude sur les cartes d'îlots de chaleur urbains
+                        </h2>
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12">
+
+                            <div class="flex flex-col items-center">
+                                <a href="https://www.arcgis.com/apps/instant/portfolio/index.html?appid=ff73f22b99c74d009e0882aa2aff3149" target="_blank" rel="noopener noreferrer" class="block">
+                                    <img src="/data/img/index/icu1.png" alt="Carte des ICU - Île-de-France" class="**h-64 w-auto md:w-80** object-contain rounded-md border border-gray-200">
+                                </a>
+                                <p class="font-soustitre text-sm text-gray-600 mt-4 max-w-sm">
+                                    Figure 1 : Diagnostic territorial de vulnérabilité à la chaleur urbaine © Institut Paris Région, 2022
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col items-center">
+                                <a href="https://geowbs.montpellier3m.fr/portal/apps/webappviewer/index.html?id=a4cc113aa0c345a69252272a556b9439" target="_blank" rel="noopener noreferrer" class="block">
+                                    <img src="/data/img/index/icu2.png" alt="Carte des ICU - Montpellier" class="**h-72 w-auto md:w-96** object-contain rounded-md border border-gray-200">
+                                </a>
+                                <p class="font-soustitre text-sm text-gray-600 mt-4 max-w-sm">
+                                    Figure 2 : Cartographie interactive de la thermographie satellitaire de Montpellier Méditéranée Métropole © Opendata 3M, 2019
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    
+    <section class="bg-white py-16">
+    <div class="mx-auto lg:container px-4 sm:px-6">
+        <div class="text-center mb-12">
+            <h2 class="font-titre text-3xl md:text-4xl text-gray-800">Le collectif FreshWay</h2>
+            <p class="font-soustitre text-lg text-gray-600 mt-2">Une aventure collective qui rassemble :</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <div class="bg-slate-50 p-6 rounded-lg shadow-sm border lg:col-span-2">
+                <h3 class="font-soustitre text-xl text-gray-800 mb-6 text-center">Laboratoires de Recherche et Universités</h3>
+                <div class="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-12 gap-y-8">
+                    <a href="https://laburba.univ-gustave-eiffel.fr/" target="_blank" rel="noopener noreferrer" title="Lab'URBA"
+                    class="transition-opacity duration-300 hover:opacity-75 flex flex-col items-center **w-full**">
+                        <img src="/data/img/index/labURBA.png" alt="Logo Lab'URBA" class="h-20 w-auto object-contain">
+                        <span class="text-sm text-gray-600 mt-2">Porteur du projet</span>
+                    </a>
+                    <a href="https://imse.univ-gustave-eiffel.fr/" target="_blank" rel="noopener noreferrer" title="IMSE / Université Gustave Eiffel" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/imse.png" alt="Logo IMSE" class="h-14 w-auto object-contain">
+                    </a>
+                    <a href="https://www.paris-est.archi.fr/" target="_blank" rel="noopener noreferrer" title="École d'architecture de la ville & des territoires Paris-Est" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/ecoleArchi.jpg" alt="Logo École d'architecture Paris-Est" class="h-12 w-auto object-contain">
+                    </a>
+                    <a href="https://paris-est.archi.fr/la-recherche/ocs" target="_blank" rel="noopener noreferrer" title="Observatoire de la Condition Suburbaine" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/ocs.png" alt="Logo École de l'observatoire de la condition suburbaine" class="h-14 w-auto object-contain">
+                    </a>
+                    <a href="http://www.espace-dev.fr/" target="_blank" rel="noopener noreferrer" title="Espace DEV" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/espaceDev.png" alt="Logo Espace DEV" class="h-14 w-auto object-contain">
+                    </a>
+                    <a href="https://www.univ-montp3.fr/" target="_blank" rel="noopener noreferrer" title="Université Paul Valéry Montpellier 3" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/upv.png" alt="Logo Université Paul Valéry Montpellier 3" class="h-16 w-auto object-contain">
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-lg shadow-sm border">
+                <h3 class="font-soustitre text-xl text-gray-800 mb-4 text-center">Soutient et financement via l'appel à projet PACT2</h3>
+                <div class="flex justify-center items-center h-full">
+                    <a href="https://www.ademe.fr/" target="_blank" rel="noopener noreferrer" title="ADEME" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/ademe.png" alt="Logo ADEME" class="h-24 w-auto object-contain">
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-lg shadow-sm border">
+                <h3 class="font-soustitre text-xl text-gray-800 mb-4 text-center">Partenaires Privés</h3>
+                <div class="flex flex-wrap justify-center items-center gap-8 h-full">
+                    <a href="https://www.linkedin.com/company/nost-architectes/" target="_blank" rel="noopener noreferrer" title="nøst architectes" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/nost.png" alt="Logo nøst architectes" class="h-16 w-auto object-contain">
+                    </a>
+                    <a href="https://www.nhood.fr/" target="_blank" rel="noopener noreferrer" title="Nhood" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/nhood.jpg" alt="Logo Nhood" class="h-20 w-auto object-contain">
+                    </a>
+                    <a href="https://www.ceetrus.com/" target="_blank" rel="noopener noreferrer" title="Ceetrus" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/ceetrus.jpg" alt="Logo Ceetrus" class="h-14 w-auto object-contain">
+                    </a>
+                    <a href="https://www.ginkgo-avocats.fr/" target="_blank" rel="noopener noreferrer" title="GinkGo" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/ginkgo.png" alt="Logo Ginkgo" class="h-10 w-auto object-contain">
+                    </a>
+                </div>
+            </div>
+
+             <div class="bg-slate-50 p-6 rounded-lg shadow-sm border lg:col-span-2">
+                <h3 class="font-soustitre text-xl text-gray-800 mb-6 text-center">Collectivités Territoriales Partenaires</h3>
+                <div class="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-12 gap-y-8">
+                    <a href="https://www.paris.fr/" target="_blank" rel="noopener noreferrer" title="Paris" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/paris.png" alt="Logo Ville de Paris" class="h-16 w-auto object-contain" >
+                    </a>
+                    <a href="https://www.montreuil.fr/" target="_blank" rel="noopener noreferrer" title="Montreuil" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/montreuil.png" alt="Logo Ville de Montreuil" class="h-16 w-auto object-contain" >
+                    </a>
+                    <a href="https://www.pontault-combault.fr/" target="_blank" rel="noopener noreferrer" title="Pontault-Combault" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/pontault.webp" alt="Logo Ville de Pontault-Combault" class="h-16 w-auto object-contain" >
+                    </a>
+                    <a href="https://www.sarcelles.fr/" target="_blank" rel="noopener noreferrer" title="Sarcelles" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/sarcelles.png" alt="Logo Ville de Sarcelles" class="h-16 w-auto object-contain" >
+                    </a>
+                    <a href="https://www.castelnau-le-lez.fr/" target="_blank" rel="noopener noreferrer" title="Castelnau-le-Lez" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/castelnau.png" alt="Logo Ville de Castelnau-le-Lez" class="h-16 w-auto object-contain" >
+                    </a>
+                    <a href="https://www.montpellier.fr/" target="_blank" rel="noopener noreferrer" title="Montpellier"" class="transition-opacity duration-300 hover:opacity-75">
+                        <img src="/data/img/index/montpellier.png" alt="Logo Montpellier Méditerranée Métropole" class="h-16 w-auto object-contain" >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="equipe-projet" class="bg-white py-16">
+  <div class="mx-auto lg:container px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <h2 class="font-titre text-3xl md:text-4xl text-gray-800">Équipe projet</h2>
+      <p class="font-soustitre text-lg text-gray-600 mt-2">Les membres de FreshWay</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto">
+      <!-- Porteur du projet -->
+      <div class="bg-gradient-to-r from-site-primary to-site-primary/80 p-6 rounded-lg shadow-xl mb-8">
+        <h3 class="font-soustitre text-xl text-white mb-4 text-center">Porteurs du projet</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <p class="font-semibold text-white text-lg">Anne Ruas</p>
+            <p class="text-white text-sm">IMSE - Université Gustave Eiffel</p>
+          </div>
+          <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <p class="font-semibold text-white text-lg">Bruno Barroca</p>
+            <p class="text-white text-sm">Lab'URBA - Université Gustave Eiffel</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Équipe de recherche -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow-lg mb-8">
+        <h3 class="font-soustitre text-xl text-gray-800 mb-6 text-center">Équipe de recherche</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Mathieu Delorme</p>
+            <p class="text-sm text-gray-600">OCS - Université Gustave Eiffel</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Jean-François Girres</p>
+            <p class="text-sm text-gray-600">Espace DEV - Université Montpellier 3</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Marion Perney</p>
+            <p class="text-sm text-gray-600">Doctorante - Lab'URBA</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Valentin Clémence</p>
+            <p class="text-sm text-gray-600">Doctorant - Lab'URBA & EPT Paris Est Marne&Bois</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Rita Akiki dit Mazraani</p>
+            <p class="text-sm text-gray-600">Doctorante - Lab'URBA & Nhood</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Gaïa Marchesini</p>
+            <p class="text-sm text-gray-600">Post-doc - Lab'URBA</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partenaires opérationnels -->
+      <div class="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
+        <h3 class="font-soustitre text-xl text-gray-800 mb-6 text-center">Partenaires opérationnels</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+            <p class="font-semibold text-gray-900">Elodie Nourrigat</p>
+            <p class="text-sm text-gray-600">NØST architectes</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+            <p class="font-semibold text-gray-900">Émilie Sampson</p>
+            <p class="text-sm text-gray-600">Nhood</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+            <p class="font-semibold text-gray-900">Malicia Donniou</p>
+            <p class="text-sm text-gray-600">Ginkgo Avocats</p>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Collaborateurs -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow-lg mb-8">
+        <h3 class="font-soustitre text-xl text-gray-800 mb-6 text-center">Collaborateurs</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Cosma Zydek <span class="text-xs text-left text-gray-600"> - Conception du site</span></p>
+            <p class="text-sm text-gray-600">Stagiaire M2 - AgroParisTech</p>
+
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Abdou Guene</p>
+            <p class="text-sm text-gray-600">Stagiaire M2 - Paris Cité</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Loïc Quéru</p>
+            <p class="text-sm text-gray-600">Stagiaire M2 - Université Gustave Eiffel</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-site-primary">
+            <p class="font-semibold text-gray-900">Robin Metivier</p>
+            <p class="text-sm text-gray-600">Stagiaire M2 - Université Gustave Eiffel</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <section class="py-20 lg:py-28 bg-gradient-to-br from-site-primary to-site-primary/80 relative overflow-hidden">
+        <!-- Éléments décoratifs -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-white rounded-full"></div>
+            <div class="absolute bottom-20 right-20 w-24 h-24 bg-white rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-titre text-5xl lg:text-6xl text-white mb-6">Nos Ambitions</h2>
+                <p class="text-xl text-teal-100 max-w-3xl mx-auto">Au terme de ce projet, nous visons un double impact :</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Impact Scientifique -->
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 lg:p-12 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-titre text-3xl text-white">Impact Scientifique</h3>
+                    </div>
+                    <p class="text-lg text-teal-100 leading-relaxed">
+                        Contribuer à une meilleure compréhension des dynamiques d'adaptation des villes au changement climatique et enrichir les connaissances en matière de planification urbaine et environnementale.
+                    </p>
+                </div>
+                
+                <!-- Impact Opérationnel -->
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 lg:p-12 hover:bg-white/15 transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-titre text-3xl text-white">Impact Opérationnel</h3>
+                    </div>
+                    <p class="text-lg text-teal-100 leading-relaxed">
+                        Mettre à disposition des collectivités, des aménageurs et de tous les acteurs concernés des outils, des méthodes et des recommandations pour concevoir et mettre en œuvre des stratégies de rafraîchissement plus robustes et efficaces. In fine, il s'agit d'améliorer la qualité de vie dans nos villes et de les préparer aux défis climatiques de demain.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+    <div id="footer-container"></div>
+
+    <script src="../../js/config-castelnau.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+</body>
+</html>

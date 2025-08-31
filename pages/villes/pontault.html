@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - Pontault-Combault</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col overflow-x-hidden">
+    <div id="header-container"></div>
+
+    <main class="pt-20 lg:pt-24 flex-grow mx-auto lg:container px-1 lg:px-4 py-10 pb-20">
+
+        <section class="mb-16 text-center relative">
+            <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                        Analyse des trajectoires de transformation de Pontault-Combault
+                    </h1>
+                    <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6"></div>
+                </div>
+            </div>
+        </section>
+
+<!-- Section 1: Contexte -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+            <span class="w-10 h-10 sm:w-8 sm:h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">1</span>
+            Contexte
+        </h2>
+        <span class="text-4xl sm:text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-6 sm:p-8 space-y-12">
+            <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 sm:p-8 rounded-xl -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">2854,9 hab/km²</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Densité en 2022 (INSEE)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">13,6 km²</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Superficie en 2022 (INSEE)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                            <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">196,46 h / mois</p>
+                            <p class="text-base sm:text-sm text-gray-600 font-medium">Ensoleillement moyen calculé sur la période 1999-2019 (Climate Data)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description contextuelle -->
+            <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 sm:p-8 rounded-xl border-l-4 border-site-primary">
+                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                    La ville de Pontault-Combault est située à l’Est de Paris. Elle fait partie de l'agglomération Paris Vallée de la Marne. Au recensement de 2020 elle avait 37 579 habitants. Son taux de croissance entre 2008 et 2019 est de 1.07 
+                    . Sa superficie est de 1360ha (13,6km²).  Sa densité en 2022 est de 2 854,9 hab/km².
+                </p>
+                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg mt-4">
+                    Pontault-Combault est coupée par deux routes (la nationale 104 dite la Francilienne et la nationale 4) qui créent deux coupures importantes dans la ville. La zone urbaine principale est située dans la partie nord-ouest. Les trois autres parties sont bien plus petites. Le sud-est est recouvert de forêts appartenant à l’Etat et gérées par l’ONF. La partie Nord-Est partagée entre forêt et une zone industrielle, est grignotée par la zone industrielle. La partie Sud-Ouest est de petite taille, elle est principalement dédiée à des zones d’activités. Une ligne SNCF, située tout au nord de la commune, relie Pontault à Paris. 
+                </p>
+            </div>
+            
+            <!-- Croissance démographique -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl border-l-4 border-emerald-500">
+                        <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 sm:w-6 sm:h-6 bg-emerald-500 rounded-full mr-3"></div>
+                            Une croissance démographique modérée
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                            Son taux de croissance entre 2008 et 2019 est de 1.07 (Montpellier 1.17, Montreuil 1.09; Castelnau-Le-Lez 1.50; Sarcelles 0.98; France 1.05).
+                        </p>
+                    </div>
+                </div>
+                <figure class="group">
+                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <img src="/data/img/pontault/1/1_taux_croissance.png" alt="Graphique du taux de croissance de la population de Pontault-Combault comparé au 77 et Paris." class="w-full h-auto transform transition-transform duration-300">
+                    </div>
+                    <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                        Taux de croissance historique à Pontault-Combault © FreshWay 2025
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-6 sm:p-8 rounded-xl shadow-inner -mx-6 sm:-mx-8 border border-gray-100">
+                <figure class="group order-2 lg:order-1">
+                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <img src="/data/img/pontault/1/2_carte_schématique.jpg" alt="Carte schématique de Pontault-Combault en 2022 montrant les zones de végétation, les quartiers et les infrastructures." class="w-full h-auto transform transition-transform duration-300">
+                    </div>
+                    <figcaption class="text-center text-base sm:text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                        Vue d’ensemble sur Pontault Combault, 2022 © FreshWay 2025
+                    </figcaption>
+                </figure>
+                <div class="space-y-6 order-1 lg:order-2">
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+                        <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                            <div class="w-8 h-8 sm:w-6 sm:h-6 bg-green-500 rounded-full mr-3"></div>
+                            Un fort capital fraîcheur
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                            La commune se caractérise par un climat tempéré, avec des épisodes de chaleur estivale typiques de l’Île-de-France. Ces conditions climatiques, combinées à l’augmentation des surfaces artificialisées, accentuent les phénomènes d’îlots de chaleur urbains. La carte schématique ci-dessous localise les principaux éléments structurants du territoire : les zones urbaines moyennement denses, les axes routiers majeurs (la N104 et la N4), les zones dédiées aux activités économiques (industrielles et commerciales). Ces zones, particulièrement les secteurs 1, 2 et 3, ont vu leur densité augmenter entre 2006 et 2022, avec une transformation notable d’espaces verts en surfaces construites.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                            Par rapport aux autres villes étudiées dans ce projet, Pontault-Combault est moins minérale que les autres (20,2% de minéralité sol (routes et bati) (castelnau 23,9%, Sarcelles 28,3%, Montreuil 42,4%). <b>On peut considérer que Pontault a un fort capital fraîcheur,</b> d’autant plus qu’elle est entourée de villes également moyennement minérales. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+
+
+<!-- Section 2: Trajectoire de mise en œuvre opérationnelle -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">2</span>
+            Trajectoire de mise en œuvre opérationnelle
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+
+    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-16">
+            <div class="space-y-8">
+                <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8 -mt-8 mb-12">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Actions de végétalisation et d'aménagement</h3>
+                    <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-12 items-start">
+                    <div class="space-y-8">
+                        <!-- Section texte en haut -->
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500">
+                            <p class="text-gray-700 leading-relaxed mb-4 sm:text-lg">
+                                La commune a engagé plusieurs actions pour renforcer la végétalisation et le rafraîchissement urbain. Outre le projet de plantation de 1 500 arbres, les cours d'écoles ont été aménagées en cours oasis, avec des plantations dans les établissements maternels et élémentaires.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                On peut aussi noter l'ombrage Urban Canopée en centre-ville qui n'a pas atteint les objectifs escomptés en raison de sa croissance lente. Des projets comme la réhabilitation de la place des Nations ou la création d'une pergola à Pont O l'été montrent une volonté d'améliorer le confort thermique, mais leur impact reste marginal face à l'ampleur de l'artificialisation. Le projet de la coulée verte (en cours de réalisation en 2025) dans le contexte de la trame verte et bleue est également une action qui pourra contribuer au rafraîchissement urbain ou au moins à l'existence de lieux frais.  
+                            </p>
+                        </div>
+
+                        <!-- Section images en bas -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Image 1 : Cours oasis (plus large) -->
+                            <div class="lg:col-span-1">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/pontault/2/3_cours_oasis.png" 
+                                            alt="Cours oasis à Pontault" 
+                                            class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                    <figcaption class="text-center text-sm text-gray-600 mt-2 bg-white py-2 px-3 rounded-lg shadow-sm">
+                                        Cours oasis à Pontault © Mairie de Pontault
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <!-- Image 2 : Ombrage 1 -->
+                            <div class="lg:col-span-1">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/pontault/2/3_ombrage_1.png" 
+                                            alt="Installation de l'ombrage Urban Canopee" 
+                                            class="w-full h-64 object-cover transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                    <figcaption class="text-center text-sm text-gray-600 mt-2 bg-white py-2 px-3 rounded-lg shadow-sm">
+                                        Installation Urban Canopee © Freshway, Ruas, 2024
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                            <!-- Image 3 : Ombrage 2 -->
+                            <div class="lg:col-span-1">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/pontault/2/3_ombrage_2.png" 
+                                            alt="Détail de l'ombrage Urban Canopee" 
+                                            class="w-full h-64 object-cover transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                    <figcaption class="text-center text-sm text-gray-600 mt-2 bg-white py-2 px-3 rounded-lg shadow-sm">
+                                        Détail Urban Canopee © Freshway, Ruas, 2024
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau solutions de rafraîchissement -->
+            <div>
+                <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Solutions de rafraîchissement mises en place</h3>
+                    <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 -mx-8">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Solution</th>
+                                    <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Niveau d'action</th>
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détails</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Plantation d’arbres</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Politique volontariste</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Une politique volontariste de plantation d’arbres est en cours avec comme objectifs de planter <b>1500 arbres</b> durant le mandat  sur les îlots de fraîcheur au niveau des établissements scolaires : <b>1041 arbres plantés</b> entre 2021 et 2023, dont 18% dans les écoles. 1248 prévu pour fin 2024 en tout (+ 207). Préparation du projet Coulée verte (plus de 3km prévu) démarré en 2025.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Accès à des lieux frais</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Aménagement</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Entretien de l'Etang du coq par le SIAM (Syndicat intercommunal pour l’assainissement et l’aménagement du Morbras) 20 hectares et projet Coulée verte à venir. </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Désimperméabilisation (cours oasis)</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Planification et réalisation</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Désimperméabilisation et végétalisation des cours d’école sur plusieurs années : 12 établissements scolaires au total (10 en 2024, 2 en 2025).</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Installation d’ombrages</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Quelques tentatives</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Un ombrage installé (urban canopée) et une pergola prévue .</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée à l'eau</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">1 action remarquable</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Inauguration d’un miroir d’eau le 4 juillet 2025 sur la place de la mairie pour les enfants.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée au réseau froid</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absent</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Pas d’action.</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action sur l'Albedo</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absent</td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Pas d’action sur l’albedo.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+<!-- Section 3: Trajectoire de l'espace physique -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-violet-100">3</span>
+            Trajectoire de l'espace physique
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+            <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-violet-500">
+                 <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Par rapport aux autres villes étudiées dans ce projet, Pontault-Combault est moins minérale que les autres (20,2% de minéralité sol (routes et bâti) (castelnau 23,9%, Sarcelles 28,3%, Montreuil 42,4%). <b>On peut considérer que Pontault a un fort capital fraîcheur,</b> d’autant plus qu’elle est entourée de ville également moyennement minérale. 
+                </p><br/>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200"></th>
+                                <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                             <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Capital fraîcheur</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-forte text-white">Très bon </td>
+                                <td class="py-4 px-6 text-gray-700 align-top">Fort capital fraîcheur, notamment grâce aux fôrets gérées par l’ONF et à une surface important de zones pavillonnaires.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Évolution de la minéralité </strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Forte perte</td>
+                                <td class="py-4 px-6 text-gray-700 align-top">Entre 2008 et 2022 la minéralisation a été intense, elle équivaut à 28 ha soit l’équivalent de 40 terrains de foot.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><br/>
+
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                    Explorez les transformations physiques de Pontault-Combault. Le tableau de bord ci-dessous met en lumière les changements d'occupation du sol et l'évolution des espaces végétalisés entre 2008 et 2022. Sélectionnez une zone d'étude pour afficher les données correspondantes.
+                </p>
+            </div>
+
+            <div class="mb-6 p-4 bg-white/50 rounded-lg border border-gray-200 shadow-sm">
+                <label for="zone-select" class="block text-md font-soustitre text-gray-800 mb-1 sm:text-2xl">
+                    Choisissez une zone d'étude :
+                </label>
+                <div class="relative">
+                    <select id="zone-select" class="w-full p-2.5 border border-gray-300 rounded-md appearance-none text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-site-primary focus:border-site-primary shadow-sm cursor-pointer pr-10 sm:text-lg">
+                        <option value="select-commune">Commune de Pontault-Combault</option>
+                        <option value="select-zones">Ensemble des zones étudiées</option>
+                        <option value="Zone 1">Zone 1</option>
+                        <option value="Zone 2">Zone 2</option>
+                        <option value="Zone 3">Zone 3</option>
+                        <option value="Zone 4">Zone 4</option>
+                        <option value="Zone 5">Zone 5</option>
+                        <option value="Zone 6">Zone 6</option>
+                        <option value="Zone 7">Zone 7</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                        <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                <div class="flex flex-col gap-6">
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-soustitre text-gray-800 mb-4 ">Évolution nette de végétation <span id="canopee-zone-name" class="text-site-secondary font-bold"></span></h3>
+                        <div class="flex items-center justify-between">
+                            <div id="indicator-content">
+                                <p class="text-5xl font-bold text-site-secondary" id="vegetation-loss">-- %</p>
+                                <p class="text-sm text-gray-500 mt-1 sm:text-lg">Entre 2008 et 2022</p>
+                                <p class="text-sm text-gray-500 mt-0" id="football-transcription"></p>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-xs text-gray-500 mb-1 sm:text-lg" id="unity-change">Changer d'unité</span>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm font-medium text-gray-600 sm:text-lg">%</span>
+                                    <label for="unit-switch-v1" class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" value="" id="unit-switch-v1" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-site-primary rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-site-primary"></div>
+                                    </label>
+                                    <span class="text-sm font-medium text-gray-600 sm:text-lg">ha</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3 class="text-xl font-soustitre text-gray-800 mb-4 flex items-center gap-x-2">
+                            <span>Occupation du Sol <span id="occupation-zone-name" class="text-site-secondary font-bold"></span></span>
+                            
+                            <span id="occupation-info-tooltip" class="has-tooltip relative" style="display: none;">
+                                <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-400 rounded-full cursor-pointer">i</span>
+                                <span class="tooltip"><strong class="font-semibold">Note de calcul :</strong> Dans l'ensemble de la commune, la catégorie d'occupation du sol 'Imperméable' est calculée à partir de données sur la voirie.</span>
+                            </span>
+                            </h3>
+                        <div class="chart-container" style="height: 168px;"><canvas id="compositionChart"></canvas></div>
+                    </div> 
+                </div>
+                <div class="dashboard-card">
+                    <div id="map" class="z-0 mb-4" style="height: 360px;"></div>
+                    <p class="text-xs text-gray-500 mt-3 text-center">Cliquez sur une zone pour afficher ses détails. Utilisez les boutons pour comparer avant/après.
+                        <br/>Données calculées à partir de : BD TOPO®, BD ORTHO® IGN</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white/50 p-6 rounded-lg border border-gray-200">
+                <h3 class="text-2xl font-titre text-gray-800 mb-3 text-center">
+                    Approfondir l'Analyse <span id="analysis-zone-name" class="text-site-primary"></span>
+                </h3>
+                <div id="dynamic-analysis-text" class="text-gray-700 text-justify">
+                    <p>Sélectionnez une zone sur la carte ou dans le menu déroulant pour afficher une analyse détaillée.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</details>
+
+
+<!-- Section 4: Trajectoire du système d'action locale -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">4</span>
+            Trajectoire du système d'action locale
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+            <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-8 rounded-xl -mx-8 -mt-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-teal-500">
+                    <h3 class="font-soustitre text-xl text-gray-800 mb-4 flex items-center">
+                        <div class="w-6 h-6 bg-teal-500 rounded-full mr-3"></div>
+                        <div class="sm:text-2xl">Contexte politique et organisationnel</div>
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                        Le rafraîchissement urbain est un thème présent dans le discours politique récent de Pontault-Combault, principalement incarné par des projets concrets comme la plantation de 1 500 arbres, la création de cours oasis, apportant des 'îlots de fraîcheur dans les cours d'écoles et l'aménagement d'une coulée verte. Ces initiatives, qui figurent parmi les engagements du mandat actuel, sont portées par le maire-adjoint en charge du patrimoine commun, dans une démarche de transversalité entre services mise en place depuis 2020. La commune dispose d'une Direction des Espaces Publics et Naturels (DEPN) qui a renforcé ses compétences par le recrutement d'un écologue en 2021. La mise en œuvre de ces solutions rencontre toutefois des défis. 
+                    </p><br/>
+                    <h3 class="font-soustitre text-xl text-gray-800 mb-4 flex items-center">
+                        <div class="w-6 h-6 bg-teal-500 rounded-full mr-3"></div>
+                        <div class="sm:text-2xl">Défis opérationnels identifiés</div>
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                        Un enjeu propre à la gestion au sein de la commune est la pédagogie auprès des habitants, qui peuvent mal percevoir de nouvelles gestions de la végétation en ville, par exemple en les voyant comme un manque d'entretien des espaces verts. Ces projets exigent un investissement financier significatif, ce qui pourrait nécessiter de réduire le budget alloué à d'autres domaines jugés prioritaires par la population, tels que la rénovation des voiries, des bâtiments communaux, et l’équipement des écoles.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                        Pour des projets de plus grande envergure comme la <b>coulée verte,</b> la commune fait appel à des compétences externes (bureaux d'études Polis, Confluence, Sephia Ingénierie) pour les études de faisabilité. La commune mène également des expérimentations, comme l'installation d'une structure d’ombrage Urban Canopée en centre-ville, qui n'a cependant pas donné satisfaction en raison d'une croissance végétale jugée trop lente.
+                    </p>
+                </div>
+                </div>
+            </div> 
+
+            <!-- Tableau d'évaluation -->
+            <div class="bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden mt-12">
+                <div class="bg-gradient-to-r from-slate-100 to-gray-100 px-8 py-6">
+                    <h3 class="font-soustitre text-2xl text-gray-800 text-center">Évaluation du système d'action locale</h3>
+                    <div class="w-20 h-1 bg-site-secondary mx-auto mt-3"></div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Critère</th>
+                                <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Évaluation</th>
+                                <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détail</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                             <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Volonté politique spécifique de rafraîchissement et stratégie</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible</td>
+                                <td class="py-4 px-6 text-gray-700 align-top"><b>Pas de volonté politique spécifique formulée du rafraîchissement, plutôt une conséquence d’autres volontés politiques :</b> inscription dans les préoccupations sociétales sur le confortement de la biodiversité, notamment pour les trames vertes et bleues. Une <b>coulée verte </b>doit traverser la ville sur 3.3 Km. L’objectif est l’inauguration d’au moins une partie de la coulée verte avant l’été 2025. </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Identification des compétences mobilisées et pilotage</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Peu de compétences internes</td>
+                                <td class="py-4 px-6 text-gray-700 align-top"><b>Compétences techniques limitées en interne, appui des prestataires extérieurs.</b> Service dédié au rafraîchissement au sein de la direction des espaces publics et naturels (+écologue depuis 2021) + équipe moe (Atelier Polis, Confluence, Sephia ingénierie) pour le projet coulée verte. <b>Pas de compétences au niveau stratégique.</b> Directement du politique au technicien de terrain. Les projets sont l'occasion de végétaliser (OAP, trame verte)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Élaboration / mobilisation des documents de planification</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Moyen</td>
+                                <td class="py-4 px-6 text-gray-700 align-top"><b>Mobilisation des documents de planification dans la mise en œuvre du rafraîchissement. </b>PCAET, PLU et OAP trame verte et bleue Ressources Institut Paris Région, Agence de l’Eau + subventions</td>
+                            </tr>
+                             <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Solutions sectorielle ou hybride</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Moyen</td>
+                                <td class="py-4 px-6 text-gray-700 align-top"><b>Combinaison des deux approches :</b> focus sur la végétalisation et planification de transformation multifonctionnelle des cours d'écoles.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Préservation et transformation</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Un peu de préservation; quelques actions de transformation</td>
+                                <td class="py-4 px-6 text-gray-700 align-top"><b></b>Quelques actions de protection/transformation :</b> 1500 arbres, îlots fraîcheurs dans les écoles, coulée verte.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Accès aux espaces frais</strong></td>
+                                <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Peu</td>
+                                <td class="py-4 px-6 text-gray-700 align-top">Pas d’aménagement des parcs existants. Quelques aménagements à l’Etang du coq (3 ha d’eau, 7 ha de végétation) à l’occasion de Pont O l’été.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+
+<!-- Section 5: Trajectoire de planification -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-indigo-100">5</span>
+            Trajectoire de planification
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-12">
+            <section class="space-y-8">
+                <!-- 5.1 Les documents d'urbanisme -->
+                <div class="text-center bg-gradient-to-r from-indigo-50 to-purple-50 py-8 px-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-indigo-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.1 Les documents d'urbanisme</h3>
+                    <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+                </div>
+                
+                <div class="space-y-8">
+
+
+                    <!-- Liste des documents analysés -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-lg border border-blue-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-blue-800 mb-3">SDRIF-E-île de France (2024)</h4>
+                            <p class="text-blue-700 text-sm leading-relaxed sm:text-lg">Comptabilise 15 prescriptions influant sur le rafraîchissement. 1/3 concerne les solutions fondées sur la nature, 26% les matériaux, et 20% la typo-morphologie urbaine. Les solutions sur les usages et la gestion sont absentes.</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border border-green-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-green-800 mb-3">PCAET Paris Vallée de la Marne</h4>
+                            <p class="text-green-700 text-sm leading-relaxed sm:text-lg">Prescrit la plupart des solutions techniques pour lutter contre les îlots de chaleur et recommande la formation des élus et techniciens. Pas d'indication sur les diagnostics et l'usage.</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl shadow-lg border border-orange-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-orange-800 mb-3">PLU Pontault-Combault (2019)</h4>
+                            <p class="text-orange-700 text-sm leading-relaxed sm:text-lg">Préconise majoritairement des solutions fondées sur la nature (45%) et l'eau (36%). Les solutions liées aux matériaux et les solutions douces n’y figurent pas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Figures illustratives -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                        <figure class="group">
+                            <img src="/data/img/pontault/5/13_mesures_decrites.png" alt="Mesures décrites avec objectifs clairs de rafraîchissement urbain" class="w-full h-auto rounded-xl shadow-lg">
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg"><em>Mesures décrites avec objectifs clairs de rafraîchissement urbain dans les documents d’urbanisme (2007-2025) © Freshway, Perney 2025</em></figcaption>
+                        </figure>
+                        <figure class="group">
+                            <img src="/data/img/pontault/5/14_mesures_decrites_co-benefices.png" alt="Toutes mesures pouvant contribuer au rafraîchissement urbain" class="w-full h-auto rounded-xl shadow-lg">
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg"><em>Toutes mesures pouvant contribuer au rafraîchissement (co-bénéfices) dans les documents d’urbanisme (2007-2025) © Freshway, Perney 2025</em></figcaption>
+                        </figure>
+                        <figure class="group">
+                            <img src="/data/img/pontault/5/15_nombre_prescriptions.png" alt="Nombre de prescriptions par catégorie et par document de planification" class="w-full h-auto rounded-xl shadow-lg">
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg"><em>Types et occurrences des termes présents dans les documents d’urbanisme pour Pontault-Combault (2007-2025) © Freshway, Perney 2025</em></figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-violet-500">
+                 <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Pontault Combault fait partie de l’agglo <b>Paris Vallée de la Marne </b>qui est responsable de son SCOT et du PCAET. le PCAET a été signé en septembre 2021. Le terme îlot de chaleur apparaît dans le PCAET sans être central. Parmi les actions, il est prévu de former les agents et élus à la transition écologique (action  n°01#01); de revoir les PLU en intégrant mieux des contraintes contemporaines dont les îlot de chaleur (Action n°02#02) et le confort thermique (Action n°02#05). A noter l’Action n°05#01 : Elaborer et mettre en œuvre un schéma directeur des réseaux de chaleur et froid qui fait référence au réseau de froid. Mais toutes les actions suivantes font référence aux réseaux chauds uniquement. Le document des actions du PCAET en ligne sur le site de l’agglomération décrit peu les budgets qui seront alloués sauf certains en 2021 et 2022. Si on compare le budget alloué aux actions décrites précédemment et toutes les autres actions (et en utilisant les données disponibles) le budget alloué à la préservation de la nature et indirectement au rafraîchissement est de 2% du budget global, dont les ⅔ concernent la réalisation d’un atlas de biodiversité qui permettra de mieux protéger les espaces naturels, dont les trames vertes et bleues.
+                </p>
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Le financement attribué au PCAET n’est pas défini dans sa totalité mais on peut extraire certains éléments en lien avec le rafraîchissement urbain : dans la stratégie d’aménagement durable, concernant la protection de la biodiversité, la trame verte et bleue, le budget attribué varie de 305 000€ à 330 000€.
+                </p>
+                <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                    Le financement de l'élaboration du schéma directeur des réseaux de chaleur et de froid a pour montant 104700€ et l'intégration d'un volet énergie climat dans les PLU a comme montant de 5000€ à 30000€.
+                </p>
+
+                <div class="overflow-x-auto mt-8">
+                <table class="min-w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Axe</th>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Sous axe</th>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Finance prévue</th>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Indicateur</th>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Texte</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">axe 1 : Organisation interne de la CA et des communes</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Montée en compétence des services et des élus</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">18 500 € sur 2021</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Nombre de formations dispensées Nombre d'élus formés Nombre d'agents formés</td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°01#01 : Former les agents et les élus sur les thématiques de la transition écologique (dont le sujet suivant : - Urbanisme durable : <u>lutte contre les îlots de chaleur </u>et le risque inondation. Prise en compte des espaces verts et agricoles dans la lutte contre le changement climatique...)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°2 : Aménagement durable</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Gestion de l'eau et des espaces naturels</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">300 000 € sur 2021</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Publication du diagnostic, Suivi des stocks de carbone sur le territoire (MOS / ALDO)</td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°02#01 : Elaborer et mettre en œuvre un schéma directeur territorial de protection de la biodiversité et des écosystèmes</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°2 : Aménagement durable</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Gestion de l'eau et des espaces naturels</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">2022 : 5 000€ à 30 000 €</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top"></td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°02#02 : Mobiliser les PLU et le SAGE pour protéger la trame verte et bleue; Cette action vise à : <br/>- Former les services et les élus sur les dispositions qui peuvent être prises dans les PLU en matière de préservation de la trame verte, bleue, et noire <br/>- Etudier et intégrer des recommandations (exemples : OAP sectorielles et thématiques) et des exigences réglementaires aux PLU. Exemples de thématiques traitées : éclairage public, projets de construction/rénovation (infiltration des eaux à la parcelle, désimperméabilisation des sols, coefficient de biotope), gestion des milieux naturels, ilot de chaleur</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°2 : Aménagement durable</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Gestion de l'énergie</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">2022: 5 000€ à 30 000€</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Nombre de formations dispensées Nombre d'élus et de techniciens formés Intégration d'exigences énergie climat aux PLU</td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°02#05 : Intégrer un volet énergie climat dans les PLU : Cette action vise à : 
+                                <br/>- Former les services et les élus sur les dispositions qui peuvent être prises dans les PLU en matière matière atténuation et <u>d'adaptation au changement climatique </u>
+                                <br/>- Etudier et intégrer des recommandations (exemples : OAP sectorielles et thématiques) et des exigences réglementaires aux PLU (Exemples de thématiques traitées : performance énergétique du bâti, développement des réseaux de chaleur/énergies renouvelables, choix des matériaux de construction/rénovation, confort thermique, formes urbaines, mobilité, prise en compte du risque retrait gonflement d'argile)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°5 : Développement des énergies renouvelables</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Planifier le développement des énergies renouvelables</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top"></td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top"></td>
+                            <td class="py-4 px-6 text-gray-700 align-top"><u>Les besoins en froid sont également un enjeu énergétique important compte tenu des projections climatiques sur le territoire :</u> Le nombre de journée d'été (Température supérieur à 25°C) pourrait passer de 36 par an à 52 par an d'ici 2050 Cette action consiste à : 
+                                <br/>- Affiner et préciser le potentiel de développement des réseaux de chaleur/froid, 
+                                <br/>- Identifier des zones propices à la création/extension de réseaux de chaleur/froid, 
+                                <br/>- Planifier le développement des projets de réseaux de chaleur/froid</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°5 : Développement des énergies renouvelables</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Planifier le développement des énergies renouvelables</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">104 000 €</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Elaboration du schéma directeur des réseaux de chaleur et de froid</td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°05#01 : Elaborer et mettre en œuvre un schéma directeur des réseaux de chaleur et froid</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Axe n°7 : Mobilisation de l'ensemble des acteurs du territoire</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top"></td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">5000€ en 2022</td>
+                            <td class="py-4 px-6 text-gray-700 border-r align-top">Mise en place du club climat</td>
+                            <td class="py-4 px-6 text-gray-700 align-top">Action n°07#01 : Créer un club climat</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+
+            </div>
+            </section>
+
+            <!-- 5.2 Les éléments du PLU(i) -->
+            <section class="space-y-8 border-t pt-12 mt-12">
+                <div class="text-center bg-gradient-to-r from-emerald-50 to-teal-50 py-8 px-8 rounded-xl shadow-lg -mx-8 border-l-4 border-emerald-500">
+                    <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.2 Les éléments du PLU(i)</h3>
+                    <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 space-y-8">
+                    <figure class="group">
+                        <h4 class="font-soustitre text-xl text-gray-800 mb-4 text-center sm:text-2xl">Évolution du PLU de Pontault-Combault</h4>
+                        <img src="/data/img/pontault/5/17_frise_chrono_plu.png" alt="Frise chronologique des différentes versions du PLU" class="w-full h-auto">
+                        <figcaption class="text-center text-sm text-gray-600 mt-2 bg-gray-50 py-2 px-3 rounded-lg"><em>Frise des PLU de Pontault © Freshway, 2025</em></figcaption>
+                    </figure>
+
+                    <!-- Pourcentages minimums de pleine terre -->
+                    <div class="space-y-6 pt-8 border-t">
+                         <h4 class="font-soustitre text-xl text-gray-800 sm:text-2xl">Pourcentage de pleine terre minimum</h4>
+                         <p class="text-gray-700 leading-relaxed sm:text-lg">L'analyse des documents d'urbanisme de Pontault-Combault révèle une prise en compte progressive des enjeux de rafraîchissement. Le Plan Local d'Urbanisme (PLU) de référence date de 2006 et a connu plusieurs modifications, notamment en 2019 et 2023. L'analyse des occurrences de termes liés au rafraîchissement dans les documents de planification montre que Pontault-Combault, à l'instar d'autres villes de taille similaire, à une intégration encore faible de ce lexique comparée à des métropoles comme Paris (voir plus haut).</p>
+                         <p class="text-gray-700 leading-relaxed sm:text-lg">Une évolution notable concerne les exigences de pleine terre. On constate une augmentation significative des pourcentages minimums requis dans le cœur de la ville entre les PLU de 2006 et 2023, passant de 30% à 50% dans les zones pavillonnaires, ce qui favorise la protection de la biodiversité et la gestion des eaux pluviales. Cependant, les zones dédiées aux grands projets d'aménagement (OAP) restent moins protégées, notamment celles situées à l'Est de la Francilienne qui se développent sur d'anciens terrains végétalisés et qui ont un pourcentage de pleine terre de 10% prévu dans le PLU 2023 ce qui autorise la destruction de tous les arbres. </p>
+                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <img src="/data/img/pontault/5/18_superficie_CPT.png" alt="Graphique superficie du pourcentage minimal de pleine terre" class="rounded-lg shadow-md">
+                            <img src="/data/img/pontault/5/19_repartition_CPT.png" alt="Graphique répartition du pourcentage minimal de pleine terre" class="rounded-lg shadow-md">
+                         </div>
+                         <figcaption class="text-center text-sm text-gray-600 mt-2 bg-gray-50 py-3 px-4 rounded-lg"><em>Superficie (gauche) et répartition (droite) du pourcentage minimal de pleine terre - 2006 et 2023  © Clemence, Freshway,  2025 </em></figcaption>
+                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                             <figure>
+                                <img src="/data/img/pontault/5/20_PPT_2006.png" alt="Carte du pourcentage de pleine terre en 2006" class="rounded-lg shadow-md">
+                                <figcaption class="text-center text-sm text-gray-600 mt-2 bg-gray-50 py-3 px-4 rounded-lg">Pourcentage de pleine terre (PLU 2006) © Freshway, 2025</figcaption>
+                             </figure>
+                             <figure>
+                                <img src="/data/img/pontault/5/20_PPT_2023.png" alt="Carte du pourcentage de pleine terre en 2023" class="rounded-lg shadow-md">
+                                <figcaption class="text-center text-sm text-gray-600 mt-2 bg-gray-50 py-3 px-4 rounded-lg">Pourcentage de pleine terre (PLU 2023) © Freshway, 2025</figcaption>
+                             </figure>
+                         </div>
+                    </div>
+                    
+                    <!-- 5.3 Hauteur maximale du bâti -->
+                    <div class="space-y-6 pt-8 border-t">
+                        <h4 class="font-soustitre text-xl text-gray-800 sm:text-2xl">Hauteur maximale du bâti</h4>
+                        <p class="text-gray-700 leading-relaxed sm:text-lg">La hauteur maximale des constructions varie selon les zones. Dans les secteurs résidentiels, les hauteurs sont faibles (R+4+C en 2006). Dans le PLU de 2023, la hauteur est encore plus limitée, seule la zone longeant la N4 a des hauteurs allant jusqu’à 15m (UXa, UXb) ou R+2+C (UDa), <b>ce qui montre une volonté de limiter la densité</b>. Les zones naturelles (NG) et pavillonnaires (C) restreignent les constructions à R+1+C.</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                             <figure>
+                                <img src="/data/img/pontault/5/21_hauteur_max_2006.png" alt="Carte des hauteurs maximales en 2006" class="rounded-lg shadow-md">
+                                <figcaption class="text-center text-xs text-gray-500 mt-2">Hauteurs max (PLU 2006) © Freshway, 2025</figcaption>
+                             </figure>
+                             <figure>
+                                <img src="/data/img/pontault/5/21_hauteur_max_2023.png" alt="Carte des hauteurs maximales en 2023" class="rounded-lg shadow-md">
+                                <figcaption class="text-center text-xs text-gray-500 mt-2">Hauteurs max (PLU 2023) © Freshway, 2025</figcaption>
+                             </figure>
+                         </div>
+                    </div>
+                </div>
+            </section>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead class="bg-gray-50">
+                        <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Trajectoire de la protection de la pleine terre dans le PLU </th>
+                            <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                            <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">PLU 2006</td>
+                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-gray-800"></td>
+                            <td class="py-3 px-4 text-gray-700 align-top">Très peu de protection pleine terre en 2006</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Évolution en 2007 et 2025 (trajectoire)</td>
+                            <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-white"></td>
+                            <td class="py-3 px-4 text-gray-700 align-top">Amélioration significative de la protection pleine terre à l’exception des 2 OAP  industrielles qui ne sont pas protégées (10% pleine terre)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</details>
+
+
+<!-- Section 6: Bilan -->
+<details class="group mb-8" open>
+    <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-secondary to-red-400 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+        <h2 class="text-3xl font-titre flex items-center">
+            <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-gray-100">6</span>
+            Bilan
+        </h2>
+        <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+    </summary>
+    
+    <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+        <div class="p-8 space-y-8">
+            <!-- Bloc 1 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4"><span class="text-white font-bold text-lg">1</span></div>
+                    <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Une ville entre urbanisation et verdissement</h3></div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">Pontault-Combault représente la trajectoire d’une ville de première couronne qui, bien que disposant encore de réserves foncières naturelles et agricoles, subit une minéralisation importante (entre 2008 et 2022 la minéralisation a été intense, elle équivaut à 28 ha soit l’équivalent de 40 terrains de foot). La volonté politique d'inverser cette tendance est récente mais se traduit par des actions visibles, axées principalement sur la végétalisation (plantation d’arbres, coulée verte, cours oasis).</p>
+            </div>
+
+            <!-- Bloc 2 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4"><span class="text-white font-bold text-lg">2</span></div>
+                    <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Vers une urbanisation plus verte</h3></div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">La planification urbaine évolue également dans le sens de la nature en ville, avec une augmentation des exigences en matière de pourcentage minimal de pleine terre. Cependant, certaines nouvelles zones à urbaniser (OAP), notamment celle à l’Est de la Francilienne qui se développe sur un espace majoritairement végétal ont un pourcentage de pleine terre ne permettant pas de maintenir un minimum de nature (15%). </p>
+            </div>
+
+            <!-- Bloc 3 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4"><span class="text-white font-bold text-lg">3</span></div>
+                    <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Une prise de conscience en cours</h3></div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">La trajectoire de Pontault-Combault montre une prise de conscience en cours d’opérationnalisation. La commune s’appuie sur différents projets pour enclencher un changement, tout en faisant face à des défis financiers, notamment pour trouver des fonds pour la désimperméabilisation. </p>
+                <p class="text-gray-700 leading-relaxed text-justify">Le renforcement des compétences internes et l’intégration de plus d’enjeux autour du rafraîchissement dans les projets réalisés permettra une montée en compétence globale nécessaire pour aborder de manière plus complète les questions d'îlots de chaleur urbain.</p>
+            </div>
+
+            <!-- Bloc 4 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex items-start mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4"><span class="text-white font-bold text-lg">4</span></div>
+                    <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Des financements limités malgré la prise de conscience</h3></div>
+                </div>
+                <p class="text-gray-700 leading-relaxed text-justify">Par ailleurs Le Plan Climat Air Énergie Territorial (PCAET) de l'agglomération Paris Vallée de la Marne, signé en 2021, mentionne la lutte contre les îlots de chaleur et le confort thermique, cependant, le budget alloué à la préservation de la nature et au rafraîchissement reste limité, représentant environ 2% du budget global détaillé dans le document.</p>
+            </div>
+        </div>
+    </div>
+</details>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/lib/leaflet.js" crossorigin=""></script>
+    <script src="/lib/chart.umd.js"></script>
+    <script src="/lib/chartjs-plugin-annotation.min.js"></script> 
+    <script src="/lib/chartjs-plugin-datalabels.js"></script>
+    <script src="../../data/pontault/pontault_commune.js"></script>
+    <script src="../../data/pontault/secteurs_pontault.js"></script>
+    <script src="../../data/pontault/zone1_2008.js"></script>
+    <script src="../../data/pontault/zone1_2022.js"></script>
+    <script src="../../data/pontault/zone2_2008.js"></script>
+    <script src="../../data/pontault/zone2_2022.js"></script>
+    <script src="../../data/pontault/zone3_2008.js"></script>
+    <script src="../../data/pontault/zone3_2022.js"></script>
+    <script src="../../data/pontault/zone4_2008.js"></script>
+    <script src="../../data/pontault/zone4_2022.js"></script>
+    <script src="../../data/pontault/zone5_2008.js"></script>
+    <script src="../../data/pontault/zone5_2022.js"></script>
+    <script src="../../data/pontault/zone6_2008.js"></script>
+    <script src="../../data/pontault/zone6_2022.js"></script>
+    <script src="../../data/pontault/zone7_2008.js"></script>
+    <script src="../../data/pontault/zone7_2022.js"></script>
+    <script src="../../js/config-pontault.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+
+</body>
+</html>

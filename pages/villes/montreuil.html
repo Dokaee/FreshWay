@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Marqueur pour injecter le head commun -->
+    <meta name="common-head" content="true" charset="utf-8">
+    
+    <title>FreshWay - Montreuil</title>
+
+    <link href="/lib/tailwind.css" rel="stylesheet">
+    
+    <!-- Styles spécifiques à cette page -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="icon" type="image/png" href="/data/img/index/freshway_logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body class="min-h-screen font-corps bg-site-background flex flex-col overflow-x-hidden">
+    <div id="header-container"></div>
+
+    <main class="pt-20 lg:pt-24 flex-grow mx-auto lg:container px-1 lg:px-4 py-10 pb-20">
+
+        <section class="mb-16 text-center relative">
+            <div class="bg-gradient-to-br from-site-primary to-teal-700 text-white py-16 px-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-titre mb-4 leading-tight">
+                        Analyse des trajectoires de transformation de Montreuil
+                    </h1>
+                    <div class="w-24 h-1 bg-white bg-opacity-60 mx-auto mt-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Contexte -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-6 sm:px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-2xl sm:text-3xl font-titre flex items-center">
+                    <span class="w-10 h-10 sm:w-8 sm:h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">1</span>
+                    Contexte
+                </h2>
+                <span class="text-4xl sm:text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+
+            <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-6 sm:p-8 space-y-12">
+
+                    <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-6 sm:p-8 rounded-xl -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">12 416,8 hab/km²</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Densité en 2022 (INSEE)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">8,93 km²</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Superficie (INSEE)</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-site-secondary">
+                                <div class="text-center">
+                                    <p class="text-4xl sm:text-3xl font-bold text-gray-800 mb-2">193,36 h / mois</p>
+                                    <p class="text-base sm:text-sm text-gray-600 font-medium">Ensoleillement moyen 1999-2019 (Climate Data)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description contextuelle -->
+                    <div class="bg-gradient-to-r from-blue-50 to-teal-50 p-6 sm:p-8 rounded-xl border-l-4 border-site-primary">
+                        <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                            La ville de Montreuil, située dans la première couronne à l'Est de Paris, est une commune très dense qui subit une forte pression urbaine. Son territoire, caractérisé par une urbanisation continue, présente une minéralité de 42,4 % en 2023, surface issue de la combinaison du bâti et des routes. la densité de Montreuil est de 12.456 hab/km² (2019) ce qui est la ville la plus dense de notre étude <span class="text-sm text-gray-500">(Castelnau 2.011hab/km² (2019) , pontault 2.755 hab/km² (2019) et Sarcelles 2020: 6.942 hab/km² (2020).</span> 
+                        <br/>
+                            Cette minéralité et forte densité <b>rend la ville particulièrement sensible aux phénomènes d'îlots de chaleur urbains </b>, un enjeu majeur pour le confort et la santé de ses habitants.
+                        </p>
+                    </div>
+
+                     <!-- Croissance démographique -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg">
+                                <img src="/data/img/montreuil/1/1_taux_croissance.png" alt="Taux de croissance historique à Montreuil" class="w-full h-auto">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                                Taux de croissance historique à Montreuil,  © Freshway 2025
+                            </figcaption>
+                        </figure>
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl border-l-4 border-emerald-500">
+                                <h3 class="font-soustitre text-3xl text-gray-800 mb-4 flex items-center">
+                                    <div class="w-8 h-8 bg-emerald-500 rounded-full mr-3"></div>
+                                    Une croissance soutenue
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed text-xl sm:text-lg">
+                                    Depuis 1968, la commune connaît une croissance démographique soutenue. Entre 2008 et 2019, son taux de croissance annuel était de 1,09, une dynamique comparable à celle du département de la Seine-Saint-Denis (1,09) mais supérieure à celle de Paris (0,98) sur la même période. Cette attractivité accentue la pression sur le foncier disponible et complexifie les efforts de végétalisation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border-l-4 border-green-500">
+                            <h3 class="font-soustitre text-3xl sm:text-2xl text-gray-800 mb-4 flex items-center">
+                                <div class="w-8 h-8 sm:w-6 sm:h-6 bg-green-500 rounded-full mr-3"></div>
+                                Un capital fraîcheur à préserver
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg">
+                                En 2018, Montreuil, le ratio de m² d’espace vert par habitant est de 5,8 m²/ habitant. Cette donnée place la ville bien en dessous du ratio de 10 m² d’espaces verts par habitant prévu par le SDRIF et considéré comme un minimum pour la qualité de vie (CERTU). Source 2.1-diag-et-EIE - PLUi. Ce faible "capital fraîcheur" est cependant compensé par la présence de trois grands parcs qui jouent un rôle clé en période de canicule : le parc départemental Jean Moulin - les Guilands, le parc des Beaumonts et le parc Montreau. Montreuil comprend 2 Zones Naturelles d’Intérêt Écologique Floristique et Faunistique (ZNIEFF) de type 1 (Parc départemental Jean-Moulin les Guilands et Parc des Beaumonts). La ville bénéficie également d'un patrimoine historique unique avec les "<u><a href="https://fr.wikipedia.org/wiki/Mur_%C3%A0_p%C3%AAches" target="_blank">Murs à Pêches</a></u>", un site de 8,6 ha classé en partie, témoin de son passé agricole.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed mb-4 text-xl sm:text-lg"></p>
+                             La figure suivante montre d’une part le passé agricole de Montreuil, mais aussi que l’urbanisation de Montreuil est ancienne (à l’Ouest et au centre), même si les secteurs de ‘Marais Villiers', l’Ermitage’ et ‘la Boissière’ au nord de la ville ont été totalement urbanisés courant XXième siècle, ainsi que ceux à l’Est et Sud en contact avec Rosny et Fontenay.
+                            </p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg">
+                                        <img src="/data/img/montreuil/1/2_carte_schématique.png" alt="Vue d'ensemble sur Montreuil, 2023" class="w-full h-auto">
+                                    </div>
+                                </figure>
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg">
+                                        <img src="/data/img/montreuil/1/2_carte_schématique-2.png" alt="Vue d'ensemble sur Montreuil, 2023" class="w-full h-auto">
+                                    </div>
+                                </figure>
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-500 mt-4 bg-gray-50 py-2 px-4 rounded-lg">
+                                Vue d’ensemble sur Montreuil, 2023 © Freshway 2025 et carte d’état major (version 1906)
+                            </figcaption>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- Section 2: Trajectoire de mise en œuvre opérationnelle -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">2</span>
+                    Trajectoire de mise en œuvre opérationnelle
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+        
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-16">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 sm:text-lg">
+                         <p class="text-gray-700 leading-relaxed mb-4">La trajectoire opérationnelle de Montreuil est marquée par une tradition de participation citoyenne, notamment à travers les jardins partagés, les jardins familiaux (anciens jardins ouvriers attribués à la mairie aux habitants) et une accélération récente des politiques de renaturation. L'ambition politique est aujourd'hui (2023-2025) de <b>"planter d'abord, construire parfois"</b>, une démarche qui se traduit par plusieurs projets emblématiques.</p>
+                         <p class="text-gray-700 leading-relaxed mb-4">Le réaménagement de la Place de la République (2017-2022) est un exemple de cette approche. Initialement motivé par un besoin de requalification de cet espace de vie et d'apaisement de la circulation, le projet a progressivement intégré l'objectif de créer un îlot de fraîcheur. Le processus a été mené via une co-construction avec les habitants, incluant des ateliers de concertation et une phase d'expérimentation par de l'urbanisme temporaire à l'été 2018. La place finale, agrandie pour un accès davantage piéton, intègre de la végétation, des jeux pour enfants, des tables, ainsi que des <u>brumisateurs</u>.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                        <figure class="group md:col-span-3">
+                        <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2">
+                            <img src="/data/img/montreuil/2/3_place_republique.png" alt="Stand de concertation pour la Place de la République" class="w-full h-auto rounded-lg">
+                        </div>
+                        </figure>
+                        <figure class="group md:col-span-1">
+                        <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2">
+                            <img src="/data/img/montreuil/2/3_place_republique-2.png" alt="Vue d'ensemble de la Place de la République" class="w-full h-auto rounded-lg">
+                        </div>
+                        </figure>
+                        <figure class="group md:col-span-1">
+                        <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2">
+                            <img src="/data/img/montreuil/2/3_place_republique-3.png" alt="Brumisateurs de la Place de la République" class="w-full h-auto rounded-lg">
+                        </div>
+                        </figure>
+                    </div>
+                    <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                    Place de la République en février 2024. 1-Stand de concertation (été 2018) © Quatorze 2- vue d'ensemble 3- les brumisateurs. © Freshway Marchesini 2025
+                    </figcaption>
+                    </div>
+        
+                    <div class="space-y-8">
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8 mt-12 mb-12">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Conversion de la Place Paul Langevin (2015-2019)</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 sm:text-lg">
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                               Une autre action remarquable (2015-2019) est la conversion de la Place Paul Langevin où des places de parking ont été convertis en parc (2000m² dont 460m² d'espaces verts) avec des arbres, des jeux pour enfants et des fontaines.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                             <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2">
+                                    <img src="/data/img/montreuil/2/4_place_langevin.png" alt="Place Paul Langevin avant travaux" class="w-full h-auto rounded-lg">
+                                </div>
+                            </figure>
+                             <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2">
+                                    <img src="/data/img/montreuil/2/4_place_langevin-2.png" alt="Place Paul Langevin après travaux" class="w-full h-auto rounded-lg">
+                                </div>
+                            </figure>
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                            Place langevin avant et après travaux © Ville de montreuil
+                        </figcaption>
+                    </div>
+        
+                    <div class="space-y-8">
+                        <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8 mt-12 mb-12">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">La protection des arbres</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 sm:text-lg">
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                Les arbres font l’objet de beaucoup d’attention. Une charte de l’arbre a été écrite. Les arbres gérés par la collectivité et le département ont été comptés à cette occasion (graphique ci contre). A noter que de nombreux arbres ont été détruits par le département dans le contexte de la construction du Tram T1, ce qui semble être un sujet de discorde entre le département, l'agglomération, le département et l’etat. La notion d’EPP a été introduite dans le PLU pour protéger les arbres existants (voir la section planification).
+                            </p>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                             L’EPCI Est Ensemble porte l'objectif de planter 10 000 arbres d'ici la fin du mandat de 2026, dont 5 000 à Montreuil. Cette volonté s'inscrit dans la démarche "Montreuil est notre jardin", initiée en 2018, qui vise à renforcer le contact des habitants avec la nature.
+                            </p>
+                        </div>
+                        <figure class="group">
+                            <div class="overflow-hidden rounded-xl shadow-lg bg-white p-2 flex items-center justify-center">
+                                <img src="/data/img/montreuil/2/5_charte_arbres.png" alt="Graphique sur le nombre d'arbres à Montreuil" class="w-1/2 h-auto rounded-lg">
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-white py-3 px-4 rounded-lg shadow-sm">
+                                Nombres d’arbres d’alignements et dans les cours d’école -Montreuil. © charte des arbres Ville de Montreuil 2021
+                            </figcaption>
+                            <br/>
+                        </figure>
+                    </div>
+
+                    <!-- Tableau solutions de rafraîchissement -->
+                    <div class="text-center bg-white py-8 px-6 rounded-xl shadow-lg -mx-8">
+                        <h3 class="font-soustitre text-3xl text-gray-800 mb-4">Solutions de rafraîchissement mises en place</h3>
+                        <div class="w-20 h-1 bg-site-secondary mx-auto"></div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Solution</th>
+                                        <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Niveau d'action</th>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détails</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Plantation d’arbres</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Engagement pour la végétalisation</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Planification et mise en œuvre (5000 arbres), une pépinière dans la commune. </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Jardins partagés/familiaux</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Tradition maintenue</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Les jardins ouvriers de Montreuil ont été transformés en jardins partagés ou familiaux. En 2020, on compte 10 jardins familiaux et 51 jardins partagés en 2023 à Montreuil (site OPENDATA de la mairie). Cette dynamique permet de maintenir voire d’apporter une végétation ponctuelle, séquençant l’espace.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Désimperméabilisation des sols (cours oasis)</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Quelques emplacements</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Place de la République, 1 jardin école, 2 cours oasis entre 2019 et 2023 (jean Moulin et Oum Kathoum)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Installation d’ombrages</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absente</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Pas de politique spécifique. L'ombrage est principalement un co-bénéfice de la plantation d'arbres.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée à l'eau</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Quelques lieux</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">De nombreux Brumisateurs (dont place de la République, Place Langevin) et renaturation Rû Gobettu</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Action liée au réseau froid</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Absente</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top">Pas de réseau froid à Montreuil.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">action sur l’albedo</td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">1 ou 2 bâtiments</td>
+                                        <td class="py-3 px-4 text-gray-700 align-top"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- Section 3: Trajectoire de l'espace physique -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-violet-100">3</span>
+                    Trajectoire de l'espace physique
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-b-2xl shadow-xl border-t-0 border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-12">
+                     <div class="bg-white p-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-violet-500">
+                         <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                            Cette partie se concentre sur les transformations de l’espace, notamment sur les modifications de végétalisation ou d'artificialisation. Par rapport aux autres villes étudiées dans ce projet, Montreuil est une ville très minérale (42,4% de minéralité sol (routes et bati) (pontault 20,2%, Sarcelles 28,3%, Castelnau 23,9%). <b>On peut considérer que Montreuil a un faible capital fraîcheur</b>, de plus la commune touche Paris qui exerce une très forte pression foncière. 
+                        </p>
+                        <p class="text-gray-700 leading-relaxed text-lg sm:text-lg mt-4">
+                            L'ensemble de la commune de Montreuil a connu une <u>urbanisation modérée</u> entre 2008 et 2023. Cette dynamique se traduit par une augmentation des surfaces bâties et imperméabilisées (environ 5,08 ha soit environ 7 terrains de football). De toutes les villes que nous avons étudiées, c’est celle qui s’est le moins minéralisée pendant cette période, ce qui s’explique en partie par le fait d’avoir moins de foncier que Sarcelles, Pontault ou Castelnau, mais aussi d’avoir une volonté de conserver les espaces verts et ouverts avec une mandature des écologistes (2007-2014) et un stress thermique perceptible.  Par ailleurs, entre 1998 et 2008 une étude commandée par la direction de l’urbanisme, et faite à partir de photographies aériennes, avance que la commune aurait perdu 16,7 ha sur les terres agricoles et espaces boisés (document ENAF pour le PLU, archives urbanisme, Montreuil). Il y aurait donc un ralentissement important du rythme d'imperméabilisation des sols.  Parmi les zones que nous avons étudiées en détail, c’est la zone Boissière-Acacia qui s’est le plus minéralisée. Les autres zones sont plutôt des opérations de destruction-reconstruction locales. 
+                        </p><br/>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200"></th>
+                                        <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Capital fraîcheur</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-white">Faible</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Faible capital fraîcheur en raison de la forte densité et d'un ratio d'espaces verts par habitant de 5,8 m² en 2018, bien en dessous des recommandations. La présence de trois grands parcs et des Murs à Pêches constitue cependant un atout majeur.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Évolution de la minéralité</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Modérée</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Entre 2008 et 2023, la minéralisation a progressé de 5,08 ha (soit ~7 terrains de foot). Cette augmentation est plus faible que dans les villes en expansion, mais significative pour un territoire déjà très dense.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><br/><br/>
+                        <p class="text-gray-700 leading-relaxed text-lg sm:text-lg">
+                            Pour afficher plus de détails sur une zone, il suffit de sélectionner une zone en effectuant un clic. Les informations relatives à l'utilisation du sol apparaîtront et une analyse spécifique à la zone sélectionnée apparaîtra.
+                        </p>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-white/50 rounded-lg border border-gray-200 shadow-sm">
+                        <label for="zone-select" class="block text-md font-soustitre text-gray-800 mb-1 sm:text-2xl">
+                            Choisissez une zone d'étude :
+                        </label>
+                        <div class="relative">
+                            <select id="zone-select" class="w-full p-2.5 border border-gray-300 rounded-md appearance-none text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-site-primary focus:border-site-primary shadow-sm cursor-pointer pr-10 sm:text-lg">
+                                <option value="select-commune">Commune de Montreuil</option>
+                                <option value="select-zones">Ensemble des zones étudiées</option>
+                                <option value="Zone 1">Zone 1</option>
+                                <option value="Zone 2">Zone 2</option>
+                                <option value="Zone 3">Zone 3</option>
+                                <option value="Zone 4">Zone 4</option>
+                                <option value="Zone 5">Zone 5</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                                <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="flex flex-col gap-6">
+                            <div class="dashboard-card">
+                                <h3 class="text-xl font-soustitre text-gray-800 mb-4 ">Évolution nette de végétation <span id="canopee-zone-name" class="text-site-secondary font-bold"></span></h3>
+                                <div class="flex items-center justify-between">
+                                    <div id="indicator-content">
+                                        <p class="text-5xl font-bold text-site-secondary" id="vegetation-loss">-- %</p>
+                                        <p class="text-sm text-gray-500 mt-1 sm:text-lg">Entre 2008 et 2022</p>
+                                        <p class="text-sm text-gray-500 mt-0" id="football-transcription"></p>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <span class="text-xs text-gray-500 mb-1 sm:text-lg" id="unity-change">Changer d'unité</span>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm font-medium text-gray-600 sm:text-lg">%</span>
+                                            <label for="unit-switch-v1" class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" value="" id="unit-switch-v1" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-site-primary rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-site-primary"></div>
+                                            </label>
+                                            <span class="text-sm font-medium text-gray-600 sm:text-lg">ha</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3 class="text-xl font-soustitre text-gray-800 mb-4 flex items-center gap-x-2">
+                                    <span>Occupation du Sol <span id="occupation-zone-name" class="text-site-secondary font-bold"></span></span>
+                                    <span id="occupation-info-tooltip" class="has-tooltip relative" style="display: none;">
+                                        <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-400 rounded-full cursor-pointer">i</span>
+                                        <span class="tooltip"><strong class="font-semibold">Note de calcul :</strong> Dans l'ensemble de la commune, la catégorie d'occupation du sol 'Imperméable' est calculée à partir de données sur la voirie.</span>
+                                    </span>
+                                </h3>
+                                <div class="chart-container" style="height: 168px;"><canvas id="compositionChart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div id="map" class="z-0 mb-4" style="height: 360px;"></div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">Cliquez sur une zone pour afficher ses détails. Utilisez les boutons pour comparer avant/après.
+                                <br/>Données calculées à partir de : BD TOPO®, BD ORTHO® IGN</p>
+                        </div>
+                    </div>
+                
+                    <div class="mt-8 bg-white/50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl font-titre text-gray-800 mb-3 text-center">
+                            Approfondir l'Analyse <span id="analysis-zone-name" class="text-site-primary"></span>
+                        </h3>
+                        <div id="dynamic-analysis-text" class="text-gray-700 text-justify">
+                            <p>Sélectionnez une zone sur la carte ou dans le menu déroulant pour afficher une analyse détaillée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+        
+
+        <!-- Section 4: Trajectoire du système d'action locale -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-teal-100">4</span>
+                    Trajectoire du système d’action locale
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            
+            <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-12">
+                    <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-8 rounded-xl -mx-8 -mt-8 mb-8">
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-teal-500">
+                            <p class="text-gray-700 leading-relaxed text-lg mb-4 sm:text-lg">
+                                Le premier Plan Climat Air Énergie Territorial (PCAET) a été adopté dès 2014 sous la mairie Ecologique. La mandature suivante (PC) ne s’est pas saisie du plan climat, mais applique des actions conformes à ce plan entre 2014 et 2020. En 2020, dans le contexte du COVID, le sujet de la ville résiliente est plus important, il est porté par le premier adjoint. Le système d'action locale se caractérise par une forte tradition de participation citoyenne. Des initiatives comme "Montreuil est notre jardin" ou la co-construction du projet de la Place de la République montrent que la ville s'appuie sur ses habitants pour transformer le territoire. L'enjeu principal reste la forte pression à la densification imposée par les schémas régionaux, contre laquelle la ville tente de résister en utilisant les outils réglementaires pour protéger ses espaces de nature.
+                            </p>
+                        </div>
+                    </div>
+        
+                    <div class="bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden">
+                        <div class="bg-gradient-to-r from-slate-100 to-gray-100 px-8 py-6">
+                            <h3 class="font-soustitre text-2xl text-gray-800 text-center">Évaluation du système d'action locale</h3>
+                            <div class="w-20 h-1 bg-site-secondary mx-auto mt-3"></div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Critères</th>
+                                        <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">Valeur</th>
+                                        <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Détail</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Volonté politique spécifique de rafraîchissement et stratégie</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-faible text-gray-800">Faible</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Pas de volonté politique spécifique formulée du rafraîchissement, plutôt une conséquence d’autres volontés politiques : résistance citoyenne à la préservation d’espaces accueillant la nature en ville (tradition du jardin partagé, campagne 2018 « Montreuil est votre jardin ») avec forte implication citoyenne</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Identification des compétences mobilisées et pilotage</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Bonne compétence interne</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Bonne compétence interne : nouvelle délégation au 1er adjoint : la ville résiliente depuis 2020. Depuis la pandémie renversement de la priorité qui est faite à la nature présente sur une parcelle plutôt que les m2 développés instruite par des services locaux structurés et des agents compétents,Pilotage par le projet les projets sont l'occasion de végétaliser (ex: place de la république)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Elaboration / mobilisation des documents de planification</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Bon</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Mobilisation progressive des documents de planification pour le rafraîchissement . Plan Climat : précurseur par l’adoption en 2014 (la réglementation ne l’imposait pas) mais peu mise en œuvre à cause de l’alternance politique ,Charte construction durable : adoption 2015,Charte construction pour une ville résiliente : adoption 2021 ,Charte de l’arbre (octobre 2021) ,les EPP (espaces paysagers protégés) existent à Montreuil depuis au moins 2012. A partir de 2020, la mairie s’engage dans l’identification et la reglementation des EPP et leur introduction le PLUi dans la version de 2022 et de 2023 (PLUi modification 2) , ce qui provoque des oppositions.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Solution sectorielle ou hybride</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white">Hybridation</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Hybridation des types d'action (approche multifonctionnelle de la transformation de la place la république)</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                        <td class="py-4 px-6 font-medium text-gray-800 border-r align-top"><strong>Préservation et transformation</strong></td>
+                                        <td class="py-3 px-4 border-r align-middle text-center bg-bilan-moyenne text-gray-800">Bonne préservation et transformation mais à faible rythme</td>
+                                        <td class="py-4 px-6 text-gray-700 align-top">Focus sur la préservation : EPP, protection maximale des espaces verts et des arbres (charte de l'arbre..) avec des actions de transformation (place de la république)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+
+        <!-- Section 5: Trajectoire de planification -->
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-primary to-teal-600 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-indigo-100">5</span>
+                    Trajectoire de planification
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            
+            <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-12">
+                    <!-- 5.1 Les documents d'urbanisme -->
+                    <div class="text-center bg-gradient-to-r from-indigo-50 to-purple-50 py-8 px-8 rounded-xl shadow-lg -mx-8 -mt-8 mb-12 border-l-4 border-indigo-500">
+                        <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.1 Les documents d’urbanismes</h3>
+                        <div class="w-20 h-1 bg-indigo-500 mx-auto"></div>
+                    </div>
+                    <!-- Liste des documents analysés -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl shadow-lg border border-blue-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-blue-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-blue-600 rounded-full mr-3"></div>
+                                SDRIF-E-île de France (2024)
+                            </h4>
+                            <p class="text-blue-700 text-sm leading-relaxed sm:text-lg">
+                                Il comptabilise 15 prescriptions qui ont une influence sur le rafraîchissement urbain. Un tiers de celles-ci concerne les solutions fondées sur la nature, 26% les matériaux, et 20% concerne la typo morphologie urbaine. Les solutions relatives aux usages et à la gestion sont absentes.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg border border-green-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-green-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-green-600 rounded-full mr-3"></div>
+                                PCAET Est Ensemble (2017)
+                            </h4>
+                            <p class="text-green-700 text-sm leading-relaxed sm:text-lg">
+                                Le PCAET Est Ensemble prescrit toutes les solutions de rafraîchissement urbain mais ne prend pas en compte d'éventuelles études ou diagnostic sur le sujet.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl shadow-lg border border-purple-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-purple-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-purple-600 rounded-full mr-3"></div>
+                                SCoT de la métropole du Grand Paris (2024)
+                            </h4>
+                            <p class="text-purple-700 text-sm leading-relaxed sm:text-lg">
+                                Le SCoT de la métropole du Grand Paris, datant de 2024, réfère à toutes les solutions de rafraichissement mais n'apporte pas d'indications concernant les éléments de gestion.
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl shadow-lg border border-orange-200 transform hover:-translate-y-1 transition-all duration-300">
+                            <h4 class="font-semibold text-lg text-orange-800 mb-3 flex items-center">
+                                <div class="w-4 h-4 bg-orange-600 rounded-full mr-3"></div>
+                                PLU Est Ensemble (2020)
+                            </h4>
+                            <p class="text-orange-700 text-sm leading-relaxed sm:text-lg">
+                                Le PLUi Est Ensemble, de 2020, intègre seulement les solutions techniques liées au rafraîchissement mais pas les solutions d'usage, de gestion, ou d'étude.L'ancien PLU de Montreuil, datant de 2018, intègre seulement deux articles qui préconisent des solutions de rafraîchissement. Elles sont fondées sur la nature. Une d'entre elles préconise le développement d'activités sectorielles autour de la nature. 
+                            </p>
+                        </div>
+                    </div>
+        
+                    <figure class="group">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                             <img src="/data/img/montreuil/4/10_types_et_occurences.png" alt="Types et occurrences des termes dans les documents d’urbanisme" class="w-full h-auto transform transition-transform duration-300">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            Types et occurrences des termes présents dans les documents d’urbanisme pour Montreuil (2017-aujourd’hui) © Freshway Perney 2024
+                        </figcaption>
+                    </figure>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 sm:text-lg">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            On constate une faible prescription des solutions douces en général, qui se perd totalement à l’échelle locale au niveau du PLU(i). 
+                        </p>
+                    </div>
+                    
+                    <figure class="group">
+                        <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <img src="/data/img/montreuil/4/11_prise_compte_rafraich_.png" alt="Trajectoire de la prise en compte du rafraîchissement dans les documents d’urbanisme" class="w-full h-auto transform transition-transform duration-300">
+                        </div>
+                        <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                            Trajectoire de la prise en compte du rafraîchissement dans les documents d’urbanisme de montreuil depuis 2017 © Freshway Perney 2024
+                        </figcaption>
+                    </figure>
+
+                    <div class="space-y-8 mt-12">
+                        <div class="bg-gradient-to-br from-slate-100 to-blue-50 p-8 rounded-xl border-l-4 border-indigo-500">
+                            <h4 class="font-soustitre text-2xl text-gray-800 mb-4">Conclusion sur la planification</h4>
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                Les documents de planification applicables à Montreuil montrent une intégration croissante des enjeux de rafraîchissement. Le PLUi d'Est Ensemble (2020) et ses modifications sont devenues le principal levier d'action pour Montreuil. C'est à travers cet outil que la ville met en œuvre sa stratégie de "dé-densification" et de protection de la nature, en agissant sur les zonages, les coefficients d'emprise au sol et les pourcentages de pleine terre.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                             <ul class="space-y-4 text-lg">
+                                <li class="flex items-start">
+                                    <p class="text-gray-700"><strong>SRADDET (2024) :</strong> Il intègre les obligations de diagnostic relatif au changement climatique et à la vulnérabilité ainsi que la plupart des solutions de rafraîchissement.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <p class="text-gray-700"><strong>PCAET Est-Ensemble (2017) :</strong> Il prescrit une large gamme de solutions mais ne comprend pas de diagnostic, pourtant obligatoire.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <p class="text-gray-700"><strong>SCoT Métropole du Grand Paris (2024) :</strong> Il couvre la plupart des solutions à l'exception des aspects de gestion et semble répondre aux obligations.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <p class="text-gray-700"><strong>PLU (2018 & 2020) :</strong> Celui de 2018 intégrait très peu de solutions de rafraîchissement. La version de 2020 prend en compte la plupart des solutions mais délaisse les solutions douces.</p>
+                                </li>
+                             </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                            <h4 class="font-semibold text-lg text-amber-900 mb-3 flex items-center">
+                                Focus Budgétaire : PCAET Est Ensemble (2017)
+                            </h4>
+                            <p class="text-amber-800 leading-relaxed">
+                                Le budget total est de <strong>276 092 200 €</strong>. Le financement le plus important est attribué à la gestion des déchets (88%), suivi par les stratégies de protection de la biodiversité, de renaturation, et de lutte contre le changement climatique, représentant 7% du budget (soit 20 430 000 €).
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- 5.2 Les éléments du PLU(i) -->
+                    <section class="space-y-8 border-t pt-8">
+                        <div class="text-center bg-gradient-to-r from-emerald-50 to-teal-50 py-8 px-8 rounded-xl shadow-lg -mx-8 border-l-4 border-emerald-500">
+                            <h3 class="font-soustitre text-3xl text-gray-800 mb-4">5.2 Les éléments du PLU(i)</h3>
+                            <div class="w-20 h-1 bg-emerald-500 mx-auto"></div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <h4 class="font-soustitre text-xl text-gray-800 flex items-center sm:text-2xl">
+                                Versions du PLU de Montreuil
+                            </h4>
+                            <figure class="group">
+                                <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                    <img src="/data/img/montreuil/4/12_frise_chrono_plu.png" alt="Frise chronologique des différentes versions du PLU" class="w-full h-auto transform transition-transform duration-300">
+                                </div>
+                                <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                    Frise chronologique des différentes versions/modifications du PLU © Freshway 2025
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <!-- Bandes primaires et secondaires-->
+                        <div class="space-y-6">
+                            <h4 class="font-soustitre text-xl text-gray-800 flex items-center sm:text-2xl">
+                                Des bandes primaire et secondaire au coefficient d’emprise au sol (CES)
+                            </h4>
+                            <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                Dans le PLU 2015 et 2018 il a un recours important aux bandes primaires et secondaires pour favoriser un modèle d’urbanisation de type Haussmannien (une note ici : si on met un BP 80% et un BS 20% on incite à construire devant (jusqu’à 80% ) et pas derrière (20%)) (avec les bâtiments devant et des cœurs d’îlots verts), ce qui ne correspond pas à la structure de l’habitat de Montreuil. Pour la direction de l’urbanisme, la notion de pleine terre est bien plus satisfaisante. Il y a donc eu un travail de modification du PLUi (modification 2 de 2023), la minimisation de l’utilisation des bandes primaire et secondaire (BP, BS) et l’utilisation des coefficients d’emprise au sol (CES) pour mieux s’adapter aux structures existantes. La figure suivante illustre l'évolution des PLU et la réduction de l’usage des BP/BS aux zones de type faubourg où l’urbanisation est faite le long des routes.  
+                            </p>
+                            <blockquote class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-600">
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg mb-4">
+                                    “On ne peut pas aujourd'hui balancer sur la ville une bande de 18 m principale et un cœur d'îlot vert, sans démolir énormément de quartiers existants… dans l'urbanisme des années 50, 60, 70,  on a fait les ensembles en les détachant du front de rue et en allant chercher plutôt des jardins qui se sont transformés pour la plupart en parking malheureusement.”
+                                </p>
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg mb-4">
+                                    “Sur le terrain, on a des bâtiments au milieu de la parcelle… est-ce que vous voulez qu'on les démolisse pour faire du 20 ou 30 % et qu'on fasse une bande sur rue ?”
+                                </p>
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg mb-4">
+                                    “Il faut vraiment beaucoup de moyens pour tout démolir la ville et pour faire à la mode de Haussmann, c'est-à-dire d'aller mettre sur rue des bâtiments et libérer des cœur d’îlot quand on a affaire à l'existant différent.”
+                                </p>
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg mb-4">
+                                    “Si le bâtiment aujourd'hui, il est en fond de parcelle et n’est pas aligné sur rue, on va travailler à partir de lui, on va autoriser je ne sais pas 30, 40 50 % de constructibilité mais voyez, on peut laisser le jardin qui est déjà existant.”
+                                </p>
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg">
+                                    “Ça nous permet de ne pas couper d'arbres, ça nous permet de vraiment de regarder également le vide. De quoi est constitué ce vide ? Le vide n'est pas vide, le vide est plein de nature.”
+                                </p>
+                                <footer class="mt-4 text-sm text-gray-500">
+                                    — Serge Planchenault, Chef de service Étude et Développement Urbain, Direction de l’Urbanisme et de l’Habitat – Ville de Montreuil, 16 août 2023
+                                </footer>
+                            </blockquote>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/13_CES.png" alt="Coefficient de construction CES 2018 PLU" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/13_CES_2.png" alt="Coefficient de construction CES PLUi 2023" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                            </div>
+                                <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                    Réduction de l’usage des bandes primaire au secondaire au profit du coefficient d’emprise entre 2018 et de 2023 © Freshway 2025  
+                                </figcaption>
+                        </div>
+
+                        <!-- Espace Paysager à Protéger -->
+                        <br/>
+                        <div class="space-y-6">
+                            <h4 class="font-soustitre text-xl text-gray-800 flex items-center sm:text-2xl">
+                                Les EPP : Espace Paysager à Protéger.
+                            </h4>
+                            <div class="bg-gray-50 p-6 rounded-xl shadow-lg border-l-4 border-green-600">
+                                <p class="text-gray-700 sm:text-lg mb-4">
+                                    La notion d'EPP apparaît dans le code de l’urbanisme dans l’<strong>Article L113-1</strong> 
+                                    <span class="text-sm text-gray-500">(Création ORDONNANCE n°2015-1174 du 23 septembre 2015 - art.)</span>
+                                </p>
+                                <p class="italic text-gray-700 leading-relaxed sm:text-lg">
+                                    “Les plans locaux d'urbanisme peuvent classer comme espaces boisés, les bois, forêts, parcs à conserver, à protéger ou à créer, qu'ils relèvent ou non du régime forestier, enclos ou non, attenant ou non à des habitations. 
+                                    Ce classement peut s'appliquer également à des arbres isolés, des haies ou réseaux de haies ou des plantations d'alignements.”
+                                </p>
+                            </div>
+
+                            <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                Il semble que les EPP soient présents dans le PLU de Montreuil depuis 2012 (mairie Écologiste). En 2020 pour augmenter leur nombre, la direction de l’urbanisme a cherché les cœurs d’îlot, en a trouvé 92 et ajouté ceux qui ne devaient pas poser de problème (hors bailleurs sociaux et grandes copropriétés). Pour le PLU de 2023 (modification 2), la mairie a ajouté des grandes propriétés.
+                            </p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/14_EPP.png" alt="Nombre et surface d’espaces paysagers et boisés protégés" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/14_EPP_2.png" alt="Les espaces paysagers protégés (PLUi M2 2023)" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                Comptage des EPP dans les PLU et les EPP du PLU de Montreuil 2023 © Freshway, Queru, 2023 
+                            </figcaption>
+
+                            <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                                <h4 class="font-semibold text-lg text-amber-900 mb-3 flex items-center">
+                                    Focus : Charte l’arbre
+                                </h4>
+                                <p class="text-amber-800 leading-relaxed">
+                                    A noter que la <strong>charte l’arbre</strong> est également un moyen pour inciter le maintien de la végétation existante.  Le nouveau Règlement de Voirie Communal prévoit un dispositif dissuasif pour abattre un arbre : si l'abattage est accepté par la ville, le demandeur devra payer des coûts élevés d'aménités c'est-à-dire divers frais qui regroupent la valeur financière de l'arbre, le remplacement de l'arbre abattu par 3 arbres sur l'espace public ainsi que leur arrosage sur 2 ans. (extrait charte de l’arbre de montreuil, 20 octobre 2021, page 9-10)
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Travail sur le zonage -->
+                        <br/>
+                        <div class="space-y-6">
+                             <h4 class="font-soustitre text-xl text-gray-800 flex items-center sm:text-2xl">
+                                Travail sur le zonage
+                            </h4>
+                             <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                Entre 2020 et 2023 un gros travail de zonage est réalisé par la collectivité. On peut noter l’apparition du type UR Renouvellement de l’habitat collectif.
+                            </p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/15_PLUi.png" alt="Zonage PLUI Montreuil Est Ensemble 2020" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/15_PLUi_2.png" alt="Zonage PLUI montreuil-2023 modif 2" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+
+                        <!-- Pourcentage pleine terre -->
+                         <br/>
+                        <div class="space-y-6">
+                             <h4 class="font-soustitre text-xl text-gray-800 flex items-center sm:text-2xl">
+                                Pourcentages minimums de pleine terre
+                            </h4>
+                             <p class="text-gray-700 leading-relaxed sm:text-lg">
+                                À Montreuil en 2023, la majorité du territoire est soumise à un seuil de 40 % de pleine terre, ce qui est suffisant pour garantir des espaces végétalisés pour les nouveaux aménagements. Certaines zones, notamment la zone résidentielle située au nord est, est fixée à 40 %, tout comme la zone 2 (30%), au sud est de la commune, ce qui permet d’assurer une végétalisation minimale via le PLU: bien que ces valeurs représentent des minimas réglementaires, et que rien n’empêche d’aller au-delà, elles traduisent une exigence et une prise en compte du végétal. Les zones en rénovation et celle proche de paris ont des pourcentage bas, ce qui fait l’hypothèse du maintien d’une densification forte, en préservant les pourcentages élevés dans les zones plutôt pavillonnaires. 
+                            </p>
+                            <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border-l-4 border-amber-500 shadow-lg">
+                                <h4 class="font-semibold text-lg text-amber-900 mb-3 flex items-center">
+                                    Focus : ZAC Boissiere-Acacia
+                                </h4>
+                                <p class="text-amber-800 leading-relaxed">
+                                    On notera que dans le PLU de 2018 la ZAC Boissiere-Acacia à un pourcentage de pleine terre de 10%, dans celui de 2023 il n’est pas fixé au niveau du zonage mais dans le texte du PLU il est noté à 15%.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/16_PPT.png" alt="Pourcentage minimal de pleine terre en 2018" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                                <figure class="group">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/16_PPT-2.png" alt="Pourcentage minimal de pleine terre en 2023" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                Pourcentage minimal de pleine terre en 2018 (gauche) & en 2023 (droite) © Clemence, Freshway 2025  
+                            </figcaption>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                <figure class="group lg:col-span-1">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/17_repartition_CPT.png" alt="Superficie et répartition du pourcentage minimal de pleine terre" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                                <figure class="group lg:col-span-1">
+                                    <div class="overflow-hidden rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 bg-white p-2">
+                                        <img src="/data/img/montreuil/4/17_superficie_CPT.png" alt="Superficie et répartition du pourcentage minimal de pleine terre" class="w-full h-auto transform transition-transform duration-300 rounded-lg">
+                                    </div>
+                                </figure>
+                            </div>
+                            <figcaption class="text-center text-sm text-gray-600 mt-4 bg-gray-50 py-3 px-4 rounded-lg">
+                                Superficie et répartition du pourcentage minimal de pleine terre (PLU de 2012, 2022 et 2023) © Clemence, Freshway 2025 
+                            </figcaption>
+                        </div>
+                    </section>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-50">
+                                <tr class="bg-gradient-to-r from-slate-100 to-gray-100">
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Trajectoire de la protection de la pleine terre dans le PLU </th>
+                                    <th class="py-4 px-6 text-center font-bold text-gray-800 border-b-2 border-gray-200 w-48">État</th>
+                                    <th class="py-4 px-6 text-left font-bold text-gray-800 border-b-2 border-gray-200">Interprétation</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">PLU 2012</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-absente text-gray-800"></td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">Le PLU de 2012 est très peu protecteur</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-medium text-gray-800 border-r align-top">Évolution en 2012 et 2023 (trajectoire)</td>
+                                    <td class="py-3 px-4 border-r align-middle text-center bg-bilan-bonne text-white"></td>
+                                    <td class="py-3 px-4 text-gray-700 align-top">L'évolution du PLU de Montreuil est remarquable avec une amélioration significative en 2018, puis une autre entre 2022 et 2023.  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details class="group mb-8" open>
+            <summary class="py-6 list-none cursor-pointer flex justify-between items-center bg-gradient-to-r from-site-secondary to-red-400 text-white px-8 rounded-t-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <h2 class="text-3xl font-titre flex items-center">
+                    <span class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 text-lg font-bold text-gray-100">6</span>
+                    Bilan
+                </h2>
+                <span class="text-3xl transition-transform duration-300 group-open:rotate-45">+</span>
+            </summary>
+            
+            <div class="bg-white rounded-b-2xl shadow-xl border-t-0 border border-gray-100 overflow-hidden">
+                <div class="p-8 space-y-8">
+
+                    <!-- Bloc 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-lg">1</span>
+                            </div>
+                            <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Une ville dense et résiliente face à la chaleur</h3></div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-justify">
+                            Montreuil présente la trajectoire d’une ville dense et “saturée” qui, face à une forte vulnérabilité à la chaleur urbaine due à une artificialisation importante des sols, a engagé une stratégie de ville résiliente. Son capital fraîcheur initial est faible, mais la commune s’appuie sur ses grands parcs et une politique volontariste pour inverser la tendance à la minéralisation. Le rythme d’artificialisation s’est ralenti par rapport à la période précédente.
+                        </p>
+                    </div>
+
+                    <!-- Bloc 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-lg">2</span>
+                            </div>
+                            <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Transformations urbaines et projets majeurs</h3></div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-justify">
+                            Si la période 2008 - 2023 a vu la construction ponctuelle de bâtiments (centre commercial Grand Angle, ajout d’un bâtiment pour l’IUT), elle a aussi connu de la destruction-reconstruction (logements), de l'artificialisation – dans le sens minéralisation d’un espace naturel – pour la piscine des Murs à Pêches, et surtout la construction de 1200 logements dans la ZAC Boissière-Acacia.
+                        </p>
+                    </div>
+
+                    <!-- Bloc 3 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-lg">3</span>
+                            </div>
+                            <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Initiatives de rafraîchissement et végétalisation</h3></div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-justify">
+                            Au niveau des réalisations, la mairie s’est engagée à planter 5000 arbres et a transformé quelques places (place de la République et place Langevin) en y insérant un ensemble de solutions rafraîchissantes : végétalisation et brumisateurs. Pour l’instant, il n’y a pas d’installation d'ombrage, de changement d'albédo ou de réseau froid. Seulement deux cours oasis ont été réalisées entre 2019 et 2023 (Jean Moulin et Oum Khatoum).
+                        </p>
+                    </div>
+
+                    <!-- Bloc 4 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-lg">4</span>
+                            </div>
+                            <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Outils réglementaires au service du climat</h3></div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-justify">
+                            La transition de Montreuil ne repose pas sur de grandes réserves foncières mais sur l’utilisation d’outils réglementaires, en particulier le PLUi. La création d’Espaces Paysagers et boisés Protégés (EPP) et la modulation des droits à construire, notamment les Pourcentages minimums de Pleine Terre (PPT), sont des exemples de cette stratégie. Cette approche est complétée par une culture de la participation citoyenne, comme pour la transformation de la Place de la République, qui mobilise un échange commun et permet un changement pérenne du territoire. On peut regretter que le pourcentage de pleine terre appliqué dans la ZAC Boissières-Acacia reste très bas (non défini dans le plan de zonage et de 15% dans le règlement du PLUi 2023).
+                        </p>
+                    </div>
+
+                    <!-- Bloc 5 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="flex items-start mb-6">
+                            <div class="flex-shrink-0 w-12 h-12 bg-site-primary rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold text-lg">5</span>
+                            </div>
+                            <div><h3 class="font-soustitre text-xl text-gray-800 mb-3">Des défis persistants dans un contexte dense</h3></div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-justify">
+                            Les défis restent importants dans un tissu urbain contraint et très dense, donc particulièrement sujet aux îlots de chaleur. La vision politique, la mobilisation des services et des outils de planification cohérents permettent d'amorcer une démarche d’aménagement qui prend en compte le changement climatique comme élément structurant de l’aménagement urbain.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </details>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="../../data/montreuil/montreuil_commune.js"></script>
+    <script src="../../data/montreuil/secteurs_montreuil.js"></script>
+    <script src="../../data/montreuil/zone1_2008.js"></script>
+    <script src="../../data/montreuil/zone1_2022.js"></script>
+    <script src="../../data/montreuil/zone2_2008.js"></script>
+    <script src="../../data/montreuil/zone2_2022.js"></script>
+    <script src="../../data/montreuil/zone3_2008.js"></script>
+    <script src="../../data/montreuil/zone3_2022.js"></script>
+    <script src="../../data/montreuil/zone4_2008.js"></script>
+    <script src="../../data/montreuil/zone4_2022.js"></script>
+    <script src="../../data/montreuil/zone5_2008.js"></script>
+    <script src="../../data/montreuil/zone5_2022.js"></script>
+    <script src="../../js/config-montreuil.js"></script>
+    <script src="../../js/mapCore.js"></script>
+    <script src="../../js/mapVivuals.js"></script>
+    <script src="../../js/mapInteractions.js"></script>
+    <script src="../../js/chartModule.js"></script>
+    <script src="../../js/sharedComponents.js"></script>
+</body>
+</html>
