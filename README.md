@@ -1,7 +1,7 @@
 # FreshWay
 Dump du code entier du site web de Freshway
 
-Arborescence simplifiée & explications du site
+Arborescence simplifiée & explications du site (à télécharger pour voir proprement)
 
 /
 ├ .htaccess
